@@ -54,7 +54,20 @@ Lighthouse가 WCAG AA 기준(4.5:1) 미달로 지적한 요소들의 텍스트 o
 
 ## Best Practices
 
-- (현재 특별한 이슈 없음)
+### Source Maps 활성화
+
+`vite.config.ts`에 `build.sourcemap: true` 추가.
+Lighthouse가 대용량 first-party JS에 source map이 없으면 경고를 표시함.
+source map 파일(.map)은 DevTools가 열려 있을 때만 다운로드되므로 일반 사용자 성능에 영향 없음.
+
+### Paste Prevention (Monaco — 수정 불가)
+
+Lighthouse가 Monaco Editor의 내부 textarea에서 "Prevents users from pasting into input fields" 경고를 표시함.
+
+- **원인**: Monaco의 clipboard contribution이 `paste` 이벤트를 가로채서 자체 모델에 삽입하는 구조
+- **실제 동작**: 붙여넣기는 정상 작동함 (Ctrl+V, 우클릭 모두 가능)
+- **수정 불가 사유**: Monaco 내부 DOM(`textarea.inputarea`)에 설정된 이벤트 리스너이므로 외부에서 제어 불가. Monaco를 fork하지 않는 한 해결할 수 없는 known limitation
+- **영향**: Best Practices 점수에만 영향, 실제 UX에는 문제 없음
 
 ---
 
