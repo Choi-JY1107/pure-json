@@ -28,7 +28,7 @@
 </script>
 
 <svelte:head>
-	{#each getAlternatePaths() as alt}
+	{#each getAlternatePaths() as alt (alt.lang)}
 		<link rel="alternate" hreflang={alt.lang} href={alt.href} />
 	{/each}
 	<link rel="alternate" hreflang="x-default" href={BASE_URL + (page.url?.pathname?.replace(/^\/(en|ko|ja)/, '/en') ?? '/')} />

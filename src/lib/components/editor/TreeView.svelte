@@ -3,11 +3,7 @@
 	import TreeView from './TreeView.svelte';
 
 	let { node }: { node: TreeNode } = $props();
-	let expanded = $state(false);
-
-	$effect(() => {
-		expanded = node.expanded ?? false;
-	});
+	let expanded = $derived(node.expanded ?? false);
 
 	function toggle() {
 		expanded = !expanded;

@@ -107,7 +107,7 @@
 	<div bind:this={container} class="monaco-editor__container"></div>
 	{#if loading}
 		<div class="monaco-editor__skeleton">
-			{#each [60, 80, 45, 70, 55, 90, 40] as width}
+			{#each [60, 80, 45, 70, 55, 90, 40] as width, i (i)}
 				<div class="monaco-editor__skeleton-line" style="width: {width}%"></div>
 			{/each}
 		</div>

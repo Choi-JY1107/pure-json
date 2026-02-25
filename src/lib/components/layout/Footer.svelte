@@ -1,7 +1,6 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages.js';
 
-	let { lang = 'en' }: { lang?: string } = $props();
 </script>
 
 <footer class="footer footer-center">
