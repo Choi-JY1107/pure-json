@@ -34,6 +34,6 @@
 		@apply text-2xl;
 	}
 	.header__actions {
-		@apply flex-none flex gap-2;
+		@apply flex-none flex items-center gap-2;
 	}
 </style>
