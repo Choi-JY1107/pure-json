@@ -2,7 +2,7 @@
 	import { MetaTags } from 'svelte-meta-tags';
 	import DualView from '$lib/components/editor/DualView.svelte';
 	import CopyButton from '$lib/components/ui/CopyButton.svelte';
-	import { getEditorStore } from '$lib/stores/editor.svelte';
+	import { getEditorStore } from '$lib/stores/editor';
 
 	const editor = getEditorStore('json-viewer');
 	import * as m from '$lib/paraglide/messages.js';
@@ -63,7 +63,7 @@
 		@apply border border-base-300 rounded-lg overflow-hidden;
 	}
 	.tool-page__editor--tall {
-		@apply h-[500px];
+		@apply h-125;
 	}
 	.tool-page__article {
 		@apply max-w-none mt-8;

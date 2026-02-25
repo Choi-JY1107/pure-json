@@ -18,7 +18,7 @@ const SAMPLE_JSON = `{
   "isAwesome": true
 }`;
 
-class EditorStore {
+export class EditorStore {
 	input = $state('');
 	output = $state('');
 	error = $state('');
@@ -49,13 +49,4 @@ class EditorStore {
 	}
 }
 
-const stores = new Map<string, EditorStore>();
 
-function getEditorStore(key: string): EditorStore {
-	if (!stores.has(key)) {
-		stores.set(key, new EditorStore());
-	}
-	return stores.get(key)!;
-}
-
-export { EditorStore, getEditorStore };

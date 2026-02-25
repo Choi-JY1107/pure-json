@@ -85,7 +85,7 @@
 	@reference "../../../app.css";
 
 	.monaco-editor {
-		@apply relative h-full w-full min-h-[300px];
+		@apply relative h-full w-full min-h-75;
 	}
 	.monaco-editor__container {
 		@apply h-full w-full;

@@ -1,0 +1,142 @@
+<script lang="ts">
+	import { MetaTags } from 'svelte-meta-tags';
+	import MonacoEditor from '$lib/components/editor/MonacoEditor.svelte';
+	import CopyButton from '$lib/components/ui/CopyButton.svelte';
+	import type { EditorStore } from '$lib/stores/editor';
+	import * as m from '$lib/paraglide/messages.js';
+	import type { Snippet } from 'svelte';
+
+	let {
+		editor,
+		transform,
+		metaTitle,
+		metaDescription,
+		title,
+		actionLabel,
+		inputLabel = m.json_input_label(),
+		outputLabel = m.output_label(),
+		outputLanguage = 'json',
+		intro,
+		faqs,
+		toolbarExtra,
+		beforeGrid
+	}: {
+		editor: EditorStore;
+		transform: (input: string) => string;
+		metaTitle: string;
+		metaDescription: string;
+		title: string;
+		actionLabel: string;
+		inputLabel?: string;
+		outputLabel?: string;
+		outputLanguage?: string;
+		intro: string;
+		faqs: Array<{ question: string; answer: string }>;
+		toolbarExtra?: Snippet;
+		beforeGrid?: Snippet;
+	} = $props();
+
+	function handleAction() {
+		try {
+			editor.setOutput(transform(editor.input));
+		} catch (e) {
+			editor.setError((e as Error).message);
+		}
+	}
+</script>
+
+<MetaTags title={metaTitle} description={metaDescription} />
+
+<div class="tool-page">
+	<div class="tool-page__toolbar">
+		<h1 class="tool-page__title">{title}</h1>
+		{#if toolbarExtra}
+			{@render toolbarExtra()}
+		{/if}
+		<button class="tool-page__btn tool-page__btn--primary btn btn-sm btn-primary" onclick={handleAction}>
+			{actionLabel}
+		</button>
+		<button class="tool-page__btn tool-page__btn--ghost btn btn-sm btn-ghost" onclick={() => editor.loadSample()}>
+			{m.btn_sample_short()}
+		</button>
+		<button class="tool-page__btn tool-page__btn--ghost btn btn-sm btn-ghost" onclick={() => editor.clear()}>
+			{m.btn_clear()}
+		</button>
+	</div>
+
+	{#if beforeGrid}
+		{@render beforeGrid()}
+	{/if}
+
+	<div class="tool-page__grid">
+		<div class="tool-page__panel">
+			<div class="tool-page__label-row">
+				<span class="tool-page__label">{inputLabel}</span>
+			</div>
+			<div class="tool-page__editor">
+				<MonacoEditor bind:value={editor.input} placeholder={m.editor_placeholder()} />
+			</div>
+		</div>
+		<div class="tool-page__panel">
+			<div class="tool-page__label-row">
+				<span class="tool-page__label">{outputLabel}</span>
+				<CopyButton text={editor.output} />
+			</div>
+			<div class="tool-page__editor">
+				<MonacoEditor value={editor.output || editor.error} readOnly language={outputLanguage} />
+			</div>
+		</div>
+	</div>
+
+	{#if editor.error}
+		<div class="tool-page__error alert alert-error">
+			<span>{editor.error}</span>
+		</div>
+	{/if}
+
+	<article class="tool-page__article prose prose-sm">
+		<h2>{title}</h2>
+		<p>{intro}</p>
+		{#each faqs as faq (faq.question)}
+			<details>
+				<summary><strong>{faq.question}</strong></summary>
+				<p>{faq.answer}</p>
+			</details>
+		{/each}
+	</article>
+</div>
+
+<style>
+	@reference "../../../app.css";
+
+	.tool-page {
+		@apply max-w-7xl mx-auto space-y-4;
+	}
+	.tool-page__toolbar {
+		@apply flex flex-wrap gap-2 items-center;
+	}
+	.tool-page__title {
+		@apply text-lg font-bold flex-1;
+	}
+	.tool-page__grid {
+		@apply grid grid-cols-1 lg:grid-cols-2 gap-4;
+	}
+	.tool-page__panel {
+		@apply space-y-1;
+	}
+	.tool-page__label {
+		@apply text-sm font-medium;
+	}
+	.tool-page__label-row {
+		@apply flex items-center gap-2 h-8;
+	}
+	.tool-page__label-row .tool-page__label {
+		@apply flex-1;
+	}
+	.tool-page__editor {
+		@apply h-100 border border-base-300 rounded-lg overflow-hidden;
+	}
+	.tool-page__article {
+		@apply max-w-none mt-8;
+	}
+</style>
