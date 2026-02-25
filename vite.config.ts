@@ -44,10 +44,15 @@ export default defineConfig({
 		})
 	],
 	optimizeDeps: {
-		include: ['monaco-editor']
+		include: [
+			'monaco-editor/esm/vs/editor/editor.api',
+			'monaco-editor/esm/vs/language/json/monaco.contribution',
+			'monaco-editor/esm/vs/basic-languages/typescript/typescript.contribution',
+			'monaco-editor/esm/vs/basic-languages/yaml/yaml.contribution',
+		]
 	},
 	build: {
-		chunkSizeWarningLimit: 4000
+		chunkSizeWarningLimit: 1500
 	},
 	worker: {
 		format: 'es'

@@ -15,12 +15,14 @@
 		placeholder?: string;
 	} = $props();
 
+	let wrapper: HTMLDivElement;
 	let container: HTMLDivElement;
 	let editorInstance = $state.raw<MonacoEditor.IStandaloneCodeEditor | undefined>();
 	let setEditorThemeFn = $state.raw<((isDark: boolean) => void) | undefined>();
 	let ignoreChange = false;
 	let contentLeft = $state(0);
 	let contentTop = $state(0);
+	let loading = $state(true);
 
 	// value prop → Monaco sync (top-level so Svelte tracks reactivity)
 	$effect(() => {
@@ -38,7 +40,36 @@
 		}
 	});
 
-	onMount(async () => {
+	onMount(() => {
+		let loaded = false;
+
+		const triggerLoad = () => {
+			if (loaded) return;
+			loaded = true;
+			loadEditor();
+		};
+
+		// 1) Load on first user interaction (click/tap on editor area)
+		wrapper.addEventListener('pointerdown', triggerLoad, { once: true });
+
+		// 2) Fallback: also preload via idle callback so the editor
+		//    eventually appears even without interaction
+		let cleanupIdle: (() => void) | undefined;
+		if ('requestIdleCallback' in window) {
+			const id = requestIdleCallback(triggerLoad, { timeout: 4000 });
+			cleanupIdle = () => cancelIdleCallback(id);
+		} else {
+			const timer = setTimeout(triggerLoad, 2000);
+			cleanupIdle = () => clearTimeout(timer);
+		}
+
+		return () => {
+			wrapper.removeEventListener('pointerdown', triggerLoad);
+			cleanupIdle?.();
+		};
+	});
+
+	async function loadEditor() {
 		const { createEditor, setEditorTheme } = await import('$lib/monaco');
 		setEditorThemeFn = setEditorTheme;
 
@@ -63,18 +94,24 @@
 			value = instance.getValue();
 		});
 
-		// Setting this last triggers the $effect above
 		editorInstance = instance;
-	});
+		loading = false;
+	}
 
 	onDestroy(() => {
 		editorInstance?.dispose();
 	});
 </script>
 
-<div class="monaco-editor">
+<div bind:this={wrapper} class="monaco-editor" role="application">
 	<div bind:this={container} class="monaco-editor__container"></div>
-	{#if !value && placeholder}
+	{#if loading}
+		<div class="monaco-editor__skeleton">
+			{#each [60, 80, 45, 70, 55, 90, 40] as width}
+				<div class="monaco-editor__skeleton-line" style="width: {width}%"></div>
+			{/each}
+		</div>
+	{:else if !value && placeholder}
 		<div class="monaco-editor__placeholder" style="left: {contentLeft}px; top: {contentTop}px;">
 			{placeholder}
 		</div>
@@ -85,7 +122,7 @@
 	@reference "../../../app.css";
 
 	.monaco-editor {
-		@apply relative h-full w-full min-h-75;
+		@apply relative h-full w-full min-h-75 cursor-text;
 	}
 	.monaco-editor__container {
 		@apply h-full w-full;
@@ -93,5 +130,11 @@
 	.monaco-editor__placeholder {
 		@apply pointer-events-none absolute
 		       text-base-content/40 text-sm leading-[19px] font-mono;
+	}
+	.monaco-editor__skeleton {
+		@apply absolute inset-0 p-4 flex flex-col gap-2.5 pointer-events-none;
+	}
+	.monaco-editor__skeleton-line {
+		@apply h-3.5 rounded bg-base-300/50;
 	}
 </style>
