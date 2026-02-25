@@ -2,6 +2,8 @@
 	import { MetaTags } from 'svelte-meta-tags';
 	import MonacoEditor from '$lib/components/editor/MonacoEditor.svelte';
 	import CopyButton from '$lib/components/ui/CopyButton.svelte';
+	import ConfirmModal from '$lib/components/ui/ConfirmModal.svelte';
+	import LoadFileButton from '$lib/components/ui/LoadFileButton.svelte';
 	import type { EditorStore } from '$lib/stores/editor';
 	import * as m from '$lib/paraglide/messages.js';
 	import type { Snippet } from 'svelte';
@@ -36,6 +38,8 @@
 		beforeGrid?: Snippet;
 	} = $props();
 
+	let showClearModal = $state(false);
+
 	function handleAction() {
 		try {
 			editor.setOutput(transform(editor.input));
@@ -49,17 +53,20 @@
 
 <div class="tool-page">
 	<div class="tool-page__toolbar">
-		<h1 class="tool-page__title">{title}</h1>
+		<div class="tool-page__title-group">
+			<h1 class="tool-page__title">{title}</h1>
+			<button class="btn btn-sm btn-soft btn-primary" onclick={() => editor.loadSample()}>
+				{m.btn_sample_short()}
+			</button>
+			<LoadFileButton onLoad={(content) => editor.setInput(content)} />
+		</div>
 		{#if toolbarExtra}
 			{@render toolbarExtra()}
 		{/if}
 		<button class="tool-page__btn tool-page__btn--primary btn btn-sm btn-primary" onclick={handleAction}>
 			{actionLabel}
 		</button>
-		<button class="tool-page__btn tool-page__btn--ghost btn btn-sm btn-ghost" onclick={() => editor.loadSample()}>
-			{m.btn_sample_short()}
-		</button>
-		<button class="tool-page__btn tool-page__btn--ghost btn btn-sm btn-ghost" onclick={() => editor.clear()}>
+		<button class="tool-page__btn tool-page__btn--ghost btn btn-sm btn-ghost" onclick={() => (showClearModal = true)}>
 			{m.btn_clear()}
 		</button>
 	</div>
@@ -106,6 +113,14 @@
 	</article>
 </div>
 
+<ConfirmModal
+	bind:open={showClearModal}
+	title={m.confirm_clear_title()}
+	message={m.confirm_clear_message()}
+	confirmLabel={m.btn_clear()}
+	onConfirm={() => editor.clear()}
+/>
+
 <style>
 	@reference "../../../app.css";
 
@@ -115,8 +130,11 @@
 	.tool-page__toolbar {
 		@apply flex flex-wrap gap-2 items-center;
 	}
+	.tool-page__title-group {
+		@apply flex items-center gap-2 flex-1;
+	}
 	.tool-page__title {
-		@apply text-lg font-bold flex-1;
+		@apply text-lg font-bold;
 	}
 	.tool-page__grid {
 		@apply grid grid-cols-1 lg:grid-cols-2 gap-4;

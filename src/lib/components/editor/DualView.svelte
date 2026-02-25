@@ -41,6 +41,7 @@
 		>
 			{m.tab_code()}
 		</button>
+		<div class="dual-view__divider"></div>
 		<button
 			role="tab"
 			class="dual-view__tab tab"
@@ -72,6 +73,9 @@
 
 	.dual-view {
 		@apply flex flex-col h-full;
+	}
+	.dual-view__divider {
+		@apply w-px h-4 bg-base-300 self-center;
 	}
 	.dual-view__content {
 		@apply flex-1 min-h-0;

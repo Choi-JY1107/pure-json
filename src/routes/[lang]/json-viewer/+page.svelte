@@ -2,10 +2,14 @@
 	import { MetaTags } from 'svelte-meta-tags';
 	import DualView from '$lib/components/editor/DualView.svelte';
 	import CopyButton from '$lib/components/ui/CopyButton.svelte';
+	import ConfirmModal from '$lib/components/ui/ConfirmModal.svelte';
+	import LoadFileButton from '$lib/components/ui/LoadFileButton.svelte';
 	import { getEditorStore } from '$lib/stores/editor';
 
 	const editor = getEditorStore('json-viewer');
 	import * as m from '$lib/paraglide/messages.js';
+
+	let showClearModal = $state(false);
 </script>
 
 <MetaTags
@@ -15,12 +19,15 @@
 
 <div class="tool-page">
 	<div class="tool-page__toolbar">
-		<h1 class="tool-page__title">{m.viewer_h1()}</h1>
-		<button class="tool-page__btn tool-page__btn--primary btn btn-sm btn-primary" onclick={() => editor.loadSample()}>
-			{m.btn_load_sample()}
-		</button>
+		<div class="tool-page__title-group">
+			<h1 class="tool-page__title">{m.viewer_h1()}</h1>
+			<button class="btn btn-sm btn-soft btn-primary" onclick={() => editor.loadSample()}>
+				{m.btn_load_sample()}
+			</button>
+			<LoadFileButton onLoad={(content) => editor.setInput(content)} />
+		</div>
 		<CopyButton text={editor.input} />
-		<button class="tool-page__btn tool-page__btn--ghost btn btn-sm btn-ghost" onclick={() => editor.clear()}>
+		<button class="tool-page__btn tool-page__btn--ghost btn btn-sm btn-ghost" onclick={() => (showClearModal = true)}>
 			{m.btn_clear()}
 		</button>
 	</div>
@@ -47,6 +54,14 @@
 	</article>
 </div>
 
+<ConfirmModal
+	bind:open={showClearModal}
+	title={m.confirm_clear_title()}
+	message={m.confirm_clear_message()}
+	confirmLabel={m.btn_clear()}
+	onConfirm={() => editor.clear()}
+/>
+
 <style>
 	@reference "../../../app.css";
 
@@ -56,8 +71,11 @@
 	.tool-page__toolbar {
 		@apply flex flex-wrap gap-2 items-center;
 	}
+	.tool-page__title-group {
+		@apply flex items-center gap-2 flex-1;
+	}
 	.tool-page__title {
-		@apply text-lg font-bold flex-1;
+		@apply text-lg font-bold;
 	}
 	.tool-page__editor {
 		@apply border border-base-300 rounded-lg overflow-hidden;
