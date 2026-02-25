@@ -1,0 +1,22 @@
+export const LOCALES = ['en', 'ko', 'ja'] as const;
+export type Locale = (typeof LOCALES)[number];
+export const DEFAULT_LOCALE: Locale = 'en';
+export const BASE_URL = 'https://purejson.dev';
+export const PAGES = [
+	'',
+	'json-viewer',
+	'json-formatter',
+	'json-minifier',
+	'json-to-typescript',
+	'json-to-yaml'
+] as const;
+
+export function langEntries() {
+	return LOCALES.map((lang) => ({ lang }));
+}
+
+export const LOCALE_META = {
+	en: { label: 'EN', nativeName: 'English' },
+	ko: { label: '한', nativeName: '한국어' },
+	ja: { label: '日', nativeName: '日本語' }
+} as const;
