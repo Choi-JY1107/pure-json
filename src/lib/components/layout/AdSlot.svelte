@@ -26,10 +26,10 @@
 	@reference "../../../app.css";
 
 	.ad-slot {
-		@apply flex items-center justify-center bg-base-200/50
+		@apply flex items-center justify-center bg-base-200
 		       border border-base-300 rounded-lg overflow-hidden;
 	}
 	.ad-slot__label {
-		@apply text-xs text-base-content/30;
+		@apply text-xs text-base-content/60;
 	}
 </style>

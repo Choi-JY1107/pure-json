@@ -76,7 +76,7 @@
 		@apply w-56 bg-base-200 border-r border-base-300 p-4 hidden lg:block;
 	}
 	.sidebar__group-title {
-		@apply text-xs font-semibold text-base-content/50
+		@apply text-xs font-semibold text-base-content/70
 		       uppercase tracking-wider px-3 mb-1;
 	}
 	.sidebar__group-title--convert {

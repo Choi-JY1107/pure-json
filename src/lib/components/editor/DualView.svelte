@@ -77,6 +77,9 @@
 	.dual-view__divider {
 		@apply w-px h-4 bg-base-300 self-center;
 	}
+	.dual-view__tab {
+		@apply text-base-content/70;
+	}
 	.dual-view__content {
 		@apply flex-1 min-h-0;
 	}
@@ -86,7 +89,7 @@
 	}
 	.dual-view__empty {
 		@apply h-full flex items-center justify-center
-		       text-base-content/50 bg-base-100
+		       text-base-content/70 bg-base-100
 		       rounded-b-lg border border-base-300 border-t-0;
 	}
 </style>

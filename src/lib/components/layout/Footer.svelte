@@ -30,9 +30,9 @@
 		@apply font-semibold text-sm;
 	}
 	.footer__privacy {
-		@apply text-xs text-base-content/60 mt-1;
+		@apply text-xs text-base-content/70 mt-1;
 	}
 	.footer__meta {
-		@apply flex gap-4 text-xs text-base-content/50;
+		@apply flex gap-4 text-xs text-base-content/70;
 	}
 </style>

@@ -52,7 +52,7 @@ export default defineConfig({
 		]
 	},
 	build: {
-		chunkSizeWarningLimit: 1500
+		chunkSizeWarningLimit: 3000
 	},
 	worker: {
 		format: 'es'
