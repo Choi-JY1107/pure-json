@@ -15,7 +15,7 @@ export function langEntries() {
 	return LOCALES.map((lang) => ({ lang }));
 }
 
-export const ADSENSE_CLIENT = ''; // ca-pub-XXXX (승인 후 입력)
+export const ADSENSE_CLIENT = 'ca-pub-4837179301443377';
 
 export const LOCALE_META = {
 	en: { label: 'EN', nativeName: 'English' },
