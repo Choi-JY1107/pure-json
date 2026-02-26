@@ -4,7 +4,7 @@
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import AdSlot from '$lib/components/layout/AdSlot.svelte';
 	import { page } from '$app/state';
-	import { LOCALES, BASE_URL } from '$lib/config/site';
+	import { LOCALES, BASE_URL, ADSENSE_CLIENT } from '$lib/config/site';
 	import { browser } from '$app/environment';
 
 	let { children, data } = $props();
@@ -39,7 +39,7 @@
 
 	<div class="app-layout__content drawer-content">
 		<div class="app-layout__ad-top">
-			<AdSlot slot="top-banner" height="90px" />
+			<AdSlot client={ADSENSE_CLIENT} slot="top-banner" height="90px" />
 		</div>
 
 		<Header {lang} />
@@ -49,7 +49,7 @@
 		</main>
 
 		<div class="app-layout__ad-bottom">
-			<AdSlot slot="bottom-banner" height="90px" />
+			<AdSlot client={ADSENSE_CLIENT} slot="bottom-banner" height="90px" />
 		</div>
 
 		<Footer {lang} />
