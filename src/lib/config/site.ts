@@ -3,17 +3,12 @@ export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'en';
 export const BASE_URL = 'https://purejson.dev';
 export const PAGES = [
-	'',
 	'json-viewer',
 	'json-formatter',
 	'json-minifier',
 	'json-to-typescript',
 	'json-to-yaml'
 ] as const;
-
-export function langEntries() {
-	return LOCALES.map((lang) => ({ lang }));
-}
 
 export const ADSENSE_CLIENT = 'ca-pub-4837179301443377';
 

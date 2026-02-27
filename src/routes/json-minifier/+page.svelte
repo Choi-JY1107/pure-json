@@ -53,7 +53,7 @@
 </DualPanelToolPage>
 
 <style>
-	@reference "../../../app.css";
+	@reference "../../app.css";
 
 	.tool-page__stats {
 		@apply shadow bg-base-200 w-full;

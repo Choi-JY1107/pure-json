@@ -2,8 +2,6 @@
 	import { page } from '$app/state';
 	import * as m from '$lib/paraglide/messages.js';
 
-	let { lang = 'en' }: { lang?: string } = $props();
-
 	const tools = $derived([
 		{ path: 'json-viewer', icon: '👁', label: m.sidebar_viewer() },
 		{ path: 'json-formatter', icon: '✨', label: m.sidebar_formatter() },
@@ -23,7 +21,7 @@
 		</div>
 		<ul class="sidebar__menu menu menu-sm">
 			{#each tools as tool (tool.path)}
-				{@const href = `/${lang}/${tool.path}`}
+				{@const href = `/${tool.path}`}
 				{@const isActive = page.url?.pathname === href}
 				<li>
 					<a
@@ -45,7 +43,7 @@
 		</div>
 		<ul class="sidebar__menu menu menu-sm">
 			{#each converters as tool (tool.path)}
-				{@const href = `/${lang}/${tool.path}`}
+				{@const href = `/${tool.path}`}
 				{@const isActive = page.url?.pathname === href}
 				<li>
 					<a
