@@ -2,18 +2,16 @@
 	import ThemeToggle from '$lib/components/ui/ThemeToggle.svelte';
 	import LocaleSwitcher from '$lib/components/ui/LocaleSwitcher.svelte';
 	import * as m from '$lib/paraglide/messages.js';
-
-	let { lang = 'en' }: { lang?: string } = $props();
 </script>
 
 <header class="header navbar">
 	<div class="header__brand">
-		<a href="/{lang}/json-viewer" class="header__logo">
+		<a href="/json-viewer" class="header__logo">
 			<span class="header__logo-icon">{'{ }'}</span> {m.site_name()}
 		</a>
 	</div>
 	<div class="header__actions">
-		<LocaleSwitcher {lang} />
+		<LocaleSwitcher />
 		<ThemeToggle />
 	</div>
 </header>
