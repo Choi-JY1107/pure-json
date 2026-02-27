@@ -8,3 +8,10 @@ vite.config.ts.timestamp-*
 src/lib/paraglide/
 .omc
 .claude
+# Cloudflare Types
+/worker-configuration.d.ts
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
