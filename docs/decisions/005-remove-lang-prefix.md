@@ -24,3 +24,14 @@ In Progress
 - `src/lib/stores/locale.svelte.ts` 생성
 - `LocaleStore` 클래스: `current` ($state), `set()`, `detectLocale()`
 - 초기값 우선순위: localStorage → Paraglide getLocale → navigator.languages → 'en'
+
+### Step 2: 라우트 구조 변경
+- `src/routes/[lang]/` 디렉토리 전체 삭제
+- 6개 도구 페이지를 `src/routes/{tool}/+page.svelte`로 이동
+- `+page.ts` (entries export) 제거 — 더 이상 `[lang]` 파라미터 없음
+- `[lang]/+layout.svelte` 내용을 `+layout.svelte`로 병합
+  - `{#key locale.current}` 블록으로 언어 전환 시 자식 리렌더
+  - `lang` prop 대신 `locale` 스토어 사용
+  - hreflang alternate 링크 제거
+- `/` → `/json-viewer`로 리다이렉트 (lang 프리픽스 없이)
+- `svelte.config.js` prerender entries에서 locale 조합 제거
