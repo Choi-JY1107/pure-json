@@ -35,3 +35,10 @@ In Progress
   - hreflang alternate 링크 제거
 - `/` → `/json-viewer`로 리다이렉트 (lang 프리픽스 없이)
 - `svelte.config.js` prerender entries에서 locale 조합 제거
+
+### Step 3: 컴포넌트 업데이트
+- `Header.svelte`: `lang` prop 제거, 로고 링크 `/{lang}/json-viewer` → `/json-viewer`
+- `Sidebar.svelte`: `lang` prop 제거, 네비게이션 링크 `/{lang}/{tool}` → `/{tool}`
+- `LocaleSwitcher.svelte`: `window.location.href` → `locale.set()` (페이지 리로드 없음)
+- `Footer.svelte`: 변경 없음 (기존에 `lang` prop 미사용)
+- `site.ts`: `langEntries()` 함수 제거, PAGES에서 빈 문자열 항목 제거
