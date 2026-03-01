@@ -24,7 +24,10 @@
 				<button
 					class="locale-switcher__item"
 					class:locale-switcher__item--active={locale.current === loc.code}
-					onclick={() => locale.set(loc.code as Locale)}
+					onclick={() => {
+						locale.set(loc.code as Locale);
+						(document.activeElement as HTMLElement)?.blur();
+					}}
 				>
 					{loc.label}
 				</button>

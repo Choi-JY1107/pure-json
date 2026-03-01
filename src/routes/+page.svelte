@@ -63,7 +63,7 @@
 />
 
 <style>
-	@reference "../../app.css";
+	@reference "../app.css";
 
 	.tool-page {
 		@apply max-w-7xl mx-auto space-y-4;

@@ -6,7 +6,7 @@
 
 <header class="header navbar">
 	<div class="header__brand">
-		<a href="/json-viewer" class="header__logo">
+		<a href="/" class="header__logo">
 			<span class="header__logo-icon">{'{ }'}</span> {m.site_name()}
 		</a>
 	</div>
