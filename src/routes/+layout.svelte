@@ -57,24 +57,26 @@
 			<AdSlot client={ADSENSE_CLIENT} slot="top-banner" height="90px" />
 		</div>
 
-		<Header />
+		{#key locale.current}
+			<Header />
 
-		<main class="app-layout__main">
-			{#key locale.current}
+			<main class="app-layout__main">
 				{@render children()}
-			{/key}
-		</main>
+			</main>
 
-		<div class="app-layout__ad-bottom">
-			<AdSlot client={ADSENSE_CLIENT} slot="bottom-banner" height="90px" />
-		</div>
+			<div class="app-layout__ad-bottom">
+				<AdSlot client={ADSENSE_CLIENT} slot="bottom-banner" height="90px" />
+			</div>
 
-		<Footer />
+			<Footer />
+		{/key}
 	</div>
 
 	<div class="app-layout__sidebar drawer-side">
 		<label for="sidebar-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-		<Sidebar />
+		{#key locale.current}
+			<Sidebar />
+		{/key}
 	</div>
 </div>
 
