@@ -7,7 +7,7 @@ const config = {
 		prerender: {
 			entries: [
 				'*',
-				'/json-viewer',
+				'/',
 				'/json-formatter',
 				'/json-minifier',
 				'/json-to-typescript',

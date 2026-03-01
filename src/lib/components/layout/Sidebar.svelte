@@ -3,14 +3,14 @@
 	import * as m from '$lib/paraglide/messages.js';
 
 	const tools = $derived([
-		{ path: 'json-viewer', icon: '👁', label: m.sidebar_viewer() },
-		{ path: 'json-formatter', icon: '✨', label: m.sidebar_formatter() },
-		{ path: 'json-minifier', icon: '📦', label: m.sidebar_minifier() }
+		{ href: '/', icon: '👁', label: m.sidebar_viewer() },
+		{ href: '/json-formatter', icon: '✨', label: m.sidebar_formatter() },
+		{ href: '/json-minifier', icon: '📦', label: m.sidebar_minifier() }
 	]);
 
 	const converters = $derived([
-		{ path: 'json-to-typescript', icon: 'TS', label: m.sidebar_to_typescript() },
-		{ path: 'json-to-yaml', icon: '📄', label: m.sidebar_to_yaml() }
+		{ href: '/json-to-typescript', icon: 'TS', label: m.sidebar_to_typescript() },
+		{ href: '/json-to-yaml', icon: '📄', label: m.sidebar_to_yaml() }
 	]);
 </script>
 
@@ -20,12 +20,11 @@
 			{m.sidebar_group_tools()}
 		</div>
 		<ul class="sidebar__menu menu menu-sm">
-			{#each tools as tool (tool.path)}
-				{@const href = `/${tool.path}`}
-				{@const isActive = page.url?.pathname === href}
+			{#each tools as tool (tool.href)}
+				{@const isActive = page.url?.pathname === tool.href}
 				<li>
 					<a
-						{href}
+						href={tool.href}
 						class="sidebar__item"
 						class:sidebar__item--active={isActive}
 					>
@@ -42,12 +41,11 @@
 			{m.sidebar_group_convert()}
 		</div>
 		<ul class="sidebar__menu menu menu-sm">
-			{#each converters as tool (tool.path)}
-				{@const href = `/${tool.path}`}
-				{@const isActive = page.url?.pathname === href}
+			{#each converters as tool (tool.href)}
+				{@const isActive = page.url?.pathname === tool.href}
 				<li>
 					<a
-						{href}
+						href={tool.href}
 						class="sidebar__item"
 						class:sidebar__item--active={isActive}
 					>
