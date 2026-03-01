@@ -1,4 +1,6 @@
-import adapter from '@sveltejs/adapter-cloudflare';
+const { default: adapter } = await import(
+	process.env.CF_PAGES ? '@sveltejs/adapter-cloudflare' : '@sveltejs/adapter-static'
+);
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
