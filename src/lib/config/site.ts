@@ -11,6 +11,7 @@ export const PAGES = [
 ] as const;
 
 export const ADSENSE_CLIENT = 'ca-pub-4837179301443377';
+export const ADSENSE_SLOT = '5281424133';
 
 export const LOCALE_META = {
 	en: { label: 'EN', nativeName: 'English' },
