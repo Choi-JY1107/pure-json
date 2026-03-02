@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { MetaTags, JsonLd } from 'svelte-meta-tags';
 	import { onMount } from 'svelte';
-	import { BASE_URL, ADSENSE_CLIENT } from '$lib/config/site';
+	import { BASE_URL, ADSENSE_CLIENT, ADSENSE_SLOT } from '$lib/config/site';
 	import { locale } from '$lib/stores/locale.svelte';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';
@@ -54,7 +54,7 @@
 
 	<div class="app-layout__content drawer-content">
 		<div class="app-layout__ad-top">
-			<AdSlot client={ADSENSE_CLIENT} slot="top-banner" height="90px" />
+			<AdSlot client={ADSENSE_CLIENT} slot={ADSENSE_SLOT} height="90px" />
 		</div>
 
 		{#key locale.current}
@@ -65,7 +65,7 @@
 			</main>
 
 			<div class="app-layout__ad-bottom">
-				<AdSlot client={ADSENSE_CLIENT} slot="bottom-banner" height="90px" />
+				<AdSlot client={ADSENSE_CLIENT} slot={ADSENSE_SLOT} height="90px" />
 			</div>
 
 			<Footer />
