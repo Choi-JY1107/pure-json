@@ -19,6 +19,9 @@
 		outputLabel = m.output_label(),
 		outputLanguage = 'json',
 		intro,
+		howto,
+		features,
+		usecases,
 		faqs,
 		toolbarExtra,
 		beforeGrid
@@ -33,6 +36,9 @@
 		outputLabel?: string;
 		outputLanguage?: string;
 		intro: string;
+		howto?: Array<{ step: string; desc: string }>;
+		features?: string[];
+		usecases?: string[];
 		faqs: Array<{ question: string; answer: string }>;
 		toolbarExtra?: Snippet;
 		beforeGrid?: Snippet;
@@ -104,6 +110,35 @@
 	<article class="tool-page__article prose prose-sm">
 		<h2>{title}</h2>
 		<p>{intro}</p>
+
+		{#if howto && howto.length > 0}
+			<h3>{m.section_howto()}</h3>
+			<ol>
+				{#each howto as item (item.step)}
+					<li><strong>{item.step}</strong> — {item.desc}</li>
+				{/each}
+			</ol>
+		{/if}
+
+		{#if features && features.length > 0}
+			<h3>{m.section_features()}</h3>
+			<ul>
+				{#each features as feature (feature)}
+					<li>{feature}</li>
+				{/each}
+			</ul>
+		{/if}
+
+		{#if usecases && usecases.length > 0}
+			<h3>{m.section_usecases()}</h3>
+			<ul>
+				{#each usecases as usecase (usecase)}
+					<li>{usecase}</li>
+				{/each}
+			</ul>
+		{/if}
+
+		<h3>{m.section_faq()}</h3>
 		{#each faqs as faq (faq.question)}
 			<details>
 				<summary><strong>{faq.question}</strong></summary>

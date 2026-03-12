@@ -9,8 +9,15 @@
 			🔒 {m.footer_tagline()}
 		</p>
 		<p class="footer__privacy">
-			{m.footer_privacy()}
+			{m.footer_privacy_text()}
 		</p>
+	</div>
+	<div class="footer__links">
+		<a href="/about">{m.footer_about()}</a>
+		<span>·</span>
+		<a href="/privacy">{m.footer_privacy()}</a>
+		<span>·</span>
+		<a href="/terms">{m.footer_terms()}</a>
 	</div>
 	<div class="footer__meta">
 		<span>&copy; {new Date().getFullYear()} {m.copyright_text()}</span>
@@ -30,6 +37,12 @@
 	}
 	.footer__privacy {
 		@apply text-xs text-base-content/70 mt-1;
+	}
+	.footer__links {
+		@apply flex gap-2 text-xs;
+	}
+	.footer__links a {
+		@apply link link-hover;
 	}
 	.footer__meta {
 		@apply flex gap-4 text-xs text-base-content/70;

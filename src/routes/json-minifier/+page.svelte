@@ -26,9 +26,19 @@
 	inputLabel={m.input_label()}
 	outputLabel={m.output_label()}
 	intro={m.minifier_intro()}
+	howto={[
+		{ step: m.minifier_howto_s1(), desc: m.minifier_howto_s1_desc() },
+		{ step: m.minifier_howto_s2(), desc: m.minifier_howto_s2_desc() },
+		{ step: m.minifier_howto_s3(), desc: m.minifier_howto_s3_desc() }
+	]}
+	features={[m.minifier_feature1(), m.minifier_feature2(), m.minifier_feature3(), m.minifier_feature4()]}
+	usecases={[m.minifier_usecase1(), m.minifier_usecase2(), m.minifier_usecase3()]}
 	faqs={[
 		{ question: m.minifier_faq_q1(), answer: m.minifier_faq_a1() },
-		{ question: m.minifier_faq_q2(), answer: m.minifier_faq_a2() }
+		{ question: m.minifier_faq_q2(), answer: m.minifier_faq_a2() },
+		{ question: m.minifier_faq_q3(), answer: m.minifier_faq_a3() },
+		{ question: m.minifier_faq_q4(), answer: m.minifier_faq_a4() },
+		{ question: m.minifier_faq_q5(), answer: m.minifier_faq_a5() }
 	]}
 >
 	{#snippet beforeGrid()}

@@ -5,7 +5,7 @@
 ## 프로젝트 개요
 
 PureJSON — 100% 클라이언트 사이드 JSON 도구 모음 웹앱
-- URL: https://purejson.dev
+- URL: https://purejson.org
 - 핵심 가치: "No Server, No Data Leak" (보안 강조 → 사용자 신뢰 및 체류 시간 확보)
 - 목표: 구글 검색 유입(SEO) → 애드센스 수익 창출, 운영비 0원 유지 (Cloudflare Pages)
 
@@ -31,10 +31,11 @@ npm run lint:fix   # ESLint 자동 수정
 
 ## 프로젝트 구조
 
-- `src/routes/[lang]/` — 페이지 라우트. `[lang]`은 en, ko, ja 중 하나
-  - `json-viewer/`, `json-formatter/`, `json-minifier/`, `json-to-typescript/`, `json-to-yaml/`
+- `src/routes/` — 페이지 라우트 (lang prefix 없음, Paraglide가 브라우저 언어 감지)
+  - `+page.svelte` (JSON Viewer, 루트), `json-formatter/`, `json-minifier/`, `json-sorter/`, `json-to-typescript/`, `json-to-yaml/`, `json-to-csv/`, `csv-to-json/`, `json-to-xml/`, `json-diff/`
+  - `privacy/`, `terms/`, `about/` — 정책/정보 페이지
 - `src/lib/components/` — Svelte 컴포넌트 (editor, layout, ui)
-- `src/lib/utils/` — JSON 처리 로직 (formatter, to-ts, to-yaml, tree-parser)
+- `src/lib/utils/` — JSON 처리 로직 (formatter, to-ts, to-yaml, to-csv, csv-to-json, to-xml, json-sorter, json-diff, tree-parser)
 - `src/lib/stores/` — Svelte 상태 관리 (editor.svelte.ts, theme.svelte.ts)
 - `src/lib/config/site.ts` — 사이트 설정 (로케일, 페이지 목록, URL)
 - `src/lib/paraglide/` — 자동 생성 i18n 런타임 (직접 수정 금지)
@@ -63,6 +64,20 @@ npm run lint:fix   # ESLint 자동 수정
 - `EditorStore` 클래스를 `getEditorStore(key)`로 페이지별 인스턴스 캐싱
 - 각 페이지에서 `const editor = getEditorStore('json-viewer')` 형태로 사용
 - 페이지 간 상태는 분리되며, 같은 페이지로 돌아오면 이전 상태 유지
+
+## 문서화 규칙
+
+- **기능 추가/변경 시 관련 문서를 반드시 함께 업데이트할 것**
+  - `docs/planning.md` — 새 기능 추가, 로드맵 상태 변경 시
+  - `docs/decisions/` — 아키텍처 결정, 기술 선택 변경 시 ADR 작성
+  - `CLAUDE.md` — 프로젝트 구조, 라우트, 유틸리티 목록 변경 시
+- 커밋 전에 문서 업데이트 여부를 항상 체크
+- 코드만 커밋하고 문서를 빠뜨리지 말 것
+
+## 커밋 규칙
+
+- **커밋 전에 사용자에게 테스트를 먼저 요청할 것** — 사용자가 확인한 후에만 커밋
+- 린트(`npm run lint`) 통과 확인 후 커밋
 
 ## 주의사항
 
