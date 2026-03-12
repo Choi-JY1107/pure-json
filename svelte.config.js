@@ -22,6 +22,9 @@ const config = {
 				'/csv-to-json',
 				'/json-to-xml',
 				'/json-diff',
+				'/about',
+				'/privacy',
+				'/terms',
 				'/sitemap.xml'
 			]
 		}
