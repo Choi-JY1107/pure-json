@@ -1,5 +1,6 @@
 /// <reference types="@sveltejs/kit" />
 /// <reference types="@vite-pwa/sveltekit/info" />
+/// <reference path="../worker-configuration.d.ts" />
 
 declare global {
 	namespace App {

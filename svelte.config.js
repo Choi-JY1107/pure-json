@@ -15,8 +15,13 @@ const config = {
 				'/',
 				'/json-formatter',
 				'/json-minifier',
+				'/json-sorter',
 				'/json-to-typescript',
 				'/json-to-yaml',
+				'/json-to-csv',
+				'/csv-to-json',
+				'/json-to-xml',
+				'/json-diff',
 				'/sitemap.xml'
 			]
 		}

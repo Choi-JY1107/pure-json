@@ -5,12 +5,17 @@
 	const tools = $derived([
 		{ href: '/', icon: '👁', label: m.sidebar_viewer() },
 		{ href: '/json-formatter', icon: '✨', label: m.sidebar_formatter() },
-		{ href: '/json-minifier', icon: '📦', label: m.sidebar_minifier() }
+		{ href: '/json-minifier', icon: '📦', label: m.sidebar_minifier() },
+		{ href: '/json-sorter', icon: '🔤', label: m.sidebar_sorter() },
+		{ href: '/json-diff', icon: '🔀', label: m.sidebar_diff() }
 	]);
 
 	const converters = $derived([
 		{ href: '/json-to-typescript', icon: 'TS', label: m.sidebar_to_typescript() },
-		{ href: '/json-to-yaml', icon: '📄', label: m.sidebar_to_yaml() }
+		{ href: '/json-to-yaml', icon: '📄', label: m.sidebar_to_yaml() },
+		{ href: '/json-to-csv', icon: '📊', label: m.sidebar_to_csv() },
+		{ href: '/csv-to-json', icon: '📋', label: m.sidebar_csv_to_json() },
+		{ href: '/json-to-xml', icon: '📝', label: m.sidebar_to_xml() }
 	]);
 </script>
 
