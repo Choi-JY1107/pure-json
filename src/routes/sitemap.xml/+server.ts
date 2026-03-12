@@ -6,6 +6,8 @@ export const prerender = true;
 export const GET: RequestHandler = () => {
 	const toolPages = PAGES.filter((p) => p !== 'json-viewer');
 
+	const staticPages = ['about', 'privacy', 'terms'];
+
 	const urls = [
 		`
   <url>
@@ -19,6 +21,14 @@ export const GET: RequestHandler = () => {
     <loc>${BASE_URL}/${page}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>`
+		),
+		...staticPages.map(
+			(page) => `
+  <url>
+    <loc>${BASE_URL}/${page}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>${page === 'about' ? '0.5' : '0.3'}</priority>
   </url>`
 		)
 	];

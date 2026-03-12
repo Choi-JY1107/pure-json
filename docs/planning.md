@@ -16,6 +16,11 @@
 | Minify | 공백 제거로 파일 용량 축소 + 절감률 표시 | Done |
 | JSON → TypeScript | TypeScript 인터페이스 자동 생성 | Done |
 | JSON → YAML | YAML 형식 변환 | Done |
+| JSON → CSV | JSON 배열을 CSV 형식으로 변환 | Done |
+| CSV → JSON | CSV 데이터를 JSON 배열로 변환 | Done |
+| JSON → XML | JSON을 XML 문서로 변환 | Done |
+| JSON Key Sorter | 키를 알파벳순(asc/desc)으로 재귀 정렬 | Done |
+| JSON Diff | 두 JSON 문서의 차이점 비교 | Done |
 | Offline Support | PWA 적용, 인터넷 없이 사용 가능 | Done |
 | Dark/Light 모드 | 테마 전환 지원 | Done |
 | 반응형 레이아웃 | 모바일 대응 (drawer 기반 사이드바) | Done |
@@ -59,21 +64,33 @@
 - [x] SvelteKit 정적 사이트 구조
 - [x] Monaco Editor 연동 및 JSON 처리 로직
 - [x] Dark/Light 모드 및 반응형 레이아웃
-- [x] 5개 도구 (Viewer, Formatter, Minifier, JSON→TS, JSON→YAML)
+- [x] 10개 도구 (Viewer, Formatter, Minifier, JSON→TS, JSON→YAML, JSON→CSV, CSV→JSON, JSON→XML, Sorter, Diff)
 - [x] PWA 오프라인 지원
 
 ### Phase 2: SEO 최적화 — Done
 
-- [x] 다국어 경로 설정 (en, ko, ja)
+- [x] 다국어 경로 설정 (en, ko, ja) → 이후 lang prefix 제거 (ADR-005)
 - [x] 각 언어별 메타 태그 및 키워드 삽입
-- [x] sitemap.xml 자동 생성
-- [ ] 구글 서치 콘솔 등록 및 인덱싱 확인
+- [x] sitemap.xml 자동 생성 (동적 서버 라우트, 13개 URL)
+- [x] 구글 서치 콘솔 등록
+- [ ] 전체 페이지 인덱싱 확인
 
-### Phase 3: 수익화 및 확장 — Pending
+### Phase 3: AdSense 승인 대응 — In Progress
 
-- [ ] 트래픽 발생 확인 후 애드센스 신청
-- [ ] 광고 배치 구현 (상단 배너, 사이드바, 전면 광고)
-- [ ] 확장 도구 후보: XML Viewer, YAML Converter, CSV ↔ JSON 등
+- [x] Privacy Policy, Terms of Service, About 페이지 추가
+- [x] 5개 신규 도구 추가 (CSV, XML, Sorter, Diff)
+- [x] 10개 도구 페이지 콘텐츠 보강 (howto, features, usecases, FAQ 5개)
+- [x] 사이드바 From JSON / To JSON 그룹 분리
+- [x] BASE_URL purejson.org 반영
+- [x] robots.txt, sitemap.xml 도메인 수정
+- [ ] Search Console 인덱싱 완료 대기
+- [ ] AdSense 재신청
+- 상세: [ADR-006](decisions/006-adsense-rejection-analysis.md)
+
+### Phase 4: 수익화 — Pending
+
+- [ ] AdSense 승인 후 광고 배치 최적화 (현재 하단 AdSlot만 활성)
+- [ ] 트래픽 증가에 따른 추가 수익 전략
 
 ## 7. 핵심 성공 지표 (KPI)
 

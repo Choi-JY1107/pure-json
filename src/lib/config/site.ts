@@ -1,13 +1,18 @@
 export const LOCALES = ['en', 'ko', 'ja'] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'en';
-export const BASE_URL = 'https://purejson.dev';
+export const BASE_URL = 'https://purejson.org';
 export const PAGES = [
 	'json-viewer',
 	'json-formatter',
 	'json-minifier',
+	'json-sorter',
 	'json-to-typescript',
-	'json-to-yaml'
+	'json-to-yaml',
+	'json-to-csv',
+	'csv-to-json',
+	'json-to-xml',
+	'json-diff'
 ] as const;
 
 export const ADSENSE_CLIENT = 'ca-pub-4837179301443377';

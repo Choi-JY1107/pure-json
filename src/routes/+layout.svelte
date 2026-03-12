@@ -53,10 +53,6 @@
 	<input id="sidebar-drawer" type="checkbox" class="drawer-toggle" bind:checked={drawerOpen} />
 
 	<div class="app-layout__content drawer-content">
-		<div class="app-layout__ad-top">
-			<AdSlot client={ADSENSE_CLIENT} slot={ADSENSE_SLOT} height="90px" />
-		</div>
-
 		{#key locale.current}
 			<Header />
 
@@ -98,9 +94,6 @@
 	}
 	.app-layout__content {
 		@apply flex flex-col;
-	}
-	.app-layout__ad-top {
-		@apply px-4 pt-2 hidden md:block;
 	}
 	.app-layout__main {
 		@apply flex-1 p-4 md:p-6;
