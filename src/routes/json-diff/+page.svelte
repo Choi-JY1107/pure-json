@@ -83,6 +83,30 @@
 	<article class="tool-page__article prose prose-sm">
 		<h2>{m.diff_h1()}</h2>
 		<p>{m.diff_intro()}</p>
+
+		<h3>{m.section_howto()}</h3>
+		<ol>
+			<li><strong>{m.diff_howto_s1()}</strong> — {m.diff_howto_s1_desc()}</li>
+			<li><strong>{m.diff_howto_s2()}</strong> — {m.diff_howto_s2_desc()}</li>
+			<li><strong>{m.diff_howto_s3()}</strong> — {m.diff_howto_s3_desc()}</li>
+		</ol>
+
+		<h3>{m.section_features()}</h3>
+		<ul>
+			<li>{m.diff_feature1()}</li>
+			<li>{m.diff_feature2()}</li>
+			<li>{m.diff_feature3()}</li>
+			<li>{m.diff_feature4()}</li>
+		</ul>
+
+		<h3>{m.section_usecases()}</h3>
+		<ul>
+			<li>{m.diff_usecase1()}</li>
+			<li>{m.diff_usecase2()}</li>
+			<li>{m.diff_usecase3()}</li>
+		</ul>
+
+		<h3>{m.section_faq()}</h3>
 		<details>
 			<summary><strong>{m.diff_faq_q1()}</strong></summary>
 			<p>{m.diff_faq_a1()}</p>
@@ -90,6 +114,18 @@
 		<details>
 			<summary><strong>{m.diff_faq_q2()}</strong></summary>
 			<p>{m.diff_faq_a2()}</p>
+		</details>
+		<details>
+			<summary><strong>{m.diff_faq_q3()}</strong></summary>
+			<p>{m.diff_faq_a3()}</p>
+		</details>
+		<details>
+			<summary><strong>{m.diff_faq_q4()}</strong></summary>
+			<p>{m.diff_faq_a4()}</p>
+		</details>
+		<details>
+			<summary><strong>{m.diff_faq_q5()}</strong></summary>
+			<p>{m.diff_faq_a5()}</p>
 		</details>
 	</article>
 </div>
