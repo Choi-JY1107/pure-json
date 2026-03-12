@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://purejson.dev/sitemap.xml
+Sitemap: https://purejson.org/sitemap.xml
