@@ -34,14 +34,14 @@
 		<!-- eslint-disable svelte/no-at-html-tags -- i18n values are first-party, not user input -->
 		<p>{@html intro}</p>
 
-		{#each sections as section (section.title)}
+		{#each sections as section, i (i)}
 			<h2>{section.title}</h2>
-			{#each section.paragraphs as paragraph (paragraph)}
+			{#each section.paragraphs as paragraph, j (j)}
 				<p>{@html paragraph}</p>
 			{/each}
 			{#if section.list && section.list.length > 0}
 				<ul>
-					{#each section.list as item (item)}
+					{#each section.list as item, j (j)}
 						<li>{@html item}</li>
 					{/each}
 				</ul>
@@ -62,7 +62,7 @@
 
 		{#if faqs.length > 0}
 			<h2>{m.section_faq()}</h2>
-			{#each faqs as faq (faq.question)}
+			{#each faqs as faq, j (j)}
 				<details>
 					<summary><strong>{faq.question}</strong></summary>
 					<p>{@html faq.answer}</p><!-- eslint-disable-line svelte/no-at-html-tags -->
