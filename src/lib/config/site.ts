@@ -15,6 +15,15 @@ export const PAGES = [
 	'json-diff'
 ] as const;
 
+export const GUIDE_PAGES = [
+	'what-is-json',
+	'json-vs-yaml-xml',
+	'json-syntax-errors',
+	'json-rest-api',
+	'json-schema',
+	'large-json-files'
+] as const;
+
 export const ADSENSE_CLIENT = 'ca-pub-4837179301443377';
 export const ADSENSE_SLOT = '5281424133';
 

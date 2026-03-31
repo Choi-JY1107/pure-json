@@ -96,6 +96,12 @@
 
 		editorInstance = instance;
 		loading = false;
+
+		// Fix Lighthouse "prevents pasting" warning from Monaco's hidden textarea
+		const textarea = container.querySelector('textarea');
+		if (textarea) {
+			textarea.removeAttribute('autocomplete');
+		}
 	}
 
 	onDestroy(() => {
@@ -129,7 +135,7 @@
 	}
 	.monaco-editor__placeholder {
 		@apply pointer-events-none absolute
-		       text-base-content/40 text-sm leading-[19px] font-mono;
+		       text-base-content/40 text-sm leading-4.75 font-mono;
 	}
 	.monaco-editor__skeleton {
 		@apply absolute inset-0 p-4 flex flex-col gap-2.5 pointer-events-none;
