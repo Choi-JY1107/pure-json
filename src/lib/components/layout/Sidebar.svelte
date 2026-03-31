@@ -112,7 +112,7 @@
 	@reference "../../../app.css";
 
 	.sidebar {
-		@apply w-64 h-full py-8 flex flex-col
+		@apply w-64 h-full py-8 flex flex-col overflow-x-hidden
 		       bg-surface-container-low border-r border-outline-variant/15;
 	}
 
@@ -130,7 +130,7 @@
 
 	/* Navigation */
 	.sidebar__nav {
-		@apply flex-1 flex flex-col overflow-y-auto;
+		@apply flex-1 flex flex-col overflow-y-auto overflow-x-hidden;
 	}
 	.sidebar__group-title {
 		@apply text-[0.625rem] font-semibold text-secondary
