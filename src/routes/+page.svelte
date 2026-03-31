@@ -1,56 +1,95 @@
 <script lang="ts">
 	import { MetaTags } from 'svelte-meta-tags';
-	import DualView from '$lib/components/editor/DualView.svelte';
+	import MonacoEditor from '$lib/components/editor/MonacoEditor.svelte';
+	import TreeView from '$lib/components/editor/TreeView.svelte';
 	import CopyButton from '$lib/components/ui/CopyButton.svelte';
 	import ConfirmModal from '$lib/components/ui/ConfirmModal.svelte';
 	import LoadFileButton from '$lib/components/ui/LoadFileButton.svelte';
+	import { parseJsonToTree } from '$lib/utils/tree-parser';
 	import { getEditorStore } from '$lib/stores/editor';
+import * as m from '$lib/paraglide/messages.js';
 
 	const editor = getEditorStore('json-viewer');
-	import * as m from '$lib/paraglide/messages.js';
-
 	let showClearModal = $state(false);
+
+	let treeData = $derived.by(() => {
+		if (!editor.input) return null;
+		try {
+			const parsed = JSON.parse(editor.input);
+			return parseJsonToTree(parsed);
+		} catch {
+			return null;
+		}
+	});
 </script>
 
-<MetaTags
-	title={m.viewer_title()}
-	description={m.viewer_description()}
-/>
+<MetaTags title={m.viewer_title()} description={m.viewer_description()} />
 
-<div class="tool-page">
+<div class="viewer">
 	<!-- Toolbar -->
-	<div class="tool-page__toolbar">
-		<div class="tool-page__title-group">
-			<h1 class="tool-page__title">{m.viewer_h1()}</h1>
+	<div class="viewer__toolbar">
+		<div class="viewer__toolbar-left">
+			<h1 class="viewer__title">{m.viewer_h1()}</h1>
 		</div>
-		<div class="tool-page__actions">
-			<button class="tool-page__btn tool-page__btn--soft" onclick={() => editor.loadSample()}>
-				<span class="material-symbols-outlined tool-page__btn-icon">edit_note</span>
+		<div class="viewer__toolbar-right">
+			<button class="viewer__sample-btn" onclick={() => editor.loadSample()}>
+				<span class="material-symbols-outlined" style="font-size: 0.875rem;">edit_note</span>
 				{m.btn_load_sample()}
 			</button>
 			<LoadFileButton onLoad={(content) => editor.setInput(content)} />
-			<div class="tool-page__divider"></div>
 			<CopyButton text={editor.input} />
-			<button class="tool-page__btn tool-page__btn--ghost" onclick={() => (showClearModal = true)}>
-				<span class="material-symbols-outlined tool-page__btn-icon">delete_outline</span>
+			<button class="viewer__clear-btn" onclick={() => (showClearModal = true)}>
+				<span class="material-symbols-outlined" style="font-size: 0.875rem;">delete_outline</span>
 				{m.btn_clear()}
 			</button>
 		</div>
 	</div>
 
-	<!-- Editor Panel -->
-	<div class="tool-page__panel">
-		<div class="tool-page__panel-header">
-			<span class="material-symbols-outlined tool-page__panel-icon">visibility</span>
-			<span class="tool-page__panel-label">JSON Viewer</span>
-		</div>
-		<div class="tool-page__editor">
-			<DualView bind:value={editor.input} placeholder={m.editor_placeholder()} />
-		</div>
+	<!-- Split panels: Raw Input (left) + Tree View (right) -->
+	<div class="viewer__panels">
+		<!-- Left: Raw JSON Input -->
+		<section class="viewer__panel viewer__panel--input">
+			<div class="viewer__panel-header">
+				<div class="viewer__header-left">
+					<span class="material-symbols-outlined viewer__icon viewer__icon--tertiary">data_object</span>
+					<span class="viewer__label">Raw JSON Input</span>
+				</div>
+				<div class="viewer__header-right"></div>
+			</div>
+			<div class="viewer__editor">
+				<MonacoEditor bind:value={editor.input} placeholder={m.editor_placeholder()} />
+			</div>
+		</section>
+
+		<!-- Right: Visual Tree Architecture -->
+		<section class="viewer__panel viewer__panel--tree">
+			<div class="viewer__panel-header">
+				<div class="viewer__header-left">
+					<span class="material-symbols-outlined viewer__icon viewer__icon--primary">account_tree</span>
+					<span class="viewer__label">Visual Tree Architecture</span>
+				</div>
+			<div class="viewer__header-right"></div>
+			</div>
+			<div class="viewer__tree">
+				{#if treeData}
+					<TreeView node={treeData} />
+				{:else if editor.input}
+					<div class="viewer__empty">
+						<span class="material-symbols-outlined" style="font-size: 2rem; opacity: 0.3;">error_outline</span>
+						<p>{m.tree_invalid_json()}</p>
+					</div>
+				{:else}
+					<div class="viewer__empty">
+						<span class="material-symbols-outlined" style="font-size: 2rem; opacity: 0.3;">data_object</span>
+						<p>{m.tree_paste_json()}</p>
+					</div>
+				{/if}
+			</div>
+		</section>
 	</div>
 
-	<!-- Article -->
-	<article class="tool-page__article prose prose-sm">
+	<!-- Article (SEO content) -->
+	<article class="viewer__article prose prose-sm">
 		<h2>{m.viewer_h1()}</h2>
 		<p>{m.viewer_intro()}</p>
 
@@ -111,61 +150,106 @@
 <style>
 	@reference "../app.css";
 
-	.tool-page {
-		@apply max-w-7xl mx-auto space-y-4;
+	.viewer {
+		@apply flex flex-col gap-6;
 	}
-	.tool-page__toolbar {
-		@apply flex flex-wrap items-center justify-between gap-3
-		       px-4 py-3 rounded-xl
-		       bg-surface-container-low border border-outline-variant/10;
+
+	/* Toolbar */
+	.viewer__toolbar {
+		@apply h-14 flex items-center justify-between px-6
+		       bg-surface-container-low border border-outline-variant/15 rounded-xl;
 	}
-	.tool-page__title-group {
+	.viewer__toolbar-left {
+		@apply flex items-center gap-6;
+	}
+	.viewer__toolbar-right {
 		@apply flex items-center gap-3;
 	}
-	.tool-page__title {
-		@apply text-base font-headline font-bold tracking-tight;
+	.viewer__title {
+		@apply font-headline text-lg font-semibold tracking-tight;
 	}
-	.tool-page__actions {
-		@apply flex items-center gap-2 flex-wrap;
-	}
-	.tool-page__divider {
-		@apply h-6 border-l border-outline-variant/20;
-	}
-	.tool-page__btn {
-		@apply inline-flex items-center gap-1.5 px-3 py-1.5
-		       text-[0.6875rem] font-semibold uppercase tracking-wider
-		       rounded-lg transition-all duration-200 cursor-pointer;
-	}
-	.tool-page__btn-icon {
-		font-size: 1rem;
-	}
-	.tool-page__btn--soft {
-		@apply bg-surface-container-high text-on-surface
+	.viewer__sample-btn {
+		@apply flex items-center gap-1.5 px-3 py-1.5
+		       bg-surface-container-high text-on-surface
+		       text-[0.7rem] font-semibold uppercase tracking-wider
+		       rounded-lg transition-all cursor-pointer
 		       hover:bg-surface-container-highest;
 	}
-	.tool-page__btn--ghost {
-		@apply bg-transparent text-secondary hover:text-on-surface
-		       hover:bg-surface-container;
+	.viewer__clear-btn {
+		@apply flex items-center gap-1.5 px-3 py-1.5
+		       bg-transparent text-secondary
+		       text-[0.7rem] font-semibold uppercase tracking-wider
+		       rounded-lg transition-all cursor-pointer
+		       hover:text-on-surface hover:bg-surface-container;
 	}
-	.tool-page__panel {
+
+	/* Split panels */
+	.viewer__panels {
+		@apply grid grid-cols-1 lg:grid-cols-2 gap-4;
+	}
+	.viewer__panel {
 		@apply flex flex-col rounded-xl overflow-hidden
 		       border border-outline-variant/10 shadow-lg;
 	}
-	.tool-page__panel-header {
-		@apply h-10 px-4 flex items-center gap-2
+	.viewer__panel--input {
+	}
+	.viewer__panel--tree {
+		@apply bg-surface;
+	}
+
+	/* Panel header */
+	.viewer__panel-header {
+		@apply h-10 px-4 flex items-center justify-between
 		       bg-surface-container-low border-b border-outline-variant/5;
 	}
-	.tool-page__panel-icon {
+	.viewer__header-left {
+		@apply flex items-center gap-2;
+	}
+	.viewer__header-right {
+		@apply flex items-center gap-3;
+	}
+	.viewer__icon {
 		font-size: 0.875rem;
+	}
+	.viewer__icon--tertiary {
+		color: var(--md-tertiary);
+	}
+	.viewer__icon--primary {
 		color: var(--md-primary);
 	}
-	.tool-page__panel-label {
+	.viewer__label {
 		@apply text-[0.625rem] uppercase tracking-widest font-bold text-secondary;
 	}
-	.tool-page__editor {
-		@apply h-125;
+	.viewer__text-btn {
+		@apply text-[0.625rem] uppercase tracking-tighter font-semibold
+		       text-secondary hover:text-primary transition-colors cursor-pointer;
 	}
-	.tool-page__article {
-		@apply max-w-none mt-8;
+	.viewer__text-btn--danger {
+		@apply hover:text-error;
+	}
+
+	/* Editor & Tree */
+	.viewer__editor {
+		@apply h-[calc(100vh-16rem)];
+	}
+	.viewer__tree {
+		@apply h-[calc(100vh-16rem)] overflow-auto p-6;
+	}
+	.viewer__empty {
+		@apply h-full flex flex-col items-center justify-center gap-2
+		       text-sm text-secondary;
+	}
+
+	/* Article */
+	.viewer__article {
+		@apply max-w-none;
+	}
+
+	/* Mobile: both shrink equally */
+	@media (width < 64rem) {
+		.viewer__editor,
+		.viewer__tree {
+			@apply h-72;
+		}
 	}
 </style>

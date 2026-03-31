@@ -44,18 +44,33 @@
 	{#snippet beforeGrid()}
 		{#if savings}
 			{@const s = savings}
-			<div class="tool-page__stats flex flex-row">
-				<div class="tool-page__stat flex flex-col gap-1 p-4">
-					<div class="tool-page__stat-title text-xs text-secondary">{m.stats_original()}</div>
-					<div class="tool-page__stat-value text-2xl font-bold">{s.original} B</div>
+			<div class="bento">
+				<div class="bento__card">
+					<div class="bento__header">
+						<span class="bento__label">{m.stats_original()}</span>
+						<div class="bento__icon-box bento__icon-box--tertiary">
+							<span class="material-symbols-outlined" style="font-size: 1rem;">data_usage</span>
+						</div>
+					</div>
+					<div class="bento__value">{s.original} <span class="bento__unit">B</span></div>
 				</div>
-				<div class="tool-page__stat flex flex-col gap-1 p-4">
-					<div class="tool-page__stat-title text-xs text-secondary">{m.stats_minified()}</div>
-					<div class="tool-page__stat-value text-2xl font-bold">{s.minified} B</div>
+				<div class="bento__card">
+					<div class="bento__header">
+						<span class="bento__label">{m.stats_minified()}</span>
+						<div class="bento__icon-box bento__icon-box--primary">
+							<span class="material-symbols-outlined" style="font-size: 1rem;">speed</span>
+						</div>
+					</div>
+					<div class="bento__value">{s.minified} <span class="bento__unit">B</span></div>
 				</div>
-				<div class="tool-page__stat flex flex-col gap-1 p-4">
-					<div class="tool-page__stat-title text-xs text-secondary">{m.stats_saved()}</div>
-					<div class="tool-page__stat-value text-2xl font-bold tool-page__stat-value--success">{s.percent}%</div>
+				<div class="bento__card">
+					<div class="bento__header">
+						<span class="bento__label">{m.stats_saved()}</span>
+						<div class="bento__icon-box bento__icon-box--tertiary">
+							<span class="material-symbols-outlined" style="font-size: 1rem;">trending_up</span>
+						</div>
+					</div>
+					<div class="bento__value bento__value--tertiary">{s.percent}<span class="bento__unit">%</span></div>
 				</div>
 			</div>
 		{/if}
@@ -65,13 +80,35 @@
 <style>
 	@reference "../../app.css";
 
-	.tool-page__stats {
-		@apply shadow bg-surface-container-low w-full;
+	.bento {
+		@apply grid grid-cols-1 md:grid-cols-3 gap-4;
 	}
-	.tool-page__stat-value {
-		@apply text-lg;
+	.bento__card {
+		@apply glass-panel p-5 rounded-xl border border-outline-variant/15
+		       flex flex-col justify-between;
 	}
-	.tool-page__stat-value--success {
+	.bento__header {
+		@apply flex justify-between items-start;
+	}
+	.bento__label {
+		@apply text-[0.65rem] uppercase tracking-widest text-secondary font-bold;
+	}
+	.bento__icon-box {
+		@apply w-8 h-8 rounded-lg flex items-center justify-center;
+	}
+	.bento__icon-box--tertiary {
+		@apply bg-tertiary/10 text-tertiary;
+	}
+	.bento__icon-box--primary {
+		@apply bg-primary/10 text-primary;
+	}
+	.bento__value {
+		@apply text-3xl font-headline font-bold text-on-surface mt-3;
+	}
+	.bento__value--tertiary {
 		@apply text-tertiary;
+	}
+	.bento__unit {
+		@apply text-lg text-secondary;
 	}
 </style>

@@ -32,9 +32,39 @@
 	]}
 >
 	{#snippet toolbarExtra()}
-		<select class="px-2 py-1 text-sm border border-outline-variant rounded-lg bg-surface-container" bind:value={order}>
-			<option value="asc">{m.sort_asc()}</option>
-			<option value="desc">{m.sort_desc()}</option>
-		</select>
+		<div class="sort-toggle">
+			<button
+				class="sort-toggle__btn"
+				class:sort-toggle__btn--active={order === 'asc'}
+				onclick={() => (order = 'asc')}
+			>
+				<span class="material-symbols-outlined" style="font-size: 0.875rem;">arrow_upward</span>
+				{m.sort_asc()}
+			</button>
+			<button
+				class="sort-toggle__btn"
+				class:sort-toggle__btn--active={order === 'desc'}
+				onclick={() => (order = 'desc')}
+			>
+				<span class="material-symbols-outlined" style="font-size: 0.875rem;">arrow_downward</span>
+				{m.sort_desc()}
+			</button>
+		</div>
 	{/snippet}
 </DualPanelToolPage>
+
+<style>
+	@reference "../../app.css";
+
+	.sort-toggle {
+		@apply flex bg-surface-container-low rounded-lg p-1;
+	}
+	.sort-toggle__btn {
+		@apply inline-flex items-center gap-1 px-3 py-1 rounded
+		       text-[0.625rem] font-bold uppercase tracking-wider
+		       text-secondary cursor-pointer transition-colors;
+	}
+	.sort-toggle__btn--active {
+		@apply bg-primary text-on-primary;
+	}
+</style>
