@@ -18,24 +18,38 @@
 />
 
 <div class="tool-page">
+	<!-- Toolbar -->
 	<div class="tool-page__toolbar">
 		<div class="tool-page__title-group">
 			<h1 class="tool-page__title">{m.viewer_h1()}</h1>
-			<button class="inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-primary/15 text-primary hover:bg-primary/25" onclick={() => editor.loadSample()}>
+		</div>
+		<div class="tool-page__actions">
+			<button class="tool-page__btn tool-page__btn--soft" onclick={() => editor.loadSample()}>
+				<span class="material-symbols-outlined tool-page__btn-icon">edit_note</span>
 				{m.btn_load_sample()}
 			</button>
 			<LoadFileButton onLoad={(content) => editor.setInput(content)} />
+			<div class="tool-page__divider"></div>
+			<CopyButton text={editor.input} />
+			<button class="tool-page__btn tool-page__btn--ghost" onclick={() => (showClearModal = true)}>
+				<span class="material-symbols-outlined tool-page__btn-icon">delete_outline</span>
+				{m.btn_clear()}
+			</button>
 		</div>
-		<CopyButton text={editor.input} />
-		<button class="tool-page__btn tool-page__btn--ghost inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-transparent hover:bg-surface-container" onclick={() => (showClearModal = true)}>
-			{m.btn_clear()}
-		</button>
 	</div>
 
-	<div class="tool-page__editor tool-page__editor--tall">
-		<DualView bind:value={editor.input} placeholder={m.editor_placeholder()} />
+	<!-- Editor Panel -->
+	<div class="tool-page__panel">
+		<div class="tool-page__panel-header">
+			<span class="material-symbols-outlined tool-page__panel-icon">visibility</span>
+			<span class="tool-page__panel-label">JSON Viewer</span>
+		</div>
+		<div class="tool-page__editor">
+			<DualView bind:value={editor.input} placeholder={m.editor_placeholder()} />
+		</div>
 	</div>
 
+	<!-- Article -->
 	<article class="tool-page__article prose prose-sm">
 		<h2>{m.viewer_h1()}</h2>
 		<p>{m.viewer_intro()}</p>
@@ -101,18 +115,54 @@
 		@apply max-w-7xl mx-auto space-y-4;
 	}
 	.tool-page__toolbar {
-		@apply flex flex-wrap gap-2 items-center;
+		@apply flex flex-wrap items-center justify-between gap-3
+		       px-4 py-3 rounded-xl
+		       bg-surface-container-low border border-outline-variant/10;
 	}
 	.tool-page__title-group {
-		@apply flex items-center gap-2 flex-1;
+		@apply flex items-center gap-3;
 	}
 	.tool-page__title {
-		@apply text-lg font-bold;
+		@apply text-base font-headline font-bold tracking-tight;
+	}
+	.tool-page__actions {
+		@apply flex items-center gap-2 flex-wrap;
+	}
+	.tool-page__divider {
+		@apply h-6 border-l border-outline-variant/20;
+	}
+	.tool-page__btn {
+		@apply inline-flex items-center gap-1.5 px-3 py-1.5
+		       text-[0.6875rem] font-semibold uppercase tracking-wider
+		       rounded-lg transition-all duration-200 cursor-pointer;
+	}
+	.tool-page__btn-icon {
+		font-size: 1rem;
+	}
+	.tool-page__btn--soft {
+		@apply bg-surface-container-high text-on-surface
+		       hover:bg-surface-container-highest;
+	}
+	.tool-page__btn--ghost {
+		@apply bg-transparent text-secondary hover:text-on-surface
+		       hover:bg-surface-container;
+	}
+	.tool-page__panel {
+		@apply flex flex-col rounded-xl overflow-hidden
+		       border border-outline-variant/10 shadow-lg;
+	}
+	.tool-page__panel-header {
+		@apply h-10 px-4 flex items-center gap-2
+		       bg-surface-container-low border-b border-outline-variant/5;
+	}
+	.tool-page__panel-icon {
+		font-size: 0.875rem;
+		color: var(--md-primary);
+	}
+	.tool-page__panel-label {
+		@apply text-[0.625rem] uppercase tracking-widest font-bold text-secondary;
 	}
 	.tool-page__editor {
-		@apply border border-surface-container rounded-lg overflow-hidden;
-	}
-	.tool-page__editor--tall {
 		@apply h-125;
 	}
 	.tool-page__article {

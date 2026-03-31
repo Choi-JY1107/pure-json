@@ -35,32 +35,44 @@
 <MetaTags title={m.diff_title()} description={m.diff_description()} />
 
 <div class="tool-page">
+	<!-- Toolbar -->
 	<div class="tool-page__toolbar">
 		<div class="tool-page__title-group">
 			<h1 class="tool-page__title">{m.diff_h1()}</h1>
 		</div>
-		<button class="inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-primary text-on-primary hover:opacity-90" onclick={handleDiff}>
-			{m.btn_compare()}
-		</button>
-		<button class="inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-transparent hover:bg-surface-container" onclick={() => (showClearModal = true)}>
-			{m.btn_clear()}
-		</button>
+		<div class="tool-page__actions">
+			<button class="tool-page__btn tool-page__btn--primary" onclick={handleDiff}>
+				<span class="material-symbols-outlined tool-page__btn-icon" style="font-variation-settings: 'FILL' 1;">difference</span>
+				{m.btn_compare()}
+			</button>
+			<button class="tool-page__btn tool-page__btn--ghost" onclick={() => (showClearModal = true)}>
+				<span class="material-symbols-outlined tool-page__btn-icon">delete_outline</span>
+				{m.btn_clear()}
+			</button>
+		</div>
 	</div>
 
+	<!-- Editor Grid (2 inputs) -->
 	<div class="tool-page__grid">
 		<div class="tool-page__panel">
-			<div class="tool-page__label-row">
-				<span class="tool-page__label">{m.diff_left_label()}</span>
-				<LoadFileButton onLoad={(content) => (left = content)} />
+			<div class="tool-page__panel-header">
+				<span class="material-symbols-outlined tool-page__panel-icon">data_object</span>
+				<span class="tool-page__panel-label">{m.diff_left_label()}</span>
+				<div class="tool-page__panel-actions">
+					<LoadFileButton onLoad={(content) => (left = content)} />
+				</div>
 			</div>
 			<div class="tool-page__editor">
 				<MonacoEditor bind:value={left} placeholder={m.editor_placeholder()} />
 			</div>
 		</div>
 		<div class="tool-page__panel">
-			<div class="tool-page__label-row">
-				<span class="tool-page__label">{m.diff_right_label()}</span>
-				<LoadFileButton onLoad={(content) => (right = content)} />
+			<div class="tool-page__panel-header">
+				<span class="material-symbols-outlined tool-page__panel-icon">data_object</span>
+				<span class="tool-page__panel-label">{m.diff_right_label()}</span>
+				<div class="tool-page__panel-actions">
+					<LoadFileButton onLoad={(content) => (right = content)} />
+				</div>
 			</div>
 			<div class="tool-page__editor">
 				<MonacoEditor bind:value={right} placeholder={m.editor_placeholder()} />
@@ -68,11 +80,15 @@
 		</div>
 	</div>
 
+	<!-- Result Panel -->
 	{#if output || error}
 		<div class="tool-page__panel">
-			<div class="tool-page__label-row">
-				<span class="tool-page__label">{m.diff_result_label()}</span>
-				<CopyButton text={output || error} />
+			<div class="tool-page__panel-header">
+				<span class="material-symbols-outlined tool-page__panel-icon tool-page__panel-icon--result">task_alt</span>
+				<span class="tool-page__panel-label">{m.diff_result_label()}</span>
+				<div class="tool-page__panel-actions">
+					<CopyButton text={output || error} />
+				</div>
 			</div>
 			<div class="tool-page__editor">
 				<MonacoEditor value={error || output} readOnly language="plaintext" />
@@ -80,6 +96,7 @@
 		</div>
 	{/if}
 
+	<!-- Article -->
 	<article class="tool-page__article prose prose-sm">
 		<h2>{m.diff_h1()}</h2>
 		<p>{m.diff_intro()}</p>
@@ -145,31 +162,62 @@
 		@apply max-w-7xl mx-auto space-y-4;
 	}
 	.tool-page__toolbar {
-		@apply flex flex-wrap gap-2 items-center;
+		@apply flex flex-wrap items-center justify-between gap-3
+		       px-4 py-3 rounded-xl
+		       bg-surface-container-low border border-outline-variant/10;
 	}
 	.tool-page__title-group {
-		@apply flex items-center gap-2 flex-1;
+		@apply flex items-center gap-3;
 	}
 	.tool-page__title {
-		@apply text-lg font-bold;
+		@apply text-base font-headline font-bold tracking-tight;
+	}
+	.tool-page__actions {
+		@apply flex items-center gap-2;
+	}
+	.tool-page__btn {
+		@apply inline-flex items-center gap-1.5 px-3 py-1.5
+		       text-[0.6875rem] font-semibold uppercase tracking-wider
+		       rounded-lg transition-all duration-200 cursor-pointer;
+	}
+	.tool-page__btn-icon {
+		font-size: 1rem;
+	}
+	.tool-page__btn--primary {
+		@apply bg-linear-to-br from-primary to-primary-container
+		       text-on-primary shadow-lg shadow-primary-container/20
+		       active:scale-95;
+	}
+	.tool-page__btn--ghost {
+		@apply bg-transparent text-secondary hover:text-on-surface
+		       hover:bg-surface-container;
 	}
 	.tool-page__grid {
 		@apply grid grid-cols-1 lg:grid-cols-2 gap-4;
 	}
 	.tool-page__panel {
-		@apply space-y-1;
+		@apply flex flex-col rounded-xl overflow-hidden
+		       border border-outline-variant/10 shadow-lg;
 	}
-	.tool-page__label {
-		@apply text-sm font-medium;
+	.tool-page__panel-header {
+		@apply h-10 px-4 flex items-center gap-2
+		       bg-surface-container-low border-b border-outline-variant/5;
 	}
-	.tool-page__label-row {
-		@apply flex items-center gap-2 h-8;
+	.tool-page__panel-icon {
+		font-size: 0.875rem;
+		color: var(--md-tertiary);
 	}
-	.tool-page__label-row .tool-page__label {
-		@apply flex-1;
+	.tool-page__panel-icon--result {
+		color: var(--md-primary);
+	}
+	.tool-page__panel-label {
+		@apply text-[0.625rem] uppercase tracking-widest font-bold text-secondary flex-1;
+	}
+	.tool-page__panel-actions {
+		@apply flex items-center gap-1;
 	}
 	.tool-page__editor {
-		@apply h-80 border border-surface-container rounded-lg overflow-hidden;
+		@apply h-80;
 	}
 	.tool-page__article {
 		@apply max-w-none mt-8;
