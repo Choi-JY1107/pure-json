@@ -18,7 +18,11 @@
 		}
 	});
 
-	let drawerOpen = $state(false);
+	let sidebarOpen = $state(false);
+
+	function closeSidebar() {
+		sidebarOpen = false;
+	}
 </script>
 
 <MetaTags
@@ -49,81 +53,82 @@
 	}}
 />
 
-<div class="app-layout">
-	<div class="app-layout__content">
-		{#key locale.current}
-			<Header />
+<!-- Mobile overlay -->
+{#if sidebarOpen}
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<div
+		class="layout__overlay"
+		onclick={closeSidebar}
+		onkeydown={(e) => e.key === 'Escape' && closeSidebar()}
+	></div>
+{/if}
 
-			<main class="app-layout__main">
-				{@render children()}
-			</main>
+<!-- Sidebar -->
+<aside class="layout__sidebar" class:layout__sidebar--open={sidebarOpen}>
+	{#key locale.current}
+		<Sidebar />
+	{/key}
+</aside>
 
-			<div class="app-layout__ad-bottom">
-				<AdSlot client={ADSENSE_CLIENT} slot={ADSENSE_SLOT} height="90px" />
-			</div>
+<!-- Main wrapper (offset by sidebar on desktop) -->
+<div class="layout__main-wrapper">
+	{#key locale.current}
+		<Header onMenuToggle={() => (sidebarOpen = !sidebarOpen)} />
 
-			<Footer />
-		{/key}
-	</div>
+		<main class="layout__main">
+			{@render children()}
+		</main>
 
-	{#if drawerOpen}
-		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<div
-			class="app-layout__overlay"
-			onclick={() => (drawerOpen = false)}
-			onkeydown={(e) => e.key === 'Escape' && (drawerOpen = false)}
-		></div>
-	{/if}
+		<div class="layout__ad-bottom">
+			<AdSlot client={ADSENSE_CLIENT} slot={ADSENSE_SLOT} height="90px" />
+		</div>
 
-	<div class="app-layout__sidebar" class:app-layout__sidebar--open={drawerOpen}>
-		{#key locale.current}
-			<Sidebar />
-		{/key}
-	</div>
+		<Footer />
+	{/key}
 </div>
-
-<button
-	class="app-layout__mobile-btn"
-	onclick={() => (drawerOpen = !drawerOpen)}
-	aria-label="Open menu"
->
-	<svg class="app-layout__mobile-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-	</svg>
-</button>
 
 <style>
 	@reference "../app.css";
 
-	.app-layout {
-		@apply min-h-screen flex;
+	/* Sidebar: fixed left, hidden on mobile */
+	.layout__sidebar {
+		@apply fixed inset-y-0 left-0 z-40
+		       w-64 -translate-x-full
+		       transition-transform duration-200 ease-out;
 	}
-	.app-layout__content {
-		@apply flex flex-col flex-1;
+	@media (width >= 64rem) {
+		.layout__sidebar {
+			translate: 0;
+		}
 	}
-	.app-layout__main {
+	.layout__sidebar--open {
+		translate: 0;
+	}
+
+	/* Mobile overlay */
+	.layout__overlay {
+		@apply fixed inset-0 z-30 bg-black/50;
+	}
+	@media (width >= 64rem) {
+		.layout__overlay {
+			display: none;
+		}
+	}
+
+	/* Main content area: offset by sidebar on desktop */
+	.layout__main-wrapper {
+		@apply flex flex-col min-h-screen;
+	}
+	@media (width >= 64rem) {
+		.layout__main-wrapper {
+			padding-left: 16rem; /* w-64 = 16rem */
+		}
+	}
+
+	.layout__main {
 		@apply flex-1 p-4 md:p-6;
 	}
-	.app-layout__ad-bottom {
+	.layout__ad-bottom {
 		@apply px-4 pb-2;
-	}
-	.app-layout__overlay {
-		@apply fixed inset-0 z-30 bg-black/50 lg:hidden;
-	}
-	.app-layout__sidebar {
-		@apply fixed inset-y-0 left-0 z-40 -translate-x-full transition-transform duration-200
-		       lg:static lg:translate-x-0;
-	}
-	.app-layout__sidebar--open {
-		@apply translate-x-0;
-	}
-	.app-layout__mobile-btn {
-		@apply fixed bottom-4 right-4
-		       z-50 lg:hidden inline-flex items-center justify-center
-		       w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg
-		       transition-colors;
-	}
-	.app-layout__mobile-icon {
-		@apply w-6 h-6;
 	}
 </style>
