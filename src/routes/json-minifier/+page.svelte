@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DualPanelToolPage from '$lib/components/tool/DualPanelToolPage.svelte';
+	import ToolPage from '$lib/components/tool/ToolPage.svelte';
 	import { getEditorStore } from '$lib/stores/editor';
 	import { minifyJson } from '$lib/utils/json-formatter';
 	import * as m from '$lib/paraglide/messages.js';
@@ -16,7 +16,8 @@
 	});
 </script>
 
-<DualPanelToolPage
+<ToolPage
+	mode="dual"
 	{editor}
 	transform={minifyJson}
 	metaTitle={m.minifier_title()}
@@ -41,7 +42,7 @@
 		{ question: m.minifier_faq_q5(), answer: m.minifier_faq_a5() }
 	]}
 >
-	{#snippet beforeGrid()}
+	{#snippet beforePanels()}
 		{#if savings}
 			{@const s = savings}
 			<div class="bento">
@@ -75,40 +76,42 @@
 			</div>
 		{/if}
 	{/snippet}
-</DualPanelToolPage>
+</ToolPage>
 
 <style>
 	@reference "../../app.css";
 
-	.bento {
+	:global(.bento) {
 		@apply grid grid-cols-1 md:grid-cols-3 gap-4;
 	}
-	.bento__card {
-		@apply glass-panel p-5 rounded-xl border border-outline-variant/15
+	:global(.bento__card) {
+		@apply p-5 rounded-xl border border-outline-variant/15
 		       flex flex-col justify-between;
+		background: color-mix(in srgb, var(--md-surface-container-highest) 80%, transparent);
+		backdrop-filter: blur(20px);
 	}
-	.bento__header {
+	:global(.bento__header) {
 		@apply flex justify-between items-start;
 	}
-	.bento__label {
+	:global(.bento__label) {
 		@apply text-[0.65rem] uppercase tracking-widest text-secondary font-bold;
 	}
-	.bento__icon-box {
+	:global(.bento__icon-box) {
 		@apply w-8 h-8 rounded-lg flex items-center justify-center;
 	}
-	.bento__icon-box--tertiary {
+	:global(.bento__icon-box--tertiary) {
 		@apply bg-tertiary/10 text-tertiary;
 	}
-	.bento__icon-box--primary {
+	:global(.bento__icon-box--primary) {
 		@apply bg-primary/10 text-primary;
 	}
-	.bento__value {
+	:global(.bento__value) {
 		@apply text-3xl font-headline font-bold text-on-surface mt-3;
 	}
-	.bento__value--tertiary {
+	:global(.bento__value--tertiary) {
 		@apply text-tertiary;
 	}
-	.bento__unit {
+	:global(.bento__unit) {
 		@apply text-lg text-secondary;
 	}
 </style>
