@@ -134,7 +134,7 @@
 	}
 	.sidebar__group-title {
 		@apply text-[0.625rem] font-semibold text-secondary
-		       uppercase tracking-widest px-4 mb-1 mt-2;
+		       uppercase tracking-widest px-4 mb-2 mt-4;
 	}
 	.sidebar__item {
 		@apply flex items-center gap-3 pl-4 py-2
@@ -151,7 +151,7 @@
 
 	/* Divider */
 	.sidebar__divider {
-		@apply border-t border-outline-variant/15 my-2 mx-4;
+		@apply border-t border-outline-variant/30 my-3 mx-4;
 	}
 
 	/* Privacy footer */
