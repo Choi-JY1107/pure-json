@@ -53,47 +53,8 @@
 	--color-success: var(--md-tertiary);
 }
 
-/* ── Dark Theme (default) ── */
+/* ── Light Theme (default) ── */
 :root,
-[data-theme='dark'] {
-	--md-surface: #0e0e0e;
-	--md-surface-dim: #0e0e0e;
-	--md-surface-bright: #2b2c2c;
-	--md-surface-container-lowest: #000000;
-	--md-surface-container-low: #131313;
-	--md-surface-container: #191a1a;
-	--md-surface-container-high: #1f2020;
-	--md-surface-container-highest: #252626;
-	--md-on-surface: #e7e5e5;
-	--md-on-surface-variant: #acabaa;
-
-	--md-primary: #b9c3ff;
-	--md-primary-dim: #a8b5fd;
-	--md-primary-container: #354282;
-	--md-on-primary: #2e3b7b;
-	--md-on-primary-container: #c6ceff;
-
-	--md-secondary: #9f9d9d;
-	--md-secondary-dim: #9f9d9d;
-	--md-secondary-container: #3c3b3b;
-	--md-on-secondary: #202020;
-
-	--md-tertiary: #8ef4e9;
-	--md-tertiary-dim: #71d7cd;
-	--md-tertiary-container: #7fe6db;
-	--md-on-tertiary: #005c56;
-
-	--md-error: #ec7c8a;
-	--md-error-container: #7f2737;
-	--md-on-error: #490013;
-
-	--md-outline: #767575;
-	--md-outline-variant: #484848;
-
-	color-scheme: dark;
-}
-
-/* ── Light Theme ── */
 [data-theme='light'] {
 	--md-surface: #fafafa;
 	--md-surface-dim: #d9d9d9;
@@ -132,11 +93,65 @@
 	color-scheme: light;
 }
 
+/* ── Dark Theme ── */
+[data-theme='dark'] {
+	--md-surface: #0e0e0e;
+	--md-surface-dim: #0e0e0e;
+	--md-surface-bright: #2b2c2c;
+	--md-surface-container-lowest: #000000;
+	--md-surface-container-low: #131313;
+	--md-surface-container: #191a1a;
+	--md-surface-container-high: #1f2020;
+	--md-surface-container-highest: #252626;
+	--md-on-surface: #e7e5e5;
+	--md-on-surface-variant: #acabaa;
+
+	--md-primary: #b9c3ff;
+	--md-primary-dim: #a8b5fd;
+	--md-primary-container: #354282;
+	--md-on-primary: #2e3b7b;
+	--md-on-primary-container: #c6ceff;
+
+	--md-secondary: #9f9d9d;
+	--md-secondary-dim: #9f9d9d;
+	--md-secondary-container: #3c3b3b;
+	--md-on-secondary: #202020;
+
+	--md-tertiary: #8ef4e9;
+	--md-tertiary-dim: #71d7cd;
+	--md-tertiary-container: #7fe6db;
+	--md-on-tertiary: #005c56;
+
+	--md-error: #ec7c8a;
+	--md-error-container: #7f2737;
+	--md-on-error: #490013;
+
+	--md-outline: #767575;
+	--md-outline-variant: #484848;
+
+	color-scheme: dark;
+}
+
 /* ── Base Styles ── */
 body {
 	font-family: var(--font-body), sans-serif;
 	background-color: var(--md-surface);
 	color: var(--md-on-surface);
+}
+
+/* ── Prose (typography plugin) dark mode override ── */
+.prose {
+	--tw-prose-body: var(--md-on-surface);
+	--tw-prose-headings: var(--md-on-surface);
+	--tw-prose-links: var(--md-primary);
+	--tw-prose-bold: var(--md-on-surface);
+	--tw-prose-counters: var(--md-secondary);
+	--tw-prose-bullets: var(--md-secondary);
+	--tw-prose-hr: var(--md-outline-variant);
+	--tw-prose-quotes: var(--md-on-surface-variant);
+	--tw-prose-code: var(--md-tertiary);
+	--tw-prose-pre-bg: var(--md-surface-container-lowest);
+	--tw-prose-pre-code: var(--md-on-surface);
 }
 
 /* ── Material Symbols ── */

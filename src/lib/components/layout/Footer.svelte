@@ -1,28 +1,17 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages.js';
-
 </script>
 
 <footer class="footer">
-	<div class="footer__info">
-		<p class="footer__tagline">
-			🔒 {m.footer_tagline()}
-		</p>
-		<p class="footer__privacy">
-			{m.footer_privacy_text()}
-		</p>
+	<div class="footer__left">
+		<span class="material-symbols-outlined footer__lock-icon" style="font-variation-settings: 'FILL' 1;">lock</span>
+		<span>{m.footer_tagline()}</span>
 	</div>
-	<div class="footer__links">
-		<a href="/about">{m.footer_about()}</a>
-		<span>·</span>
-		<a href="/privacy">{m.footer_privacy()}</a>
-		<span>·</span>
-		<a href="/terms">{m.footer_terms()}</a>
-	</div>
-	<div class="footer__meta">
-		<span>&copy; {new Date().getFullYear()} {m.copyright_text()}</span>
-		<span>·</span>
-		<span>{m.open_source()}</span>
+	<div class="footer__right">
+		<a href="/about" class="footer__link">{m.footer_about()}</a>
+		<a href="/privacy" class="footer__link">{m.footer_privacy()}</a>
+		<a href="/terms" class="footer__link">{m.footer_terms()}</a>
+		<span class="footer__copyright">&copy; {new Date().getFullYear()} {m.copyright_text()}</span>
 	</div>
 </footer>
 
@@ -30,22 +19,24 @@
 	@reference "../../../app.css";
 
 	.footer {
-		@apply p-6 bg-surface-container-low text-on-surface border-t border-surface-container
-		       flex flex-col items-center gap-2 text-center;
+		@apply h-10 px-6 flex items-center justify-between
+		       bg-surface-container-lowest border-t border-outline-variant/10
+		       text-[0.5625rem] uppercase tracking-widest font-medium text-outline;
 	}
-	.footer__tagline {
-		@apply font-semibold text-sm;
+	.footer__left {
+		@apply flex items-center gap-2;
 	}
-	.footer__privacy {
-		@apply text-xs text-on-surface/70 mt-1;
+	.footer__lock-icon {
+		font-size: 0.75rem;
+		color: var(--md-tertiary);
 	}
-	.footer__links {
-		@apply flex gap-2 text-xs;
+	.footer__right {
+		@apply flex items-center gap-4;
 	}
-	.footer__links a {
-		@apply underline hover:no-underline;
+	.footer__link {
+		@apply text-secondary hover:text-on-surface transition-colors no-underline;
 	}
-	.footer__meta {
-		@apply flex gap-4 text-xs text-on-surface/70;
+	.footer__copyright {
+		@apply text-outline/60;
 	}
 </style>
