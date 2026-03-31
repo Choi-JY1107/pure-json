@@ -20,6 +20,15 @@
 	const toJson = $derived([
 		{ href: '/csv-to-json', icon: '📋', label: m.sidebar_csv_to_json() }
 	]);
+
+	const guides = $derived([
+		{ href: '/guides/what-is-json', icon: '📖', label: m.sidebar_guide_what_is_json() },
+		{ href: '/guides/json-vs-yaml-xml', icon: '⚖️', label: m.sidebar_guide_vs_formats() },
+		{ href: '/guides/json-syntax-errors', icon: '🐛', label: m.sidebar_guide_syntax_errors() },
+		{ href: '/guides/json-rest-api', icon: '🌐', label: m.sidebar_guide_rest_api() },
+		{ href: '/guides/json-schema', icon: '✅', label: m.sidebar_guide_schema() },
+		{ href: '/guides/large-json-files', icon: '📦', label: m.sidebar_guide_large_files() }
+	]);
 </script>
 
 <aside class="sidebar">
@@ -80,6 +89,26 @@
 					>
 						<span class="sidebar__icon">{tool.icon}</span>
 						{tool.label}
+					</a>
+				</li>
+			{/each}
+		</ul>
+		<div class="sidebar__divider"></div>
+
+		<div class="sidebar__group-title sidebar__group-title--sub">
+			{m.sidebar_group_guides()}
+		</div>
+		<ul class="sidebar__menu menu menu-sm">
+			{#each guides as guide (guide.href)}
+				{@const isActive = page.url?.pathname === guide.href}
+				<li>
+					<a
+						href={guide.href}
+						class="sidebar__item"
+						class:sidebar__item--active={isActive}
+					>
+						<span class="sidebar__icon">{guide.icon}</span>
+						{guide.label}
 					</a>
 				</li>
 			{/each}
