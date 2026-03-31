@@ -34,7 +34,7 @@
 	]}
 >
 	{#snippet toolbarExtra()}
-		<select class="tool-page__select select select-sm select-bordered" bind:value={indent}>
+		<select class="tool-page__select px-2 py-1 text-sm border border-outline-variant rounded-lg bg-surface-container" bind:value={indent}>
 			<option value={2}>{m.indent_2_spaces()}</option>
 			<option value={4}>{m.indent_4_spaces()}</option>
 			<option value={1}>{m.indent_1_tab()}</option>

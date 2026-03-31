@@ -49,10 +49,8 @@
 	}}
 />
 
-<div class="app-layout drawer lg:drawer-open">
-	<input id="sidebar-drawer" type="checkbox" class="drawer-toggle" bind:checked={drawerOpen} />
-
-	<div class="app-layout__content drawer-content">
+<div class="app-layout">
+	<div class="app-layout__content">
 		{#key locale.current}
 			<Header />
 
@@ -68,8 +66,16 @@
 		{/key}
 	</div>
 
-	<div class="app-layout__sidebar drawer-side">
-		<label for="sidebar-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+	{#if drawerOpen}
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<div
+			class="app-layout__overlay"
+			onclick={() => (drawerOpen = false)}
+			onkeydown={(e) => e.key === 'Escape' && (drawerOpen = false)}
+		></div>
+	{/if}
+
+	<div class="app-layout__sidebar" class:app-layout__sidebar--open={drawerOpen}>
 		{#key locale.current}
 			<Sidebar />
 		{/key}
@@ -77,7 +83,7 @@
 </div>
 
 <button
-	class="app-layout__mobile-btn btn btn-ghost btn-circle"
+	class="app-layout__mobile-btn"
 	onclick={() => (drawerOpen = !drawerOpen)}
 	aria-label="Open menu"
 >
@@ -90,10 +96,10 @@
 	@reference "../app.css";
 
 	.app-layout {
-		@apply min-h-screen;
+		@apply min-h-screen flex;
 	}
 	.app-layout__content {
-		@apply flex flex-col;
+		@apply flex flex-col flex-1;
 	}
 	.app-layout__main {
 		@apply flex-1 p-4 md:p-6;
@@ -101,12 +107,21 @@
 	.app-layout__ad-bottom {
 		@apply px-4 pb-2;
 	}
+	.app-layout__overlay {
+		@apply fixed inset-0 z-30 bg-black/50 lg:hidden;
+	}
 	.app-layout__sidebar {
-		@apply z-40;
+		@apply fixed inset-y-0 left-0 z-40 -translate-x-full transition-transform duration-200
+		       lg:static lg:translate-x-0;
+	}
+	.app-layout__sidebar--open {
+		@apply translate-x-0;
 	}
 	.app-layout__mobile-btn {
 		@apply fixed bottom-4 right-4
-		       z-50 lg:hidden bg-primary text-primary-content shadow-lg;
+		       z-50 lg:hidden inline-flex items-center justify-center
+		       w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg
+		       transition-colors;
 	}
 	.app-layout__mobile-icon {
 		@apply w-6 h-6;

@@ -5,8 +5,13 @@
 	const locales = LOCALES.map((code) => ({ code, label: LOCALE_META[code].label }));
 </script>
 
-<div class="locale-switcher dropdown dropdown-end">
-	<div tabindex="0" role="button" class="locale-switcher__trigger btn btn-ghost btn-sm">
+<div class="locale-switcher">
+	<button class="locale-switcher__trigger inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-transparent hover:bg-surface-container"
+		onclick={(e) => {
+			const menu = (e.currentTarget as HTMLElement).nextElementSibling;
+			menu?.classList.toggle('hidden');
+		}}
+	>
 		<svg class="locale-switcher__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 			<path
 				stroke-linecap="round"
@@ -16,9 +21,8 @@
 			/>
 		</svg>
 		{locales.find((l) => l.code === locale.current)?.label ?? 'EN'}
-	</div>
-	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-	<ul tabindex="0" class="locale-switcher__menu dropdown-content menu rounded-box">
+	</button>
+	<ul class="locale-switcher__menu hidden">
 		{#each locales as loc (loc.code)}
 			<li>
 				<button
@@ -26,7 +30,8 @@
 					class:locale-switcher__item--active={locale.current === loc.code}
 					onclick={() => {
 						locale.set(loc.code as Locale);
-						(document.activeElement as HTMLElement)?.blur();
+						const menu = document.querySelector('.locale-switcher__menu');
+						menu?.classList.add('hidden');
 					}}
 				>
 					{loc.label}
@@ -39,6 +44,9 @@
 <style>
 	@reference "../../../app.css";
 
+	.locale-switcher {
+		@apply relative;
+	}
 	.locale-switcher__trigger {
 		@apply gap-1;
 	}
@@ -46,9 +54,14 @@
 		@apply w-4 h-4;
 	}
 	.locale-switcher__menu {
-		@apply bg-base-100 shadow-lg z-50 w-32 p-2;
+		@apply absolute right-0 top-full mt-1 bg-surface shadow-lg z-50 w-32 p-2
+		       rounded-lg border border-surface-container list-none;
+	}
+	.locale-switcher__item {
+		@apply block w-full text-left px-3 py-1.5 text-sm rounded-lg
+		       hover:bg-surface-container transition-colors;
 	}
 	.locale-switcher__item--active {
-		@apply bg-primary text-primary-content;
+		@apply bg-primary text-on-primary;
 	}
 </style>

@@ -39,10 +39,10 @@
 		<div class="tool-page__title-group">
 			<h1 class="tool-page__title">{m.diff_h1()}</h1>
 		</div>
-		<button class="btn btn-sm btn-primary" onclick={handleDiff}>
+		<button class="inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-primary text-on-primary hover:opacity-90" onclick={handleDiff}>
 			{m.btn_compare()}
 		</button>
-		<button class="btn btn-sm btn-ghost" onclick={() => (showClearModal = true)}>
+		<button class="inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-transparent hover:bg-surface-container" onclick={() => (showClearModal = true)}>
 			{m.btn_clear()}
 		</button>
 	</div>
@@ -169,7 +169,7 @@
 		@apply flex-1;
 	}
 	.tool-page__editor {
-		@apply h-80 border border-base-300 rounded-lg overflow-hidden;
+		@apply h-80 border border-surface-container rounded-lg overflow-hidden;
 	}
 	.tool-page__article {
 		@apply max-w-none mt-8;

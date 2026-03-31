@@ -36,7 +36,7 @@
 		<div class="sidebar__group-title">
 			{m.sidebar_group_tools()}
 		</div>
-		<ul class="sidebar__menu menu menu-sm">
+		<ul class="sidebar__menu">
 			{#each tools as tool (tool.href)}
 				{@const isActive = page.url?.pathname === tool.href}
 				<li>
@@ -57,7 +57,7 @@
 		<div class="sidebar__group-title sidebar__group-title--sub">
 			{m.sidebar_group_from_json()}
 		</div>
-		<ul class="sidebar__menu menu menu-sm">
+		<ul class="sidebar__menu">
 			{#each fromJson as tool (tool.href)}
 				{@const isActive = page.url?.pathname === tool.href}
 				<li>
@@ -78,7 +78,7 @@
 		<div class="sidebar__group-title sidebar__group-title--sub">
 			{m.sidebar_group_to_json()}
 		</div>
-		<ul class="sidebar__menu menu menu-sm">
+		<ul class="sidebar__menu">
 			{#each toJson as tool (tool.href)}
 				{@const isActive = page.url?.pathname === tool.href}
 				<li>
@@ -98,7 +98,7 @@
 		<div class="sidebar__group-title sidebar__group-title--sub">
 			{m.sidebar_group_guides()}
 		</div>
-		<ul class="sidebar__menu menu menu-sm">
+		<ul class="sidebar__menu">
 			{#each guides as guide (guide.href)}
 				{@const isActive = page.url?.pathname === guide.href}
 				<li>
@@ -127,31 +127,33 @@
 	@reference "../../../app.css";
 
 	.sidebar {
-		@apply w-56 bg-base-200 border-r border-base-300 p-4 hidden min-h-screen;
-
-		@media (width >= 64rem) {
-			display: flex;
-			flex-direction: column;
-		}
+		@apply w-56 bg-surface-container-low border-r border-surface-container p-4 flex flex-col min-h-screen;
 	}
 	.sidebar__group-title {
-		@apply text-xs font-semibold text-base-content/70
+		@apply text-xs font-semibold text-on-surface/70
 		       uppercase tracking-wider px-3 mb-1;
 	}
 	.sidebar__group-title--sub {
 		@apply mt-3;
 	}
+	.sidebar__menu {
+		@apply list-none p-0 text-sm;
+	}
+	.sidebar__item {
+		@apply flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors
+		       hover:bg-surface-container;
+	}
 	.sidebar__item--active {
-		@apply bg-primary text-primary-content;
+		@apply bg-primary text-on-primary;
 	}
 	.sidebar__icon {
 		@apply w-6 text-center;
 	}
 	.sidebar__divider {
-		@apply border-t border-base-300 my-2;
+		@apply border-t border-surface-container my-2;
 	}
 	.sidebar__privacy {
-		@apply mt-auto p-3 bg-base-100 rounded-lg border border-base-300
-		       text-xs text-base-content/60 leading-relaxed;
+		@apply mt-auto p-3 bg-surface rounded-lg border border-surface-container
+		       text-xs text-on-surface/60 leading-relaxed;
 	}
 </style>

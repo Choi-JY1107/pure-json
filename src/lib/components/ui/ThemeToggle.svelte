@@ -3,7 +3,7 @@
 </script>
 
 <button
-	class="theme-toggle btn btn-ghost btn-circle"
+	class="theme-toggle inline-flex items-center justify-center w-10 h-10 rounded-full bg-transparent hover:bg-surface-container transition-colors"
 	onclick={() => theme.toggle()}
 	aria-label="Toggle theme"
 >

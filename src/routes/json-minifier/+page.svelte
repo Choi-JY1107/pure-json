@@ -44,18 +44,18 @@
 	{#snippet beforeGrid()}
 		{#if savings}
 			{@const s = savings}
-			<div class="tool-page__stats stats stats-horizontal">
-				<div class="tool-page__stat stat">
-					<div class="tool-page__stat-title stat-title">{m.stats_original()}</div>
-					<div class="tool-page__stat-value stat-value">{s.original} B</div>
+			<div class="tool-page__stats flex flex-row">
+				<div class="tool-page__stat flex flex-col gap-1 p-4">
+					<div class="tool-page__stat-title text-xs text-secondary">{m.stats_original()}</div>
+					<div class="tool-page__stat-value text-2xl font-bold">{s.original} B</div>
 				</div>
-				<div class="tool-page__stat stat">
-					<div class="tool-page__stat-title stat-title">{m.stats_minified()}</div>
-					<div class="tool-page__stat-value stat-value">{s.minified} B</div>
+				<div class="tool-page__stat flex flex-col gap-1 p-4">
+					<div class="tool-page__stat-title text-xs text-secondary">{m.stats_minified()}</div>
+					<div class="tool-page__stat-value text-2xl font-bold">{s.minified} B</div>
 				</div>
-				<div class="tool-page__stat stat">
-					<div class="tool-page__stat-title stat-title">{m.stats_saved()}</div>
-					<div class="tool-page__stat-value stat-value tool-page__stat-value--success">{s.percent}%</div>
+				<div class="tool-page__stat flex flex-col gap-1 p-4">
+					<div class="tool-page__stat-title text-xs text-secondary">{m.stats_saved()}</div>
+					<div class="tool-page__stat-value text-2xl font-bold tool-page__stat-value--success">{s.percent}%</div>
 				</div>
 			</div>
 		{/if}
@@ -66,12 +66,12 @@
 	@reference "../../app.css";
 
 	.tool-page__stats {
-		@apply shadow bg-base-200 w-full;
+		@apply shadow bg-surface-container-low w-full;
 	}
 	.tool-page__stat-value {
 		@apply text-lg;
 	}
 	.tool-page__stat-value--success {
-		@apply text-success;
+		@apply text-tertiary;
 	}
 </style>

@@ -44,14 +44,14 @@
 		@apply grid grid-cols-1 md:grid-cols-2 gap-4;
 	}
 	.guides-index__card {
-		@apply block p-5 bg-base-200 rounded-lg border border-base-300
+		@apply block p-5 bg-surface-container-low rounded-lg border border-surface-container
 		       hover:border-primary transition-colors no-underline;
 	}
 	.guides-index__card-title {
-		@apply text-base font-bold text-base-content m-0 mb-2;
+		@apply text-base font-bold text-on-surface m-0 mb-2;
 	}
 	.guides-index__card-desc {
-		@apply text-sm text-base-content/70 m-0 mb-3;
+		@apply text-sm text-on-surface/70 m-0 mb-3;
 	}
 	.guides-index__card-link {
 		@apply text-sm text-primary font-medium;

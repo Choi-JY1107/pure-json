@@ -3,7 +3,7 @@
 
 </script>
 
-<footer class="footer footer-center">
+<footer class="footer">
 	<div class="footer__info">
 		<p class="footer__tagline">
 			🔒 {m.footer_tagline()}
@@ -30,21 +30,22 @@
 	@reference "../../../app.css";
 
 	.footer {
-		@apply p-6 bg-base-200 text-base-content border-t border-base-300;
+		@apply p-6 bg-surface-container-low text-on-surface border-t border-surface-container
+		       flex flex-col items-center gap-2 text-center;
 	}
 	.footer__tagline {
 		@apply font-semibold text-sm;
 	}
 	.footer__privacy {
-		@apply text-xs text-base-content/70 mt-1;
+		@apply text-xs text-on-surface/70 mt-1;
 	}
 	.footer__links {
 		@apply flex gap-2 text-xs;
 	}
 	.footer__links a {
-		@apply link link-hover;
+		@apply underline hover:no-underline;
 	}
 	.footer__meta {
-		@apply flex gap-4 text-xs text-base-content/70;
+		@apply flex gap-4 text-xs text-on-surface/70;
 	}
 </style>

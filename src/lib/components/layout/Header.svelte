@@ -4,7 +4,7 @@
 	import * as m from '$lib/paraglide/messages.js';
 </script>
 
-<header class="header navbar">
+<header class="header">
 	<div class="header__brand">
 		<a href="/" class="header__logo">
 			<span class="header__logo-icon">{'{ }'}</span> {m.site_name()}
@@ -20,7 +20,7 @@
 	@reference "../../../app.css";
 
 	.header {
-		@apply bg-base-100 border-b border-base-300 px-4;
+		@apply flex items-center bg-surface border-b border-surface-container px-4 h-14;
 	}
 	.header__brand {
 		@apply flex-1;

@@ -21,13 +21,13 @@
 	<div class="tool-page__toolbar">
 		<div class="tool-page__title-group">
 			<h1 class="tool-page__title">{m.viewer_h1()}</h1>
-			<button class="btn btn-sm btn-soft btn-primary" onclick={() => editor.loadSample()}>
+			<button class="inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-primary/15 text-primary hover:bg-primary/25" onclick={() => editor.loadSample()}>
 				{m.btn_load_sample()}
 			</button>
 			<LoadFileButton onLoad={(content) => editor.setInput(content)} />
 		</div>
 		<CopyButton text={editor.input} />
-		<button class="tool-page__btn tool-page__btn--ghost btn btn-sm btn-ghost" onclick={() => (showClearModal = true)}>
+		<button class="tool-page__btn tool-page__btn--ghost inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-transparent hover:bg-surface-container" onclick={() => (showClearModal = true)}>
 			{m.btn_clear()}
 		</button>
 	</div>
@@ -110,7 +110,7 @@
 		@apply text-lg font-bold;
 	}
 	.tool-page__editor {
-		@apply border border-base-300 rounded-lg overflow-hidden;
+		@apply border border-surface-container rounded-lg overflow-hidden;
 	}
 	.tool-page__editor--tall {
 		@apply h-125;

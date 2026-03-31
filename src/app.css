@@ -1,9 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
 @import 'tailwindcss';
-@plugin "daisyui";
 @plugin "@tailwindcss/typography";
 
+/* ── Tailwind Theme ── */
 @theme {
-	--color-primary: #570df8;
-	--color-secondary: #f000b8;
-	--color-accent: #37cdbe;
+	--font-headline: 'Space Grotesk', sans-serif;
+	--font-body: 'Inter', sans-serif;
+	--font-mono: 'JetBrains Mono', monospace;
+
+	--color-surface: var(--md-surface);
+	--color-surface-dim: var(--md-surface-dim);
+	--color-surface-bright: var(--md-surface-bright);
+	--color-surface-container-lowest: var(--md-surface-container-lowest);
+	--color-surface-container-low: var(--md-surface-container-low);
+	--color-surface-container: var(--md-surface-container);
+	--color-surface-container-high: var(--md-surface-container-high);
+	--color-surface-container-highest: var(--md-surface-container-highest);
+	--color-on-surface: var(--md-on-surface);
+	--color-on-surface-variant: var(--md-on-surface-variant);
+
+	--color-primary: var(--md-primary);
+	--color-primary-dim: var(--md-primary-dim);
+	--color-primary-container: var(--md-primary-container);
+	--color-on-primary: var(--md-on-primary);
+	--color-on-primary-container: var(--md-on-primary-container);
+
+	--color-secondary: var(--md-secondary);
+	--color-secondary-dim: var(--md-secondary-dim);
+	--color-secondary-container: var(--md-secondary-container);
+	--color-on-secondary: var(--md-on-secondary);
+
+	--color-tertiary: var(--md-tertiary);
+	--color-tertiary-dim: var(--md-tertiary-dim);
+	--color-tertiary-container: var(--md-tertiary-container);
+	--color-on-tertiary: var(--md-on-tertiary);
+
+	--color-error: var(--md-error);
+	--color-error-container: var(--md-error-container);
+	--color-on-error: var(--md-on-error);
+
+	--color-outline: var(--md-outline);
+	--color-outline-variant: var(--md-outline-variant);
+
+	/* DaisyUI compatibility aliases — will be removed in Phase 2 */
+	--color-base-100: var(--md-surface);
+	--color-base-200: var(--md-surface-container-low);
+	--color-base-300: var(--md-surface-container);
+	--color-base-content: var(--md-on-surface);
+	--color-primary-content: var(--md-on-primary);
+	--color-success: var(--md-tertiary);
+}
+
+/* ── Dark Theme (default) ── */
+:root,
+[data-theme='dark'] {
+	--md-surface: #0e0e0e;
+	--md-surface-dim: #0e0e0e;
+	--md-surface-bright: #2b2c2c;
+	--md-surface-container-lowest: #000000;
+	--md-surface-container-low: #131313;
+	--md-surface-container: #191a1a;
+	--md-surface-container-high: #1f2020;
+	--md-surface-container-highest: #252626;
+	--md-on-surface: #e7e5e5;
+	--md-on-surface-variant: #acabaa;
+
+	--md-primary: #b9c3ff;
+	--md-primary-dim: #a8b5fd;
+	--md-primary-container: #354282;
+	--md-on-primary: #2e3b7b;
+	--md-on-primary-container: #c6ceff;
+
+	--md-secondary: #9f9d9d;
+	--md-secondary-dim: #9f9d9d;
+	--md-secondary-container: #3c3b3b;
+	--md-on-secondary: #202020;
+
+	--md-tertiary: #8ef4e9;
+	--md-tertiary-dim: #71d7cd;
+	--md-tertiary-container: #7fe6db;
+	--md-on-tertiary: #005c56;
+
+	--md-error: #ec7c8a;
+	--md-error-container: #7f2737;
+	--md-on-error: #490013;
+
+	--md-outline: #767575;
+	--md-outline-variant: #484848;
+
+	color-scheme: dark;
+}
+
+/* ── Light Theme ── */
+[data-theme='light'] {
+	--md-surface: #fafafa;
+	--md-surface-dim: #d9d9d9;
+	--md-surface-bright: #fafafa;
+	--md-surface-container-lowest: #ffffff;
+	--md-surface-container-low: #f4f4f4;
+	--md-surface-container: #eeeeee;
+	--md-surface-container-high: #e8e8e8;
+	--md-surface-container-highest: #e2e2e2;
+	--md-on-surface: #1a1a1a;
+	--md-on-surface-variant: #4a4a4a;
+
+	--md-primary: #4d5b9c;
+	--md-primary-dim: #3a4889;
+	--md-primary-container: #dee1ff;
+	--md-on-primary: #ffffff;
+	--md-on-primary-container: #0f1b54;
+
+	--md-secondary: #5c5b5b;
+	--md-secondary-dim: #747373;
+	--md-secondary-container: #e5e2e1;
+	--md-on-secondary: #ffffff;
+
+	--md-tertiary: #006b64;
+	--md-tertiary-dim: #008a82;
+	--md-tertiary-container: #7fe6db;
+	--md-on-tertiary: #ffffff;
+
+	--md-error: #ba1a1a;
+	--md-error-container: #ffdad6;
+	--md-on-error: #ffffff;
+
+	--md-outline: #767575;
+	--md-outline-variant: #c8c8c8;
+
+	color-scheme: light;
+}
+
+/* ── Base Styles ── */
+body {
+	font-family: var(--font-body), sans-serif;
+	background-color: var(--md-surface);
+	color: var(--md-on-surface);
+}
+
+/* ── Material Symbols ── */
+.material-symbols-outlined {
+	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+	font-size: 1.25rem;
+	line-height: 1;
+}
+
+/* ── Glass Panel ── */
+.glass-panel {
+	background: color-mix(in srgb, var(--md-surface-container-highest) 80%, transparent);
+	backdrop-filter: blur(20px);
+}
+
+/* ── Code Well (editor background) ── */
+.code-well {
+	background-color: var(--md-surface-container-lowest);
+	background-image: radial-gradient(var(--md-surface-container) 1px, transparent 1px);
+	background-size: 24px 24px;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: var(--md-outline-variant);
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: var(--md-primary);
+}
+
+/* ── Selection ── */
+::selection {
+	background: color-mix(in srgb, var(--md-primary) 30%, transparent);
 }

@@ -61,7 +61,7 @@
 	<div class="tool-page__toolbar">
 		<div class="tool-page__title-group">
 			<h1 class="tool-page__title">{title}</h1>
-			<button class="btn btn-sm btn-soft btn-primary" onclick={() => editor.loadSample()}>
+			<button class="inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-primary/15 text-primary hover:bg-primary/25" onclick={() => editor.loadSample()}>
 				{m.btn_sample_short()}
 			</button>
 			<LoadFileButton onLoad={(content) => editor.setInput(content)} />
@@ -69,10 +69,10 @@
 		{#if toolbarExtra}
 			{@render toolbarExtra()}
 		{/if}
-		<button class="tool-page__btn tool-page__btn--primary btn btn-sm btn-primary" onclick={handleAction}>
+		<button class="tool-page__btn tool-page__btn--primary inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-primary text-on-primary hover:opacity-90" onclick={handleAction}>
 			{actionLabel}
 		</button>
-		<button class="tool-page__btn tool-page__btn--ghost btn btn-sm btn-ghost" onclick={() => (showClearModal = true)}>
+		<button class="tool-page__btn tool-page__btn--ghost inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-transparent hover:bg-surface-container" onclick={() => (showClearModal = true)}>
 			{m.btn_clear()}
 		</button>
 	</div>
@@ -102,7 +102,7 @@
 	</div>
 
 	{#if editor.error}
-		<div class="tool-page__error alert alert-error">
+		<div class="tool-page__error bg-error/10 text-error border border-error/20 rounded-lg p-3">
 			<span>{editor.error}</span>
 		</div>
 	{/if}
@@ -187,7 +187,7 @@
 		@apply flex-1;
 	}
 	.tool-page__editor {
-		@apply h-100 border border-base-300 rounded-lg overflow-hidden;
+		@apply h-100 border border-surface-container rounded-lg overflow-hidden;
 	}
 	.tool-page__article {
 		@apply max-w-none mt-8;

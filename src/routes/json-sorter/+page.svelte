@@ -32,7 +32,7 @@
 	]}
 >
 	{#snippet toolbarExtra()}
-		<select class="select select-sm select-bordered" bind:value={order}>
+		<select class="px-2 py-1 text-sm border border-outline-variant rounded-lg bg-surface-container" bind:value={order}>
 			<option value="asc">{m.sort_asc()}</option>
 			<option value="desc">{m.sort_desc()}</option>
 		</select>
