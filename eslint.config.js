@@ -30,6 +30,7 @@ export default ts.config(
       'build/',
       '.svelte-kit/',
       'src/lib/paraglide/',
+      'src/paraglide/',
       'node_modules/',
       'i18n/project.inlang/cache/'
     ]

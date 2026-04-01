@@ -135,12 +135,12 @@
 	}
 	.monaco-editor__placeholder {
 		@apply pointer-events-none absolute
-		       text-base-content/40 text-sm leading-4.75 font-mono;
+		       text-on-surface/40 text-sm leading-4.75 font-mono;
 	}
 	.monaco-editor__skeleton {
 		@apply absolute inset-0 p-4 flex flex-col gap-2.5 pointer-events-none;
 	}
 	.monaco-editor__skeleton-line {
-		@apply h-3.5 rounded bg-base-300/50;
+		@apply h-3.5 rounded bg-surface-container/50;
 	}
 </style>

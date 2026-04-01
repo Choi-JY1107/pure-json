@@ -26,7 +26,7 @@
 	class="load-file__input"
 	onchange={handleFileChange}
 />
-<button class="load-file__btn btn btn-sm btn-soft btn-primary" onclick={() => fileInput.click()}>
+<button class="load-file__btn inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg bg-primary text-on-primary hover:opacity-90" onclick={() => fileInput.click()}>
 	{m.btn_load_file()}
 </button>
 

@@ -31,12 +31,14 @@
 </script>
 
 <div class="dual-view">
-	<div role="tablist" class="dual-view__tabs tabs tabs-bordered">
+	<div role="tablist" class="dual-view__tabs flex border-b border-surface-container">
 		<button
 			role="tab"
-			class="dual-view__tab tab"
+			class="dual-view__tab px-4 py-2 text-sm font-medium transition-colors border-b-2"
 			class:dual-view__tab--active={activeTab === 'code'}
-			class:tab-active={activeTab === 'code'}
+			class:border-primary={activeTab === 'code'}
+			class:text-primary={activeTab === 'code'}
+			class:border-transparent={activeTab !== 'code'}
 			onclick={() => (activeTab = 'code')}
 		>
 			{m.tab_code()}
@@ -44,9 +46,11 @@
 		<div class="dual-view__divider"></div>
 		<button
 			role="tab"
-			class="dual-view__tab tab"
+			class="dual-view__tab px-4 py-2 text-sm font-medium transition-colors border-b-2"
 			class:dual-view__tab--active={activeTab === 'tree'}
-			class:tab-active={activeTab === 'tree'}
+			class:border-primary={activeTab === 'tree'}
+			class:text-primary={activeTab === 'tree'}
+			class:border-transparent={activeTab !== 'tree'}
 			onclick={() => (activeTab = 'tree')}
 		>
 			{m.tab_tree()}
@@ -75,21 +79,21 @@
 		@apply flex flex-col h-full;
 	}
 	.dual-view__divider {
-		@apply w-px h-4 bg-base-300 self-center;
+		@apply w-px h-4 bg-surface-container self-center;
 	}
 	.dual-view__tab {
-		@apply text-base-content/70;
+		@apply text-on-surface/70;
 	}
 	.dual-view__content {
 		@apply flex-1 min-h-0;
 	}
 	.dual-view__tree {
-		@apply h-full overflow-auto p-2 bg-base-100
-		       rounded-b-lg border border-base-300 border-t-0;
+		@apply h-full overflow-auto p-2 bg-surface
+		       rounded-b-lg border border-surface-container border-t-0;
 	}
 	.dual-view__empty {
 		@apply h-full flex items-center justify-center
-		       text-base-content/70 bg-base-100
-		       rounded-b-lg border border-base-300 border-t-0;
+		       text-on-surface/70 bg-surface
+		       rounded-b-lg border border-surface-container border-t-0;
 	}
 </style>

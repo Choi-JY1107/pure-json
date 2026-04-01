@@ -31,7 +31,7 @@
 	<div class="tree-node__row">
 		{#if hasChildren}
 			<button
-				class="tree-node__toggle btn btn-ghost btn-xs btn-circle"
+				class="tree-node__toggle inline-flex items-center justify-center w-6 h-6 rounded-full bg-transparent hover:bg-surface-container transition-colors"
 				onclick={toggle}
 				aria-label={expanded ? 'Collapse' : 'Expand'}
 			>
@@ -74,7 +74,7 @@
 	}
 	.tree-node__row {
 		@apply flex items-center gap-1 py-0.5
-		       hover:bg-base-200 rounded px-1;
+		       hover:bg-surface-container-low rounded px-1;
 	}
 	.tree-node__toggle-icon {
 		@apply w-3 h-3 transition-transform;
@@ -89,16 +89,16 @@
 		@apply text-primary font-semibold;
 	}
 	.tree-node__separator {
-		@apply text-base-content/40;
+		@apply text-on-surface/40;
 	}
 	.tree-node__value--string {
-		@apply text-success;
+		@apply text-tertiary;
 	}
 	.tree-node__value--number {
-		@apply text-info;
+		@apply text-primary-dim;
 	}
 	.tree-node__value--boolean {
-		@apply text-warning;
+		@apply text-tertiary-dim;
 	}
 	.tree-node__value--null {
 		@apply text-error;

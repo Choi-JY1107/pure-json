@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DualPanelToolPage from '$lib/components/tool/DualPanelToolPage.svelte';
+	import ToolPage from '$lib/components/tool/ToolPage.svelte';
 	import { getEditorStore } from '$lib/stores/editor';
 	import { formatJson } from '$lib/utils/json-formatter';
 	import * as m from '$lib/paraglide/messages.js';
@@ -8,7 +8,8 @@
 	let indent = $state(2);
 </script>
 
-<DualPanelToolPage
+<ToolPage
+	mode="dual"
 	{editor}
 	transform={(input) => formatJson(input, indent)}
 	metaTitle={m.formatter_title()}
@@ -34,10 +35,26 @@
 	]}
 >
 	{#snippet toolbarExtra()}
-		<select class="tool-page__select select select-sm select-bordered" bind:value={indent}>
-			<option value={2}>{m.indent_2_spaces()}</option>
-			<option value={4}>{m.indent_4_spaces()}</option>
-			<option value={1}>{m.indent_1_tab()}</option>
-		</select>
+		<div class="indent-toggle">
+			<button class="indent-toggle__btn" class:indent-toggle__btn--active={indent === 2} onclick={() => (indent = 2)}>2 Space</button>
+			<button class="indent-toggle__btn" class:indent-toggle__btn--active={indent === 4} onclick={() => (indent = 4)}>4 Space</button>
+			<button class="indent-toggle__btn" class:indent-toggle__btn--active={indent === 1} onclick={() => (indent = 1)}>Tab</button>
+		</div>
 	{/snippet}
-</DualPanelToolPage>
+</ToolPage>
+
+<style>
+	@reference "../../app.css";
+
+	:global(.indent-toggle) {
+		@apply flex bg-surface-container-low rounded-lg p-1;
+	}
+	:global(.indent-toggle__btn) {
+		@apply px-3 py-1 rounded
+		       text-[0.625rem] font-bold uppercase tracking-wider
+		       text-secondary cursor-pointer transition-colors;
+	}
+	:global(.indent-toggle__btn--active) {
+		@apply bg-primary text-on-primary;
+	}
+</style>
