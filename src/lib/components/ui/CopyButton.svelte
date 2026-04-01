@@ -24,7 +24,7 @@
 	}
 </script>
 
-<button class="copy-btn btn btn-sm btn-outline" onclick={copy} disabled={!text}>
+<button class="copy-btn inline-flex items-center justify-center font-medium transition-colors px-3 py-1.5 text-sm rounded-lg border border-outline-variant hover:bg-surface-container" onclick={copy} disabled={!text}>
 	{#if copied}
 		<svg class="copy-btn__icon copy-btn__icon--success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -53,6 +53,6 @@
 		@apply w-4 h-4;
 	}
 	.copy-btn__icon--success {
-		@apply text-success;
+		@apply text-tertiary;
 	}
 </style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DualPanelToolPage from '$lib/components/tool/DualPanelToolPage.svelte';
+	import ToolPage from '$lib/components/tool/ToolPage.svelte';
 	import { getEditorStore } from '$lib/stores/editor';
 	import { jsonToXml } from '$lib/utils/json-to-xml';
 	import * as m from '$lib/paraglide/messages.js';
@@ -7,7 +7,8 @@
 	const editor = getEditorStore('json-to-xml');
 </script>
 
-<DualPanelToolPage
+<ToolPage
+	mode="dual"
 	{editor}
 	transform={jsonToXml}
 	metaTitle={m.to_xml_title()}

@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import { PAGES, BASE_URL } from '$lib/config/site';
+import { PAGES, GUIDE_PAGES, BASE_URL } from '$lib/config/site';
 
 export const prerender = true;
 
@@ -21,6 +21,20 @@ export const GET: RequestHandler = () => {
     <loc>${BASE_URL}/${page}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>`
+		),
+		`
+  <url>
+    <loc>${BASE_URL}/guides</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>`,
+		...GUIDE_PAGES.map(
+			(page) => `
+  <url>
+    <loc>${BASE_URL}/guides/${page}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>`
 		),
 		...staticPages.map(

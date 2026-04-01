@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DualPanelToolPage from '$lib/components/tool/DualPanelToolPage.svelte';
+	import ToolPage from '$lib/components/tool/ToolPage.svelte';
 	import { getEditorStore } from '$lib/stores/editor';
 	import { csvToJson } from '$lib/utils/csv-to-json';
 	import * as m from '$lib/paraglide/messages.js';
@@ -7,7 +7,8 @@
 	const editor = getEditorStore('csv-to-json');
 </script>
 
-<DualPanelToolPage
+<ToolPage
+	mode="dual"
 	{editor}
 	transform={csvToJson}
 	metaTitle={m.csv_to_json_title()}

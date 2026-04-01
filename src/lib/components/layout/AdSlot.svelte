@@ -61,12 +61,12 @@
 		@apply flex items-center justify-center overflow-hidden;
 	}
 	.ad-slot--placeholder {
-		@apply bg-base-200 border border-base-300 rounded-lg;
+		@apply bg-surface-container-low border border-surface-container rounded-lg;
 	}
 	.ad-slot__ins {
 		@apply w-full;
 	}
 	.ad-slot__label {
-		@apply text-xs text-base-content/60;
+		@apply text-xs text-on-surface/60;
 	}
 </style>

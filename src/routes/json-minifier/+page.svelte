@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DualPanelToolPage from '$lib/components/tool/DualPanelToolPage.svelte';
+	import ToolPage from '$lib/components/tool/ToolPage.svelte';
 	import { getEditorStore } from '$lib/stores/editor';
 	import { minifyJson } from '$lib/utils/json-formatter';
 	import * as m from '$lib/paraglide/messages.js';
@@ -16,7 +16,8 @@
 	});
 </script>
 
-<DualPanelToolPage
+<ToolPage
+	mode="dual"
 	{editor}
 	transform={minifyJson}
 	metaTitle={m.minifier_title()}
@@ -41,37 +42,76 @@
 		{ question: m.minifier_faq_q5(), answer: m.minifier_faq_a5() }
 	]}
 >
-	{#snippet beforeGrid()}
+	{#snippet beforePanels()}
 		{#if savings}
 			{@const s = savings}
-			<div class="tool-page__stats stats stats-horizontal">
-				<div class="tool-page__stat stat">
-					<div class="tool-page__stat-title stat-title">{m.stats_original()}</div>
-					<div class="tool-page__stat-value stat-value">{s.original} B</div>
+			<div class="bento">
+				<div class="bento__card">
+					<div class="bento__header">
+						<span class="bento__label">{m.stats_original()}</span>
+						<div class="bento__icon-box bento__icon-box--tertiary">
+							<span class="material-symbols-outlined" style="font-size: 1rem;">data_usage</span>
+						</div>
+					</div>
+					<div class="bento__value">{s.original} <span class="bento__unit">B</span></div>
 				</div>
-				<div class="tool-page__stat stat">
-					<div class="tool-page__stat-title stat-title">{m.stats_minified()}</div>
-					<div class="tool-page__stat-value stat-value">{s.minified} B</div>
+				<div class="bento__card">
+					<div class="bento__header">
+						<span class="bento__label">{m.stats_minified()}</span>
+						<div class="bento__icon-box bento__icon-box--primary">
+							<span class="material-symbols-outlined" style="font-size: 1rem;">speed</span>
+						</div>
+					</div>
+					<div class="bento__value">{s.minified} <span class="bento__unit">B</span></div>
 				</div>
-				<div class="tool-page__stat stat">
-					<div class="tool-page__stat-title stat-title">{m.stats_saved()}</div>
-					<div class="tool-page__stat-value stat-value tool-page__stat-value--success">{s.percent}%</div>
+				<div class="bento__card">
+					<div class="bento__header">
+						<span class="bento__label">{m.stats_saved()}</span>
+						<div class="bento__icon-box bento__icon-box--tertiary">
+							<span class="material-symbols-outlined" style="font-size: 1rem;">trending_up</span>
+						</div>
+					</div>
+					<div class="bento__value bento__value--tertiary">{s.percent}<span class="bento__unit">%</span></div>
 				</div>
 			</div>
 		{/if}
 	{/snippet}
-</DualPanelToolPage>
+</ToolPage>
 
 <style>
 	@reference "../../app.css";
 
-	.tool-page__stats {
-		@apply shadow bg-base-200 w-full;
+	:global(.bento) {
+		@apply grid grid-cols-1 md:grid-cols-3 gap-4;
 	}
-	.tool-page__stat-value {
-		@apply text-lg;
+	:global(.bento__card) {
+		@apply p-5 rounded-xl border border-outline-variant/15
+		       flex flex-col justify-between;
+		background: color-mix(in srgb, var(--md-surface-container-highest) 80%, transparent);
+		backdrop-filter: blur(20px);
 	}
-	.tool-page__stat-value--success {
-		@apply text-success;
+	:global(.bento__header) {
+		@apply flex justify-between items-start;
+	}
+	:global(.bento__label) {
+		@apply text-[0.65rem] uppercase tracking-widest text-secondary font-bold;
+	}
+	:global(.bento__icon-box) {
+		@apply w-8 h-8 rounded-lg flex items-center justify-center;
+	}
+	:global(.bento__icon-box--tertiary) {
+		@apply bg-tertiary/10 text-tertiary;
+	}
+	:global(.bento__icon-box--primary) {
+		@apply bg-primary/10 text-primary;
+	}
+	:global(.bento__value) {
+		@apply text-3xl font-headline font-bold text-on-surface mt-3;
+	}
+	:global(.bento__value--tertiary) {
+		@apply text-tertiary;
+	}
+	:global(.bento__unit) {
+		@apply text-lg text-secondary;
 	}
 </style>

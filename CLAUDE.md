@@ -34,6 +34,7 @@ npm run lint:fix   # ESLint 자동 수정
 - `src/routes/` — 페이지 라우트 (lang prefix 없음, Paraglide가 브라우저 언어 감지)
   - `+page.svelte` (JSON Viewer, 루트), `json-formatter/`, `json-minifier/`, `json-sorter/`, `json-to-typescript/`, `json-to-yaml/`, `json-to-csv/`, `csv-to-json/`, `json-to-xml/`, `json-diff/`
   - `privacy/`, `terms/`, `about/` — 정책/정보 페이지
+  - `guides/` — 교육 가이드 인덱스 및 6개 가이드 (what-is-json, json-vs-yaml-xml, json-syntax-errors, json-rest-api, json-schema, large-json-files)
 - `src/lib/components/` — Svelte 컴포넌트 (editor, layout, ui)
 - `src/lib/utils/` — JSON 처리 로직 (formatter, to-ts, to-yaml, to-csv, csv-to-json, to-xml, json-sorter, json-diff, tree-parser)
 - `src/lib/stores/` — Svelte 상태 관리 (editor.svelte.ts, theme.svelte.ts)

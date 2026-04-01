@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DualPanelToolPage from '$lib/components/tool/DualPanelToolPage.svelte';
+	import ToolPage from '$lib/components/tool/ToolPage.svelte';
 	import { getEditorStore } from '$lib/stores/editor';
 	import { sortJson } from '$lib/utils/json-sorter';
 	import * as m from '$lib/paraglide/messages.js';
@@ -8,7 +8,8 @@
 	let order = $state<'asc' | 'desc'>('asc');
 </script>
 
-<DualPanelToolPage
+<ToolPage
+	mode="dual"
 	{editor}
 	transform={(input) => sortJson(input, order)}
 	metaTitle={m.sorter_title()}
@@ -32,9 +33,39 @@
 	]}
 >
 	{#snippet toolbarExtra()}
-		<select class="select select-sm select-bordered" bind:value={order}>
-			<option value="asc">{m.sort_asc()}</option>
-			<option value="desc">{m.sort_desc()}</option>
-		</select>
+		<div class="sort-toggle">
+			<button
+				class="sort-toggle__btn"
+				class:sort-toggle__btn--active={order === 'asc'}
+				onclick={() => (order = 'asc')}
+			>
+				<span class="material-symbols-outlined" style="font-size: 0.875rem;">arrow_upward</span>
+				{m.sort_asc()}
+			</button>
+			<button
+				class="sort-toggle__btn"
+				class:sort-toggle__btn--active={order === 'desc'}
+				onclick={() => (order = 'desc')}
+			>
+				<span class="material-symbols-outlined" style="font-size: 0.875rem;">arrow_downward</span>
+				{m.sort_desc()}
+			</button>
+		</div>
 	{/snippet}
-</DualPanelToolPage>
+</ToolPage>
+
+<style>
+	@reference "../../app.css";
+
+	:global(.sort-toggle) {
+		@apply flex bg-surface-container-low rounded-lg p-1;
+	}
+	:global(.sort-toggle__btn) {
+		@apply inline-flex items-center gap-1 px-3 py-1 rounded
+		       text-[0.625rem] font-bold uppercase tracking-wider
+		       text-secondary cursor-pointer transition-colors;
+	}
+	:global(.sort-toggle__btn--active) {
+		@apply bg-primary text-on-primary;
+	}
+</style>

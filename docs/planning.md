@@ -75,6 +75,16 @@
 - [x] 구글 서치 콘솔 등록
 - [ ] 전체 페이지 인덱싱 확인
 
+### Phase 2.5: 교육 가이드 콘텐츠 — Done
+
+- [x] GuidePage 공통 컴포넌트 생성
+- [x] 가이드 인덱스 페이지 (`/guides`)
+- [x] 6개 교육 가이드 (what-is-json, json-vs-yaml-xml, json-syntax-errors, json-rest-api, json-schema, large-json-files)
+- [x] 사이드바에 Guides 그룹 추가
+- [x] sitemap에 가이드 URL 추가
+- [x] 3개 언어 번역 완료 (en, ko, ja)
+- 각 가이드 800-1500 words, 도구 페이지 내부 링크 포함
+
 ### Phase 3: AdSense 승인 대응 — In Progress
 
 - [x] Privacy Policy, Terms of Service, About 페이지 추가
