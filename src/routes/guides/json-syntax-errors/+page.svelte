@@ -44,6 +44,14 @@
 				m.guide_json_syntax_errors_s6_li4(),
 				m.guide_json_syntax_errors_s6_li5()
 			]
+		},
+		{
+			title: m.guide_json_syntax_errors_s7_title(),
+			paragraphs: [
+				m.guide_json_syntax_errors_s7_p1(),
+				m.guide_json_syntax_errors_s7_p2(),
+				m.guide_json_syntax_errors_s7_p3()
+			]
 		}
 	]}
 	relatedTools={[
@@ -52,6 +60,8 @@
 	]}
 	faqs={[
 		{ question: m.guide_json_syntax_errors_faq_q1(), answer: m.guide_json_syntax_errors_faq_a1() },
-		{ question: m.guide_json_syntax_errors_faq_q2(), answer: m.guide_json_syntax_errors_faq_a2() }
+		{ question: m.guide_json_syntax_errors_faq_q2(), answer: m.guide_json_syntax_errors_faq_a2() },
+		{ question: m.guide_json_syntax_errors_faq_q3(), answer: m.guide_json_syntax_errors_faq_a3() },
+		{ question: m.guide_json_syntax_errors_faq_q4(), answer: m.guide_json_syntax_errors_faq_a4() }
 	]}
 />

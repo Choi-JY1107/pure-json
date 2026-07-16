@@ -36,6 +36,10 @@
 		<p>{m.about_section4_p1()}</p>
 		<p>{m.about_section4_p2()}</p>
 
+		<h2>{m.about_section6_title()}</h2>
+		<p>{m.about_section6_p1()}</p>
+		<p>{m.about_section6_p2()}</p>
+
 		<h2>{m.about_section5_title()}</h2>
 		<p>{m.about_section5_p1()}</p>
 	</article>

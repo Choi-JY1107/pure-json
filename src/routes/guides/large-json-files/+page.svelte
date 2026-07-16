@@ -49,6 +49,14 @@
 				m.guide_large_json_files_s6_li3(),
 				m.guide_large_json_files_s6_li4()
 			]
+		},
+		{
+			title: m.guide_large_json_files_s7_title(),
+			paragraphs: [
+				m.guide_large_json_files_s7_p1(),
+				m.guide_large_json_files_s7_p2(),
+				m.guide_large_json_files_s7_p3()
+			]
 		}
 	]}
 	relatedTools={[
@@ -58,6 +66,8 @@
 	]}
 	faqs={[
 		{ question: m.guide_large_json_files_faq_q1(), answer: m.guide_large_json_files_faq_a1() },
-		{ question: m.guide_large_json_files_faq_q2(), answer: m.guide_large_json_files_faq_a2() }
+		{ question: m.guide_large_json_files_faq_q2(), answer: m.guide_large_json_files_faq_a2() },
+		{ question: m.guide_large_json_files_faq_q3(), answer: m.guide_large_json_files_faq_a3() },
+		{ question: m.guide_large_json_files_faq_q4(), answer: m.guide_large_json_files_faq_a4() }
 	]}
 />
