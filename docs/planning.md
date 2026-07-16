@@ -100,6 +100,8 @@
 - [x] Privacy Policy, Terms of Service, About 페이지 추가
 - [x] 5개 신규 도구 추가 (CSV, XML, Sorter, Diff)
 - [x] 10개 도구 페이지 콘텐츠 보강 (howto, features, usecases, FAQ 5개)
+- [x] 10개 도구 페이지 본문 확충 (도구당 교육 문단 2개 추가 → 페이지당 ~300단어 이상, 3개 언어)
+- [x] 가이드 코드 예시 리터럴 중괄호 이스케이프 (Paraglide undefined 렌더 버그 수정, svelte-check 에러 8→2)
 - [x] 사이드바 From JSON / To JSON 그룹 분리
 - [x] BASE_URL purejson.org 반영
 - [x] robots.txt, sitemap.xml 도메인 수정

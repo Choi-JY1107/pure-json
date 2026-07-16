@@ -15,6 +15,7 @@
 	metaDescription={m.viewer_description()}
 	title={m.viewer_h1()}
 	intro={m.viewer_intro()}
+	body={[m.viewer_body1(), m.viewer_body2()]}
 	howto={[
 		{ step: m.viewer_howto_s1(), desc: m.viewer_howto_s1_desc() },
 		{ step: m.viewer_howto_s2(), desc: m.viewer_howto_s2_desc() },

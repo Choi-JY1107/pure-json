@@ -37,7 +37,7 @@ npm run lint:fix   # ESLint 자동 수정
   - `guides/` — 교육 가이드 인덱스 및 6개 가이드 (what-is-json, json-vs-yaml-xml, json-syntax-errors, json-rest-api, json-schema, large-json-files)
 - `src/lib/components/` — Svelte 컴포넌트 (editor, layout, ui, tool, home, guide)
   - `home/` — 홈 전용: `Hero.svelte`(자기 설명 JSON 시그니처), `ToolsGrid.svelte`(10개 도구 내부 링크)
-  - `tool/ToolPage.svelte` — 10개 도구 공통 컴포넌트. `hero`/`belowContent` 스니펫으로 홈에서 히어로/그리드 주입
+  - `tool/ToolPage.svelte` — 10개 도구 공통 컴포넌트. `hero`/`belowContent` 스니펫으로 홈에서 히어로/그리드 주입. `body`(문단 배열)로 도구별 교육 콘텐츠 확충
 - `src/lib/utils/` — JSON 처리 로직 (formatter, to-ts, to-yaml, to-csv, csv-to-json, to-xml, json-sorter, json-diff, tree-parser)
 - `src/lib/stores/` — Svelte 상태 관리 (editor.svelte.ts, theme.svelte.ts)
 - `src/lib/config/site.ts` — 사이트 설정 (로케일, 페이지 목록, URL)

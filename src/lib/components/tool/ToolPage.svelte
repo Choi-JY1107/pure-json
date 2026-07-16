@@ -32,6 +32,7 @@
 
 		// content
 		intro,
+		body,
 		howto,
 		features,
 		usecases,
@@ -61,6 +62,7 @@
 		diffResultLabel?: string;
 
 		intro: string;
+		body?: string[];
 		howto?: Array<{ step: string; desc: string }>;
 		features?: string[];
 		usecases?: string[];
@@ -302,6 +304,12 @@
 	<article class="tp__article prose prose-sm">
 		<h2>{title}</h2>
 		<p>{intro}</p>
+
+		{#if body && body.length > 0}
+			{#each body as para, i (i)}
+				<p>{para}</p>
+			{/each}
+		{/if}
 
 		{#if howto && howto.length > 0}
 			<h3>{m.section_howto()}</h3>
