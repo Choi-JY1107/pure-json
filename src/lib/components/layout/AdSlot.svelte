@@ -58,15 +58,17 @@
 	@reference "../../../app.css";
 
 	.ad-slot {
-		@apply flex items-center justify-center overflow-hidden;
-	}
-	.ad-slot--placeholder {
-		@apply bg-surface-container-low border border-surface-container rounded-lg;
+		@apply flex items-center justify-center overflow-hidden rounded-xl;
+		background: var(--md-surface-container-low);
+		border: 1px solid color-mix(in srgb, var(--md-outline-variant) 40%, transparent);
 	}
 	.ad-slot__ins {
 		@apply w-full;
+		background: transparent;
 	}
 	.ad-slot__label {
-		@apply text-xs text-on-surface/60;
+		@apply font-mono text-[0.625rem] uppercase tracking-widest;
+		color: var(--md-on-surface-variant);
+		opacity: 0.5;
 	}
 </style>

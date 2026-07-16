@@ -15,10 +15,11 @@
 <MetaTags title={m.guides_title()} description={m.guides_description()} />
 
 <div class="guides-index">
-	<article class="guides-index__article prose prose-sm">
-		<h1>{m.guides_h1()}</h1>
-		<p>{m.guides_intro()}</p>
-	</article>
+	<header class="guides-index__header">
+		<span class="eyebrow">"guides"</span>
+		<h1 class="guides-index__title">{m.guides_h1()}</h1>
+		<p class="guides-index__intro">{m.guides_intro()}</p>
+	</header>
 
 	<div class="guides-index__grid">
 		{#each guides as guide (guide.href)}
@@ -37,23 +38,43 @@
 	.guides-index {
 		@apply max-w-4xl mx-auto;
 	}
-	.guides-index__article {
-		@apply max-w-none mb-6;
+	.guides-index__header {
+		@apply mb-8 pb-6;
+		border-bottom: 1px solid color-mix(in srgb, var(--md-outline-variant) 45%, transparent);
+	}
+	.guides-index__title {
+		@apply font-headline font-extrabold tracking-tight mt-2 mb-3;
+		font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+		line-height: 1.1;
+		color: var(--md-on-surface);
+	}
+	.guides-index__intro {
+		@apply text-base md:text-lg max-w-2xl m-0;
+		color: var(--md-on-surface-variant);
 	}
 	.guides-index__grid {
-		@apply grid grid-cols-1 md:grid-cols-2 gap-4;
+		@apply grid grid-cols-1 md:grid-cols-2 gap-3;
 	}
 	.guides-index__card {
-		@apply block p-5 bg-surface-container-low rounded-lg border border-surface-container
-		       hover:border-primary transition-colors no-underline;
+		@apply flex flex-col p-5 rounded-2xl no-underline transition-all duration-150;
+		background: var(--md-surface-container-lowest);
+		border: 1px solid color-mix(in srgb, var(--md-outline-variant) 45%, transparent);
+	}
+	.guides-index__card:hover {
+		border-color: color-mix(in srgb, var(--md-primary) 55%, transparent);
+		transform: translateY(-2px);
+		box-shadow: 0 14px 30px -18px color-mix(in srgb, var(--md-primary) 60%, transparent);
 	}
 	.guides-index__card-title {
-		@apply text-base font-bold text-on-surface m-0 mb-2;
+		@apply font-headline text-lg font-bold m-0 mb-2 tracking-tight;
+		color: var(--md-on-surface);
 	}
 	.guides-index__card-desc {
-		@apply text-sm text-on-surface/70 m-0 mb-3;
+		@apply text-sm m-0 mb-4 flex-1 leading-relaxed;
+		color: var(--md-on-surface-variant);
 	}
 	.guides-index__card-link {
-		@apply text-sm text-primary font-medium;
+		@apply inline-flex items-center gap-1 text-sm font-semibold;
+		color: var(--md-primary);
 	}
 </style>

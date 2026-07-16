@@ -15,6 +15,7 @@
 	diffRightLabel={m.diff_right_label()}
 	diffResultLabel={m.diff_result_label()}
 	intro={m.diff_intro()}
+	body={[m.diff_body1(), m.diff_body2()]}
 	howto={[
 		{ step: m.diff_howto_s1(), desc: m.diff_howto_s1_desc() },
 		{ step: m.diff_howto_s2(), desc: m.diff_howto_s2_desc() },

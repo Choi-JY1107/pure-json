@@ -18,6 +18,7 @@
 	outputLabel={m.xml_output_label()}
 	outputLanguage="xml"
 	intro={m.to_xml_intro()}
+	body={[m.to_xml_body1(), m.to_xml_body2()]}
 	howto={[
 		{ step: m.to_xml_howto_s1(), desc: m.to_xml_howto_s1_desc() },
 		{ step: m.to_xml_howto_s2(), desc: m.to_xml_howto_s2_desc() },

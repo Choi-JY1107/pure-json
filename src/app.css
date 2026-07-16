@@ -1,12 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400..600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
+/* ══════════════════════════════════════════════════════════
+   PureJSON — "pure.json" identity
+   Concept: the page is a self-describing JSON document.
+   Palette derived from a refined code-editor syntax theme.
+   ══════════════════════════════════════════════════════════ */
+
 /* ── Tailwind Theme ── */
 @theme {
-	--font-headline: 'Space Grotesk', sans-serif;
+	--font-headline: 'Bricolage Grotesque', sans-serif;
 	--font-body: 'Inter', sans-serif;
 	--font-mono: 'JetBrains Mono', monospace;
 
@@ -44,7 +50,14 @@
 	--color-outline: var(--md-outline);
 	--color-outline-variant: var(--md-outline-variant);
 
-	/* DaisyUI compatibility aliases — will be removed in Phase 2 */
+	/* Syntax tokens — the brand's core vocabulary */
+	--color-syntax-key: var(--md-primary);
+	--color-syntax-string: var(--md-tertiary);
+	--color-syntax-number: var(--md-number);
+	--color-syntax-keyword: var(--md-keyword);
+	--color-syntax-punct: var(--md-on-surface-variant);
+
+	/* DaisyUI compatibility aliases */
 	--color-base-100: var(--md-surface);
 	--color-base-200: var(--md-surface-container-low);
 	--color-base-300: var(--md-surface-container);
@@ -53,81 +66,87 @@
 	--color-success: var(--md-tertiary);
 }
 
-/* ── Light Theme (default) ── */
+/* ── Light Theme (default) — "cool paper" ── */
 :root,
 [data-theme='light'] {
-	--md-surface: #fafafa;
-	--md-surface-dim: #d9d9d9;
-	--md-surface-bright: #fafafa;
+	--md-surface: #fbfbfe;
+	--md-surface-dim: #e7e7f0;
+	--md-surface-bright: #ffffff;
 	--md-surface-container-lowest: #ffffff;
-	--md-surface-container-low: #f4f4f4;
-	--md-surface-container: #eeeeee;
-	--md-surface-container-high: #e8e8e8;
-	--md-surface-container-highest: #e2e2e2;
-	--md-on-surface: #1a1a1a;
-	--md-on-surface-variant: #4a4a4a;
+	--md-surface-container-low: #f4f4fa;
+	--md-surface-container: #ededf5;
+	--md-surface-container-high: #e6e6f0;
+	--md-surface-container-highest: #e0e0ec;
+	--md-on-surface: #14151f;
+	--md-on-surface-variant: #565a6e;
 
-	--md-primary: #4d5b9c;
-	--md-primary-dim: #3a4889;
-	--md-primary-container: #dee1ff;
+	--md-primary: #5b4df5;
+	--md-primary-dim: #4a3ce0;
+	--md-primary-container: #e4e1ff;
 	--md-on-primary: #ffffff;
-	--md-on-primary-container: #0f1b54;
+	--md-on-primary-container: #17124d;
 
-	--md-secondary: #5c5b5b;
-	--md-secondary-dim: #747373;
-	--md-secondary-container: #e5e2e1;
+	--md-secondary: #565a6e;
+	--md-secondary-dim: #6b6f84;
+	--md-secondary-container: #e6e6f0;
 	--md-on-secondary: #ffffff;
 
-	--md-tertiary: #006b64;
-	--md-tertiary-dim: #008a82;
-	--md-tertiary-container: #7fe6db;
+	--md-tertiary: #0e9f6e;
+	--md-tertiary-dim: #0b8a5f;
+	--md-tertiary-container: #c6f4dd;
 	--md-on-tertiary: #ffffff;
 
-	--md-error: #ba1a1a;
-	--md-error-container: #ffdad6;
+	--md-number: #b26a00;
+	--md-keyword: #d6409f;
+
+	--md-error: #d92d43;
+	--md-error-container: #ffdde0;
 	--md-on-error: #ffffff;
 
-	--md-outline: #767575;
-	--md-outline-variant: #c8c8c8;
+	--md-outline: #8b8fa3;
+	--md-outline-variant: #d7d7e2;
 
 	color-scheme: light;
 }
 
-/* ── Dark Theme ── */
+/* ── Dark Theme — "ink" ── */
 [data-theme='dark'] {
-	--md-surface: #0e0e0e;
-	--md-surface-dim: #0e0e0e;
-	--md-surface-bright: #2b2c2c;
-	--md-surface-container-lowest: #000000;
-	--md-surface-container-low: #131313;
-	--md-surface-container: #191a1a;
-	--md-surface-container-high: #1f2020;
-	--md-surface-container-highest: #252626;
-	--md-on-surface: #e7e5e5;
-	--md-on-surface-variant: #acabaa;
+	--md-surface: #0b0d16;
+	--md-surface-dim: #0b0d16;
+	--md-surface-bright: #222536;
+	--md-surface-container-lowest: #07080f;
+	--md-surface-container-low: #12141f;
+	--md-surface-container: #181b28;
+	--md-surface-container-high: #1f2233;
+	--md-surface-container-highest: #262a3d;
+	--md-on-surface: #e7e8f0;
+	--md-on-surface-variant: #9ca0b4;
 
-	--md-primary: #b9c3ff;
-	--md-primary-dim: #a8b5fd;
-	--md-primary-container: #354282;
-	--md-on-primary: #2e3b7b;
-	--md-on-primary-container: #c6ceff;
+	--md-primary: #9d90ff;
+	--md-primary-dim: #8b7bff;
+	--md-primary-container: #3a348c;
+	--md-on-primary: #211a5c;
+	--md-on-primary-container: #e4e1ff;
 
-	--md-secondary: #9f9d9d;
-	--md-secondary-dim: #9f9d9d;
-	--md-secondary-container: #3c3b3b;
-	--md-on-secondary: #202020;
+	--md-secondary: #9ca0b4;
+	--md-secondary-dim: #9ca0b4;
+	--md-secondary-container: #2a2e40;
+	--md-on-secondary: #14151f;
 
-	--md-tertiary: #8ef4e9;
-	--md-tertiary-dim: #71d7cd;
-	--md-tertiary-container: #7fe6db;
-	--md-on-tertiary: #005c56;
+	--md-tertiary: #3ddc97;
+	--md-tertiary-dim: #33c085;
+	--md-tertiary-container: #0b8a5f;
+	--md-on-tertiary: #003824;
 
-	--md-error: #ec7c8a;
-	--md-error-container: #7f2737;
-	--md-on-error: #490013;
+	--md-number: #f0b45e;
+	--md-keyword: #f58fb4;
 
-	--md-outline: #767575;
-	--md-outline-variant: #484848;
+	--md-error: #f28098;
+	--md-error-container: #7a2233;
+	--md-on-error: #4d0011;
+
+	--md-outline: #565a6e;
+	--md-outline-variant: #2a2e40;
 
 	color-scheme: dark;
 }
@@ -137,21 +156,78 @@ body {
 	font-family: var(--font-body), sans-serif;
 	background-color: var(--md-surface);
 	color: var(--md-on-surface);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
 }
 
-/* ── Prose (typography plugin) dark mode override ── */
+/* ── Prose (typography plugin) theming ── */
 .prose {
 	--tw-prose-body: var(--md-on-surface);
 	--tw-prose-headings: var(--md-on-surface);
 	--tw-prose-links: var(--md-primary);
 	--tw-prose-bold: var(--md-on-surface);
-	--tw-prose-counters: var(--md-secondary);
-	--tw-prose-bullets: var(--md-secondary);
+	--tw-prose-counters: var(--md-primary);
+	--tw-prose-bullets: var(--md-outline);
 	--tw-prose-hr: var(--md-outline-variant);
 	--tw-prose-quotes: var(--md-on-surface-variant);
 	--tw-prose-code: var(--md-tertiary);
 	--tw-prose-pre-bg: var(--md-surface-container-lowest);
 	--tw-prose-pre-code: var(--md-on-surface);
+}
+.prose h2,
+.prose h3 {
+	font-family: var(--font-headline), sans-serif;
+	letter-spacing: -0.02em;
+}
+.prose code {
+	font-family: var(--font-mono), monospace;
+	font-weight: 500;
+}
+.prose :not(pre) > code {
+	background: color-mix(in srgb, var(--md-tertiary) 12%, transparent);
+	padding: 0.15em 0.4em;
+	border-radius: 5px;
+}
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+	content: none;
+}
+.prose pre {
+	border: 1px solid color-mix(in srgb, var(--md-outline-variant) 55%, transparent);
+	border-radius: 0.75rem;
+}
+.prose a {
+	text-decoration-color: color-mix(in srgb, var(--md-primary) 40%, transparent);
+	text-underline-offset: 2px;
+}
+.prose a:hover {
+	text-decoration-color: var(--md-primary);
+}
+/* FAQ accordion */
+.prose details {
+	border: 1px solid color-mix(in srgb, var(--md-outline-variant) 45%, transparent);
+	border-radius: 0.75rem;
+	padding: 0.75rem 1rem;
+	margin: 0.5rem 0;
+	background: var(--md-surface-container-low);
+}
+.prose details summary {
+	cursor: pointer;
+	list-style: none;
+}
+.prose details summary::-webkit-details-marker {
+	display: none;
+}
+.prose details summary::before {
+	content: '+';
+	display: inline-block;
+	width: 1em;
+	font-family: var(--font-mono), monospace;
+	color: var(--md-primary);
+	font-weight: 600;
+}
+.prose details[open] summary::before {
+	content: '−';
 }
 
 /* ── Material Symbols ── */
@@ -159,25 +235,37 @@ body {
 	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 	font-size: 1.25rem;
 	line-height: 1;
+	user-select: none;
 }
 
-/* ── Glass Panel ── */
+/* ── Reusable primitives ── */
+
+/* Eyebrow: a mono label styled like a JSON key — the recurring structural device */
+.eyebrow {
+	font-family: var(--font-mono), monospace;
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	color: var(--md-primary);
+}
+
+/* Glass panel */
 .glass-panel {
-	background: color-mix(in srgb, var(--md-surface-container-highest) 80%, transparent);
-	backdrop-filter: blur(20px);
+	background: color-mix(in srgb, var(--md-surface) 72%, transparent);
+	backdrop-filter: blur(20px) saturate(1.2);
 }
 
-/* ── Code Well (editor background) ── */
+/* Code well (editor background) — subtle dotted grid */
 .code-well {
 	background-color: var(--md-surface-container-lowest);
-	background-image: radial-gradient(var(--md-surface-container) 1px, transparent 1px);
-	background-size: 24px 24px;
+	background-image: radial-gradient(var(--md-surface-container-high) 1px, transparent 1px);
+	background-size: 22px 22px;
 }
 
 /* ── Custom Scrollbar ── */
 ::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
+	width: 8px;
+	height: 8px;
 }
 ::-webkit-scrollbar-track {
 	background: transparent;
@@ -185,12 +273,33 @@ body {
 ::-webkit-scrollbar-thumb {
 	background: var(--md-outline-variant);
 	border-radius: 10px;
+	border: 2px solid transparent;
+	background-clip: padding-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-	background: var(--md-primary);
+	background: var(--md-outline);
+	background-clip: padding-box;
 }
 
 /* ── Selection ── */
 ::selection {
-	background: color-mix(in srgb, var(--md-primary) 30%, transparent);
+	background: color-mix(in srgb, var(--md-primary) 28%, transparent);
+}
+
+/* ── Focus visibility (quality floor) ── */
+:focus-visible {
+	outline: 2px solid var(--md-primary);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+/* ── Reduced motion (quality floor) ── */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+	}
 }

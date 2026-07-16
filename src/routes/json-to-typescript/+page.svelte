@@ -18,6 +18,7 @@
 	outputLabel={m.typescript_output_label()}
 	outputLanguage="typescript"
 	intro={m.to_typescript_intro()}
+	body={[m.to_typescript_body1(), m.to_typescript_body2()]}
 	howto={[
 		{ step: m.to_typescript_howto_s1(), desc: m.to_typescript_howto_s1_desc() },
 		{ step: m.to_typescript_howto_s2(), desc: m.to_typescript_howto_s2_desc() },
