@@ -307,7 +307,7 @@
 			<h3>{m.section_howto()}</h3>
 			<ol>
 				{#each howto as item, i (i)}
-					<li><strong>{item.step}</strong> — {item.desc}</li>
+					<li><strong>{item.step}</strong>: {item.desc}</li>
 				{/each}
 			</ol>
 		{/if}
