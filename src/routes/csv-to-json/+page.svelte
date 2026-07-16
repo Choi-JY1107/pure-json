@@ -19,6 +19,7 @@
 	outputLabel={m.json_output_label()}
 	outputLanguage="json"
 	intro={m.csv_to_json_intro()}
+	body={[m.csv_to_json_body1(), m.csv_to_json_body2()]}
 	howto={[
 		{ step: m.csv_to_json_howto_s1(), desc: m.csv_to_json_howto_s1_desc() },
 		{ step: m.csv_to_json_howto_s2(), desc: m.csv_to_json_howto_s2_desc() },

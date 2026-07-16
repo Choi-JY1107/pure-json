@@ -17,6 +17,7 @@
 	title={m.sorter_h1()}
 	actionLabel={m.btn_sort()}
 	intro={m.sorter_intro()}
+	body={[m.sorter_body1(), m.sorter_body2()]}
 	howto={[
 		{ step: m.sorter_howto_s1(), desc: m.sorter_howto_s1_desc() },
 		{ step: m.sorter_howto_s2(), desc: m.sorter_howto_s2_desc() },

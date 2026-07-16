@@ -29,10 +29,19 @@
 <MetaTags title={metaTitle} description={metaDescription} />
 
 <div class="guide-page">
+	<a href="/guides" class="guide-page__back">
+		<span class="material-symbols-outlined" style="font-size:1rem">arrow_back</span>
+		{m.sidebar_group_guides()}
+	</a>
+
+	<header class="guide-page__header">
+		<span class="eyebrow">"guide"</span>
+		<h1 class="guide-page__title">{title}</h1>
+	</header>
+
 	<article class="guide-page__article prose prose-sm">
-		<h1>{title}</h1>
 		<!-- eslint-disable svelte/no-at-html-tags -- i18n values are first-party, not user input -->
-		<p>{@html intro}</p>
+		<p class="guide-page__intro">{@html intro}</p>
 
 		{#each sections as section, i (i)}
 			<h2>{section.title}</h2>
@@ -53,11 +62,14 @@
 
 		{#if relatedTools.length > 0}
 			<h2>{m.guide_related_tools()}</h2>
-			<ul>
+			<div class="guide-page__tools not-prose">
 				{#each relatedTools as tool (tool.href)}
-					<li><a href={tool.href}>{tool.label}</a></li>
+					<a href={tool.href} class="guide-page__tool">
+						<span class="material-symbols-outlined" style="font-size:1rem">bolt</span>
+						{tool.label}
+					</a>
 				{/each}
-			</ul>
+			</div>
 		{/if}
 
 		{#if faqs.length > 0}
@@ -78,7 +90,43 @@
 	.guide-page {
 		@apply max-w-3xl mx-auto;
 	}
+	.guide-page__back {
+		@apply inline-flex items-center gap-1.5 mb-6 text-sm font-medium no-underline transition-colors;
+		color: var(--md-on-surface-variant);
+	}
+	.guide-page__back:hover {
+		color: var(--md-primary);
+	}
+	.guide-page__header {
+		@apply mb-8 pb-6;
+		border-bottom: 1px solid color-mix(in srgb, var(--md-outline-variant) 45%, transparent);
+	}
+	.guide-page__title {
+		@apply font-headline font-extrabold tracking-tight mt-2 mb-0;
+		font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+		line-height: 1.1;
+		color: var(--md-on-surface);
+	}
 	.guide-page__article {
 		@apply max-w-none;
+	}
+	.guide-page__intro {
+		@apply text-lg;
+		color: var(--md-on-surface-variant);
+	}
+
+	/* Related tools as pills */
+	.guide-page__tools {
+		@apply flex flex-wrap gap-2 mt-3;
+	}
+	.guide-page__tool {
+		@apply inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl
+		       text-sm font-semibold no-underline transition-all duration-150;
+		color: var(--md-primary);
+		background: var(--md-primary-container);
+	}
+	.guide-page__tool:hover {
+		transform: translateY(-1px);
+		box-shadow: 0 8px 20px -12px color-mix(in srgb, var(--md-primary) 70%, transparent);
 	}
 </style>

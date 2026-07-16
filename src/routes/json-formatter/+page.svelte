@@ -19,6 +19,7 @@
 	inputLabel={m.input_label()}
 	outputLabel={m.output_label()}
 	intro={m.formatter_intro()}
+	body={[m.formatter_body1(), m.formatter_body2()]}
 	howto={[
 		{ step: m.formatter_howto_s1(), desc: m.formatter_howto_s1_desc() },
 		{ step: m.formatter_howto_s2(), desc: m.formatter_howto_s2_desc() },

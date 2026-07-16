@@ -18,6 +18,7 @@
 	outputLabel={m.yaml_output_label()}
 	outputLanguage="yaml"
 	intro={m.to_yaml_intro()}
+	body={[m.to_yaml_body1(), m.to_yaml_body2()]}
 	howto={[
 		{ step: m.to_yaml_howto_s1(), desc: m.to_yaml_howto_s1_desc() },
 		{ step: m.to_yaml_howto_s2(), desc: m.to_yaml_howto_s2_desc() },

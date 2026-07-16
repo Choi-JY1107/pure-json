@@ -18,6 +18,7 @@
 	outputLabel={m.csv_output_label()}
 	outputLanguage="plaintext"
 	intro={m.to_csv_intro()}
+	body={[m.to_csv_body1(), m.to_csv_body2()]}
 	howto={[
 		{ step: m.to_csv_howto_s1(), desc: m.to_csv_howto_s1_desc() },
 		{ step: m.to_csv_howto_s2(), desc: m.to_csv_howto_s2_desc() },

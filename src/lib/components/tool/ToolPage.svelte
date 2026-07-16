@@ -32,6 +32,7 @@
 
 		// content
 		intro,
+		body,
 		howto,
 		features,
 		usecases,
@@ -39,7 +40,9 @@
 
 		// slots
 		toolbarExtra,
-		beforePanels
+		beforePanels,
+		hero,
+		belowContent
 	}: {
 		mode?: 'dual' | 'viewer' | 'diff';
 		metaTitle: string;
@@ -59,6 +62,7 @@
 		diffResultLabel?: string;
 
 		intro: string;
+		body?: string[];
 		howto?: Array<{ step: string; desc: string }>;
 		features?: string[];
 		usecases?: string[];
@@ -66,6 +70,8 @@
 
 		toolbarExtra?: Snippet;
 		beforePanels?: Snippet;
+		hero?: Snippet;
+		belowContent?: Snippet;
 	} = $props();
 
 	let showClearModal = $state(false);
@@ -126,7 +132,11 @@
 
 <MetaTags title={metaTitle} description={metaDescription} />
 
-<div class="tp">
+{#if hero}
+	{@render hero()}
+{/if}
+
+<div class="tp" id="workspace">
 	<!-- ── Toolbar ── -->
 	<div class="tp__toolbar">
 		<div class="tp__toolbar-left">
@@ -295,11 +305,17 @@
 		<h2>{title}</h2>
 		<p>{intro}</p>
 
+		{#if body && body.length > 0}
+			{#each body as para, i (i)}
+				<p>{para}</p>
+			{/each}
+		{/if}
+
 		{#if howto && howto.length > 0}
 			<h3>{m.section_howto()}</h3>
 			<ol>
 				{#each howto as item, i (i)}
-					<li><strong>{item.step}</strong> — {item.desc}</li>
+					<li><strong>{item.step}</strong>: {item.desc}</li>
 				{/each}
 			</ol>
 		{/if}
@@ -330,6 +346,10 @@
 			</details>
 		{/each}
 	</article>
+
+	{#if belowContent}
+		{@render belowContent()}
+	{/if}
 </div>
 
 <ConfirmModal
@@ -349,43 +369,58 @@
 
 	/* ── Toolbar ── */
 	.tp__toolbar {
-		@apply h-14 flex flex-wrap items-center justify-between gap-3 px-6
-		       bg-surface-container-low border border-outline-variant/15 rounded-xl;
+		@apply flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 md:px-5 py-3 rounded-2xl;
+		background: var(--md-surface-container-low);
+		border: 1px solid color-mix(in srgb, var(--md-outline-variant) 55%, transparent);
 	}
 	.tp__toolbar-left {
-		@apply flex items-center gap-6;
+		@apply flex items-center gap-6 min-w-0;
 	}
 	.tp__toolbar-right {
-		@apply flex items-center gap-2 flex-wrap;
+		@apply flex items-center gap-1.5 flex-wrap;
 	}
 	.tp__title {
-		@apply font-headline text-lg font-semibold tracking-tight;
+		@apply font-headline text-base md:text-lg font-bold tracking-tight truncate;
 	}
 	.tp__divider {
-		@apply h-6 border-l border-outline-variant/20;
+		@apply h-5 border-l mx-0.5;
+		border-color: var(--md-outline-variant);
 	}
 
 	/* ── Buttons ── */
 	.tp__btn {
-		@apply inline-flex items-center gap-1.5 px-3 py-1.5
-		       text-[0.6875rem] font-semibold uppercase tracking-wider
-		       rounded-lg transition-all duration-200 cursor-pointer;
+		@apply inline-flex items-center gap-1.5 px-2.5 md:px-3 py-1.5
+		       text-[0.8125rem] font-semibold
+		       rounded-lg transition-all duration-150 cursor-pointer whitespace-nowrap;
 	}
 	.tp__btn-icon {
-		font-size: 1rem;
+		font-size: 1.0625rem;
 	}
 	.tp__btn--primary {
-		@apply bg-linear-to-br from-primary to-primary-container
-		       text-on-primary shadow-lg shadow-primary-container/20
-		       active:scale-95;
+		color: var(--md-on-primary);
+		background: linear-gradient(135deg, var(--md-primary), var(--md-primary-dim));
+		box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--md-primary) 60%, transparent);
+	}
+	.tp__btn--primary:hover {
+		filter: brightness(1.06);
+	}
+	.tp__btn--primary:active {
+		@apply scale-95;
 	}
 	.tp__btn--soft {
-		@apply bg-surface-container-high text-on-surface
-		       hover:bg-surface-container-highest;
+		color: var(--md-on-surface);
+		background: var(--md-surface-container-high);
+	}
+	.tp__btn--soft:hover {
+		background: var(--md-surface-container-highest);
 	}
 	.tp__btn--ghost {
-		@apply bg-transparent text-secondary hover:text-on-surface
-		       hover:bg-surface-container;
+		@apply bg-transparent;
+		color: var(--md-on-surface-variant);
+	}
+	.tp__btn--ghost:hover {
+		color: var(--md-on-surface);
+		background: var(--md-surface-container);
 	}
 
 	/* ── Panel Grid ── */
@@ -393,15 +428,17 @@
 		@apply grid grid-cols-1 lg:grid-cols-2 gap-4;
 	}
 	.tp__panel {
-		@apply flex flex-col rounded-xl overflow-hidden
-		       border border-outline-variant/10 shadow-lg;
+		@apply flex flex-col rounded-2xl overflow-hidden;
+		background: var(--md-surface-container-lowest);
+		border: 1px solid color-mix(in srgb, var(--md-outline-variant) 50%, transparent);
 	}
 	.tp__panel-header {
-		@apply h-10 px-4 flex items-center gap-2
-		       bg-surface-container-low border-b border-outline-variant/5;
+		@apply h-11 px-4 flex items-center gap-2;
+		background: var(--md-surface-container-low);
+		border-bottom: 1px solid color-mix(in srgb, var(--md-outline-variant) 40%, transparent);
 	}
 	.tp__panel-icon {
-		font-size: 0.875rem;
+		font-size: 1rem;
 	}
 	.tp__panel-icon--tertiary {
 		color: var(--md-tertiary);
@@ -410,7 +447,8 @@
 		color: var(--md-primary);
 	}
 	.tp__panel-label {
-		@apply text-[0.625rem] uppercase tracking-widest font-bold text-secondary flex-1;
+		@apply font-mono text-[0.6875rem] tracking-wide font-semibold flex-1;
+		color: var(--md-on-surface-variant);
 	}
 	.tp__panel-actions {
 		@apply flex items-center gap-1;
@@ -424,32 +462,40 @@
 		@apply h-80;
 	}
 	.tp__tree {
-		@apply h-[calc(100vh-20rem)] overflow-auto p-6;
+		@apply h-[calc(100vh-20rem)] overflow-auto p-5;
 	}
 	.tp__empty {
-		@apply h-full flex flex-col items-center justify-center gap-2
-		       text-sm text-secondary;
+		@apply h-full flex flex-col items-center justify-center gap-2 text-sm;
+		color: var(--md-on-surface-variant);
 	}
 
 	/* ── Error ── */
 	.tp__error {
-		@apply flex items-center gap-2 px-4 py-3
-		       rounded-lg bg-error-container/20 text-error
-		       border border-error/20 text-sm;
+		@apply flex items-center gap-2 px-4 py-3 rounded-xl text-sm;
+		color: var(--md-error);
+		background: color-mix(in srgb, var(--md-error) 12%, transparent);
+		border: 1px solid color-mix(in srgb, var(--md-error) 30%, transparent);
 	}
 
 	/* ── Article ── */
 	.tp__article {
-		@apply max-w-none mt-4;
+		@apply max-w-3xl mt-6 pt-6;
+		border-top: 1px solid color-mix(in srgb, var(--md-outline-variant) 45%, transparent);
+	}
+	.tp__article :global(details) {
+		@apply py-1;
+	}
+	.tp__article :global(summary) {
+		@apply cursor-pointer;
 	}
 
 	/* ── Responsive ── */
 	@media (width < 64rem) {
 		.tp__editor {
-			@apply h-72;
+			@apply h-[24rem];
 		}
 		.tp__tree {
-			@apply h-72;
+			@apply h-[24rem];
 		}
 	}
 </style>

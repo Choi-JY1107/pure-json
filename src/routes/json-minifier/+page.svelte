@@ -27,6 +27,7 @@
 	inputLabel={m.input_label()}
 	outputLabel={m.output_label()}
 	intro={m.minifier_intro()}
+	body={[m.minifier_body1(), m.minifier_body2()]}
 	howto={[
 		{ step: m.minifier_howto_s1(), desc: m.minifier_howto_s1_desc() },
 		{ step: m.minifier_howto_s2(), desc: m.minifier_howto_s2_desc() },

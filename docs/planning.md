@@ -85,11 +85,23 @@
 - [x] 3개 언어 번역 완료 (en, ko, ja)
 - 각 가이드 800-1500 words, 도구 페이지 내부 링크 포함
 
+### Phase 2.6: 전면 비주얼 리브랜딩 — Done
+
+- [x] pure.json 아이덴티티 디자인 시스템 (`app.css` 팔레트/폰트/구문 토큰 전면 교체)
+- [x] 레이아웃 크롬 리브랜딩 (브레이스 로고, 가독성 개선, 프라이버시 트러스트 배지 승격)
+- [x] ToolPage 리스타일로 10개 도구 페이지 일괄 반영
+- [x] 홈 히어로(자기 설명 JSON 시그니처) + 10개 도구 그리드(내부 링크) 추가
+- [x] 모바일 에디터 높이 축소, 접근성 기본값(focus-visible, reduced-motion)
+- [x] 3개 언어 히어로/그리드 카피 추가
+- 상세: [ADR-007](decisions/007-visual-rebrand.md)
+
 ### Phase 3: AdSense 승인 대응 — In Progress
 
 - [x] Privacy Policy, Terms of Service, About 페이지 추가
 - [x] 5개 신규 도구 추가 (CSV, XML, Sorter, Diff)
 - [x] 10개 도구 페이지 콘텐츠 보강 (howto, features, usecases, FAQ 5개)
+- [x] 10개 도구 페이지 본문 확충 (도구당 교육 문단 2개 추가 → 페이지당 ~300단어 이상, 3개 언어)
+- [x] 가이드 코드 예시 리터럴 중괄호 이스케이프 (Paraglide undefined 렌더 버그 수정, svelte-check 에러 8→2)
 - [x] 사이드바 From JSON / To JSON 그룹 분리
 - [x] BASE_URL purejson.org 반영
 - [x] robots.txt, sitemap.xml 도메인 수정
