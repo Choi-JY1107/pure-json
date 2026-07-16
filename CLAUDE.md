@@ -35,7 +35,9 @@ npm run lint:fix   # ESLint 자동 수정
   - `+page.svelte` (JSON Viewer, 루트), `json-formatter/`, `json-minifier/`, `json-sorter/`, `json-to-typescript/`, `json-to-yaml/`, `json-to-csv/`, `csv-to-json/`, `json-to-xml/`, `json-diff/`
   - `privacy/`, `terms/`, `about/` — 정책/정보 페이지
   - `guides/` — 교육 가이드 인덱스 및 6개 가이드 (what-is-json, json-vs-yaml-xml, json-syntax-errors, json-rest-api, json-schema, large-json-files)
-- `src/lib/components/` — Svelte 컴포넌트 (editor, layout, ui)
+- `src/lib/components/` — Svelte 컴포넌트 (editor, layout, ui, tool, home, guide)
+  - `home/` — 홈 전용: `Hero.svelte`(자기 설명 JSON 시그니처), `ToolsGrid.svelte`(10개 도구 내부 링크)
+  - `tool/ToolPage.svelte` — 10개 도구 공통 컴포넌트. `hero`/`belowContent` 스니펫으로 홈에서 히어로/그리드 주입
 - `src/lib/utils/` — JSON 처리 로직 (formatter, to-ts, to-yaml, to-csv, csv-to-json, to-xml, json-sorter, json-diff, tree-parser)
 - `src/lib/stores/` — Svelte 상태 관리 (editor.svelte.ts, theme.svelte.ts)
 - `src/lib/config/site.ts` — 사이트 설정 (로케일, 페이지 목록, URL)
@@ -52,6 +54,12 @@ npm run lint:fix   # ESLint 자동 수정
 - 컴포넌트 파일: PascalCase (예: `MonacoEditor.svelte`)
 - 유틸리티 파일: kebab-case (예: `json-formatter.ts`)
 - i18n 메시지 키: snake_case (예: `viewer_title`)
+
+### 디자인 시스템 (pure.json 아이덴티티, ADR-007)
+
+- 팔레트: 잉크 블루블랙 베이스 + 아이리스(primary)/에메랄드(tertiary)/앰버(number)/핑크(keyword) 구문 강조 파생. `app.css`의 `--md-*` 토큰 정의
+- 폰트: Display `Bricolage Grotesque`, Body `Inter`, Mono `JetBrains Mono` (모노는 라벨/키/eyebrow 등 구조 요소용)
+- 카피 규칙: 설명에 `·`/`—` 금지, 여러 문장은 문장 단위 줄바꿈(`\n` + `white-space: pre-line`)
 
 ### CSS / BEM 방법론
 

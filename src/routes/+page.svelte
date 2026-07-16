@@ -1,5 +1,7 @@
 <script lang="ts">
 	import ToolPage from '$lib/components/tool/ToolPage.svelte';
+	import Hero from '$lib/components/home/Hero.svelte';
+	import ToolsGrid from '$lib/components/home/ToolsGrid.svelte';
 	import { getEditorStore } from '$lib/stores/editor';
 	import * as m from '$lib/paraglide/messages.js';
 
@@ -27,4 +29,11 @@
 		{ question: m.viewer_faq_q4(), answer: m.viewer_faq_a4() },
 		{ question: m.viewer_faq_q5(), answer: m.viewer_faq_a5() }
 	]}
-/>
+>
+	{#snippet hero()}
+		<Hero />
+	{/snippet}
+	{#snippet belowContent()}
+		<ToolsGrid />
+	{/snippet}
+</ToolPage>

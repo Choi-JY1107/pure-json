@@ -19,24 +19,28 @@
 	@reference "../../../app.css";
 
 	.footer {
-		@apply h-10 px-6 flex items-center justify-between
-		       bg-surface-container-lowest border-t border-outline-variant/10
-		       text-[0.5625rem] uppercase tracking-widest font-medium text-outline;
+		@apply px-4 md:px-6 py-3 flex flex-wrap items-center justify-between gap-2
+		       bg-surface-container-lowest border-t
+		       text-[0.75rem] font-medium;
+		border-color: color-mix(in srgb, var(--md-outline-variant) 50%, transparent);
+		color: var(--md-on-surface-variant);
 	}
 	.footer__left {
 		@apply flex items-center gap-2;
 	}
 	.footer__lock-icon {
-		font-size: 0.75rem;
+		font-size: 0.875rem;
 		color: var(--md-tertiary);
 	}
 	.footer__right {
 		@apply flex items-center gap-4;
 	}
 	.footer__link {
-		@apply text-secondary hover:text-on-surface transition-colors no-underline;
+		@apply hover:text-on-surface transition-colors no-underline;
+		color: var(--md-on-surface-variant);
 	}
 	.footer__copyright {
-		@apply text-outline/60;
+		@apply font-mono text-[0.6875rem];
+		color: var(--md-outline);
 	}
 </style>
