@@ -9,6 +9,7 @@
 	</div>
 	<div class="footer__right">
 		<a href="/about" class="footer__link">{m.footer_about()}</a>
+		<a href="/contact" class="footer__link">{m.contact_title()}</a>
 		<a href="/privacy" class="footer__link">{m.footer_privacy()}</a>
 		<a href="/terms" class="footer__link">{m.footer_terms()}</a>
 		<span class="footer__copyright">&copy; {new Date().getFullYear()} {m.copyright_text()}</span>

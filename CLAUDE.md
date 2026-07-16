@@ -33,7 +33,7 @@ npm run lint:fix   # ESLint 자동 수정
 
 - `src/routes/` — 페이지 라우트 (lang prefix 없음, Paraglide가 브라우저 언어 감지)
   - `+page.svelte` (JSON Viewer, 루트), `json-formatter/`, `json-minifier/`, `json-sorter/`, `json-to-typescript/`, `json-to-yaml/`, `json-to-csv/`, `csv-to-json/`, `json-to-xml/`, `json-diff/`
-  - `privacy/`, `terms/`, `about/` — 정책/정보 페이지
+  - `privacy/`, `terms/`, `about/`, `contact/` — 정책/정보/연락처 페이지 (contact는 mailto: contact@purejson.org)
   - `guides/` — 교육 가이드 인덱스 및 6개 가이드 (what-is-json, json-vs-yaml-xml, json-syntax-errors, json-rest-api, json-schema, large-json-files)
 - `src/lib/components/` — Svelte 컴포넌트 (editor, layout, ui, tool, home, guide)
   - `home/` — 홈 전용: `Hero.svelte`(자기 설명 JSON 시그니처), `ToolsGrid.svelte`(10개 도구 내부 링크)

@@ -6,7 +6,7 @@ export const prerender = true;
 export const GET: RequestHandler = () => {
 	const toolPages = PAGES.filter((p) => p !== 'json-viewer');
 
-	const staticPages = ['about', 'privacy', 'terms'];
+	const staticPages = ['about', 'contact', 'privacy', 'terms'];
 
 	const urls = [
 		`

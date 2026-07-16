@@ -43,6 +43,14 @@
 				m.guide_json_rest_api_s5_li4(),
 				m.guide_json_rest_api_s5_li5()
 			]
+		},
+		{
+			title: m.guide_json_rest_api_s6_title(),
+			paragraphs: [
+				m.guide_json_rest_api_s6_p1(),
+				m.guide_json_rest_api_s6_p2(),
+				m.guide_json_rest_api_s6_p3()
+			]
 		}
 	]}
 	relatedTools={[
@@ -52,6 +60,8 @@
 	]}
 	faqs={[
 		{ question: m.guide_json_rest_api_faq_q1(), answer: m.guide_json_rest_api_faq_a1() },
-		{ question: m.guide_json_rest_api_faq_q2(), answer: m.guide_json_rest_api_faq_a2() }
+		{ question: m.guide_json_rest_api_faq_q2(), answer: m.guide_json_rest_api_faq_a2() },
+		{ question: m.guide_json_rest_api_faq_q3(), answer: m.guide_json_rest_api_faq_a3() },
+		{ question: m.guide_json_rest_api_faq_q4(), answer: m.guide_json_rest_api_faq_a4() }
 	]}
 />

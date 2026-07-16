@@ -105,9 +105,16 @@
 - [x] 사이드바 From JSON / To JSON 그룹 분리
 - [x] BASE_URL purejson.org 반영
 - [x] robots.txt, sitemap.xml 도메인 수정
+- [x] 도구 페이지 편집 콘텐츠 확충 (thin content 해소, ADR-007)
+- [x] Contact 페이지 신설 (contact@purejson.org, 3개 언어, sitemap/footer 반영)
+- [x] About E-E-A-T 보강 (운영 주체/전문성 섹션 추가)
+- [x] 가이드 6개 확충 (각 섹션+FAQ 추가로 800단어 수준, 3개 언어)
+- [ ] **배포 필수**: main → release/production 병합 (Cloudflare 배포 트리거는 release/production)
 - [ ] Search Console 인덱싱 완료 대기
 - [ ] AdSense 재신청
 - 상세: [ADR-006](decisions/006-adsense-rejection-analysis.md)
+
+> AdSense 자격 재평가(2026-07-16): 리서치 결과 도구형 사이트는 "도구 UI + 이를 뒷받침하는 편집 콘텐츠"가 핵심. thin content(핵심 거절 사유), Contact 부재, E-E-A-T 약함을 이번에 보강. 남은 리스크는 배포 미반영과 신규 사이트 트래픽. 배포 후 색인 완료를 기다려 재신청 권장.
 
 ### Phase 4: 수익화 — Pending
 
