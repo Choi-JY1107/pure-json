@@ -30,6 +30,7 @@ const config = {
 				'/guides/json-schema',
 				'/guides/large-json-files',
 				'/about',
+				'/contact',
 				'/privacy',
 				'/terms',
 				'/sitemap.xml'

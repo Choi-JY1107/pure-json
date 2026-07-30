@@ -28,6 +28,46 @@
 	outputLabel={m.output_label()}
 	intro={m.minifier_intro()}
 	body={[m.minifier_body1(), m.minifier_body2()]}
+	deep={{
+		title: m.minifier_deep_title(),
+		paragraphs: [m.minifier_deep_p1(), m.minifier_deep_p2(), m.minifier_deep_p3()]
+	}}
+	reference={{
+		title: m.minifier_ref_title(),
+		intro: m.minifier_ref_intro(),
+		headers: [m.minifier_ref_h1(), m.minifier_ref_h2(), m.table_note()],
+		rows: [
+			['JSON.stringify(v, null, 2)', '10,562 B', m.minifier_ref_n1()],
+			['JSON.stringify(v)', '6,154 B', m.minifier_ref_n2()],
+			['gzip(pretty)', '668 B', m.minifier_ref_n3()],
+			['gzip(minified)', '599 B', m.minifier_ref_n4()]
+		]
+	}}
+	examples={{
+		title: m.minifier_ex_title(),
+		intro: m.minifier_ex_intro(),
+		input: `{
+  "city": "New York",
+  "coords": [
+    40.71,
+    -74.01
+  ]
+}`,
+		output: '{"city":"New York","coords":[40.71,-74.01]}',
+		note: m.minifier_ex_note()
+	}}
+	pitfalls={{
+		title: m.minifier_pit_title(),
+		items: [
+			{ title: m.minifier_pit1_t(), desc: m.minifier_pit1_d() },
+			{
+				title: m.minifier_pit2_t(),
+				desc: m.minifier_pit2_d(),
+				code: '{"note":"line1\\nline2"}'
+			},
+			{ title: m.minifier_pit3_t(), desc: m.minifier_pit3_d() }
+		]
+	}}
 	howto={[
 		{ step: m.minifier_howto_s1(), desc: m.minifier_howto_s1_desc() },
 		{ step: m.minifier_howto_s2(), desc: m.minifier_howto_s2_desc() },
@@ -40,7 +80,9 @@
 		{ question: m.minifier_faq_q2(), answer: m.minifier_faq_a2() },
 		{ question: m.minifier_faq_q3(), answer: m.minifier_faq_a3() },
 		{ question: m.minifier_faq_q4(), answer: m.minifier_faq_a4() },
-		{ question: m.minifier_faq_q5(), answer: m.minifier_faq_a5() }
+		{ question: m.minifier_faq_q5(), answer: m.minifier_faq_a5() },
+		{ question: m.minifier_faq_q6(), answer: m.minifier_faq_a6() },
+		{ question: m.minifier_faq_q7(), answer: m.minifier_faq_a7() }
 	]}
 >
 	{#snippet beforePanels()}
