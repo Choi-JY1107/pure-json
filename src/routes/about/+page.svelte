@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { MetaTags } from 'svelte-meta-tags';
+	import { AUTHOR, GITHUB_URL } from '$lib/config/site';
+	import AuthorByline from '$lib/components/ui/AuthorByline.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 </script>
 
@@ -8,6 +10,7 @@
 <div class="legal-page">
 	<article class="legal-page__article prose prose-sm">
 		<h1>{m.about_h1()}</h1>
+		<AuthorByline />
 
 		<h2>{m.about_section1_title()}</h2>
 		<p>{m.about_section1_p1()}</p>
@@ -39,9 +42,22 @@
 		<h2>{m.about_section6_title()}</h2>
 		<p>{m.about_section6_p1()}</p>
 		<p>{m.about_section6_p2()}</p>
+		<ul>
+			<li>
+				{m.contact_maintainer_name()}:
+				<a href={AUTHOR.url} rel="noopener noreferrer author" target="_blank">{AUTHOR.name}</a>
+			</li>
+			<li>
+				{m.contact_maintainer_name()} {m.contact_email_title()}:
+				<a href="mailto:{AUTHOR.email}">{AUTHOR.email}</a>
+			</li>
+		</ul>
 
 		<h2>{m.about_section5_title()}</h2>
 		<p>{m.about_section5_p1()}</p>
+		<p>
+			<a href={GITHUB_URL} rel="noopener noreferrer" target="_blank">{GITHUB_URL}</a>
+		</p>
 	</article>
 </div>
 

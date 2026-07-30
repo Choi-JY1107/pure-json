@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { MetaTags, JsonLd } from 'svelte-meta-tags';
 	import { onMount } from 'svelte';
-	import { BASE_URL, ADSENSE_CLIENT, ADSENSE_SLOT } from '$lib/config/site';
+	import { BASE_URL, ADSENSE_CLIENT, ADSENSE_SLOT, AUTHOR, GITHUB_URL } from '$lib/config/site';
 	import { locale } from '$lib/stores/locale.svelte';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';
@@ -23,14 +23,18 @@
 	function closeSidebar() {
 		sidebarOpen = false;
 	}
+
+	// trailingSlash is 'never', so pathname is already the canonical form.
+	let canonicalUrl = $derived(BASE_URL + (page.url?.pathname ?? '/'));
 </script>
 
 <MetaTags
 	titleTemplate="%s | PureJSON"
+	canonical={canonicalUrl}
 	openGraph={{
 		type: 'website',
 		siteName: 'PureJSON',
-		url: BASE_URL + (page.url?.pathname ?? '/')
+		url: canonicalUrl
 	}}
 	twitter={{
 		cardType: 'summary_large_image'
@@ -49,7 +53,19 @@
 			'@type': 'Offer',
 			price: '0',
 			priceCurrency: 'USD'
-		}
+		},
+		author: {
+			'@type': 'Person',
+			name: AUTHOR.name,
+			url: AUTHOR.url
+		},
+		publisher: {
+			'@type': 'Person',
+			name: AUTHOR.name,
+			url: AUTHOR.url
+		},
+		codeRepository: GITHUB_URL,
+		isAccessibleForFree: true
 	}}
 />
 
@@ -78,11 +94,18 @@
 		<main class="layout__main">
 			{@render children()}
 		</main>
+	{/key}
 
-		<div class="layout__ad-bottom">
-			<AdSlot client={ADSENSE_CLIENT} slot={ADSENSE_SLOT} height="90px" />
-		</div>
+	<!--
+		Deliberately outside {#key locale.current}: remounting the <ins> element pushes a
+		second ad request into a slot that already holds one, which AdSense rejects with
+		"All 'ins' elements in the DOM with class=adsbygoogle already have ads in them".
+	-->
+	<div class="layout__ad-bottom">
+		<AdSlot client={ADSENSE_CLIENT} slot={ADSENSE_SLOT} height="90px" />
+	</div>
 
+	{#key locale.current}
 		<Footer />
 	{/key}
 </div>

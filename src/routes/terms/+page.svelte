@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { MetaTags } from 'svelte-meta-tags';
+	import { AUTHOR, GITHUB_URL } from '$lib/config/site';
 	import * as m from '$lib/paraglide/messages.js';
 </script>
 
@@ -35,12 +36,23 @@
 
 		<h2>{m.terms_section5_title()}</h2>
 		<p>{m.terms_section5_p1()}</p>
+		<p>
+			<a href={GITHUB_URL} rel="noopener noreferrer" target="_blank">{GITHUB_URL}</a>
+		</p>
 
 		<h2>{m.terms_section6_title()}</h2>
 		<p>{m.terms_section6_p1()}</p>
 
 		<h2>{m.terms_section7_title()}</h2>
 		<p>{m.terms_section7_p1()}</p>
+		<ul>
+			<li><a href="mailto:{AUTHOR.email}">{AUTHOR.email}</a></li>
+			<li>
+				<a href="{GITHUB_URL}/issues" rel="noopener noreferrer" target="_blank"
+					>{GITHUB_URL}/issues</a
+				>
+			</li>
+		</ul>
 	</article>
 </div>
 

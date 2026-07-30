@@ -116,6 +116,27 @@
 
 > AdSense 자격 재평가(2026-07-16): 리서치 결과 도구형 사이트는 "도구 UI + 이를 뒷받침하는 편집 콘텐츠"가 핵심. thin content(핵심 거절 사유), Contact 부재, E-E-A-T 약함을 이번에 보강. 남은 리스크는 배포 미반영과 신규 사이트 트래픽. 배포 후 색인 완료를 기다려 재신청 권장.
 
+### Phase 3.5: "가치 없는 콘텐츠" 거절 대응 — Done (2026-07-30)
+
+Phase 3의 템플릿 일괄 적용이 오히려 "가치 없는 콘텐츠" 거절을 불러왔다.
+실측 결과 도구 10개 중 9개가 완전히 동일한 29키 구조였고, 페이지당 337~441단어였다.
+
+- [x] ToolPage에 도구별 고유 섹션 4종 추가 (`deep`, `reference` 표, `examples` 코드쌍, `pitfalls`)
+- [x] 도구 10개 심층 콘텐츠 작성 (각 984~1,179단어, 3개 언어) — 페이지 간 텍스트 유사도 평균 2.9%
+- [x] 모든 레퍼런스 표와 예시를 실행 검증 후 작성
+- [x] 검증 중 발견한 버그 4건 수정 (Tab 들여쓰기, CSV 파서 CRLF/인용 개행, XML 루트 배열, XML 숫자 시작 키)
+- [x] `AuthorByline` 컴포넌트 신설 → 도구 10 + 가이드 6 + About에 실명 저자 표기
+- [x] 가이드에 `Article` JSON-LD, 도구에 `FAQPage` + `HowTo` JSON-LD
+- [x] 실재하지 않던 GitHub 링크 삽입 (Contact/Privacy/Terms/About/사이드바)
+- [x] canonical 태그 추가 (기존 전무)
+- [x] AdSlot을 `{#key locale.current}` 밖으로 이동 (중복 `adsbygoogle.push` 방지)
+- [x] `/contact`를 prerender entries에 명시
+- [ ] 배포 및 색인 완료 대기 후 재심사 신청
+- 상세: [ADR-008](decisions/008-adsense-low-value-content.md)
+
+> 보류: 로케일별 URL과 `hreflang`. ko/ja 번역 283KB가 SEO상 보이지 않는 상태이지만,
+> 라우팅 전면 변경이라 재심사 직전에 손대지 않는다. 승인 후 별도 ADR로 다룬다.
+
 ### Phase 4: 수익화 — Pending
 
 - [ ] AdSense 승인 후 광고 배치 최적화 (현재 하단 AdSlot만 활성)

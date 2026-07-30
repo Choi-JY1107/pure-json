@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { MetaTags } from 'svelte-meta-tags';
+	import { MetaTags, JsonLd } from 'svelte-meta-tags';
+	import AuthorByline from '$lib/components/ui/AuthorByline.svelte';
+	import { AUTHOR, CONTENT_DATES } from '$lib/config/site';
 	import MonacoEditor from '$lib/components/editor/MonacoEditor.svelte';
 	import TreeView from '$lib/components/editor/TreeView.svelte';
 	import CopyButton from '$lib/components/ui/CopyButton.svelte';
@@ -33,6 +35,10 @@
 		// content
 		intro,
 		body,
+		deep,
+		reference,
+		examples,
+		pitfalls,
 		howto,
 		features,
 		usecases,
@@ -63,6 +69,24 @@
 
 		intro: string;
 		body?: string[];
+		/** Tool-specific technical discussion. This is what keeps each tool page distinct. */
+		deep?: { title: string; paragraphs: string[] };
+		/** Per-tool conversion/behaviour table. First column is code, so it is not translated. */
+		reference?: {
+			title: string;
+			intro?: string;
+			headers: [string, string, string];
+			rows: Array<[string, string, string]>;
+		};
+		/** Real input/output pairs rendered as code blocks. */
+		examples?: {
+			title: string;
+			intro?: string;
+			input: string;
+			output: string;
+			note?: string;
+		};
+		pitfalls?: { title: string; items: Array<{ title: string; desc: string; code?: string }> };
 		howto?: Array<{ step: string; desc: string }>;
 		features?: string[];
 		usecases?: string[];
@@ -131,6 +155,35 @@
 </script>
 
 <MetaTags title={metaTitle} description={metaDescription} />
+
+<JsonLd
+	schema={{
+		'@type': 'FAQPage',
+		mainEntity: faqs.map((faq) => ({
+			'@type': 'Question',
+			name: faq.question,
+			acceptedAnswer: { '@type': 'Answer', text: faq.answer }
+		}))
+	}}
+/>
+
+{#if howto && howto.length > 0}
+	<JsonLd
+		schema={{
+			'@type': 'HowTo',
+			name: title,
+			description: intro,
+			author: { '@type': 'Person', name: AUTHOR.name, url: AUTHOR.url },
+			dateModified: CONTENT_DATES.modified,
+			step: howto.map((item, i) => ({
+				'@type': 'HowToStep',
+				position: i + 1,
+				name: item.step,
+				text: item.desc
+			}))
+		}}
+	/>
+{/if}
 
 {#if hero}
 	{@render hero()}
@@ -303,11 +356,77 @@
 	<!-- ── Article ── -->
 	<article class="tp__article prose prose-sm">
 		<h2>{title}</h2>
+		<AuthorByline />
 		<p>{intro}</p>
 
 		{#if body && body.length > 0}
 			{#each body as para, i (i)}
 				<p>{para}</p>
+			{/each}
+		{/if}
+
+		{#if deep}
+			<h3>{deep.title}</h3>
+			{#each deep.paragraphs as para, i (i)}
+				<p>{para}</p>
+			{/each}
+		{/if}
+
+		{#if reference}
+			<h3>{reference.title}</h3>
+			{#if reference.intro}
+				<p>{reference.intro}</p>
+			{/if}
+			<div class="tp__table-wrap">
+				<table class="tp__table">
+					<thead>
+						<tr>
+							{#each reference.headers as header, i (i)}
+								<th>{header}</th>
+							{/each}
+						</tr>
+					</thead>
+					<tbody>
+						{#each reference.rows as row, i (i)}
+							<tr>
+								<td><code>{row[0]}</code></td>
+								<td><code>{row[1]}</code></td>
+								<td>{row[2]}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
+		{/if}
+
+		{#if examples}
+			<h3>{examples.title}</h3>
+			{#if examples.intro}
+				<p>{examples.intro}</p>
+			{/if}
+			<div class="tp__examples">
+				<div class="tp__example">
+					<span class="tp__example-label">{m.example_input_label()}</span>
+					<pre><code>{examples.input}</code></pre>
+				</div>
+				<div class="tp__example">
+					<span class="tp__example-label">{m.example_output_label()}</span>
+					<pre><code>{examples.output}</code></pre>
+				</div>
+			</div>
+			{#if examples.note}
+				<p>{examples.note}</p>
+			{/if}
+		{/if}
+
+		{#if pitfalls && pitfalls.items.length > 0}
+			<h3>{pitfalls.title}</h3>
+			{#each pitfalls.items as item, i (i)}
+				<h4>{item.title}</h4>
+				<p>{item.desc}</p>
+				{#if item.code}
+					<pre><code>{item.code}</code></pre>
+				{/if}
 			{/each}
 		{/if}
 
@@ -487,6 +606,47 @@
 	}
 	.tp__article :global(summary) {
 		@apply cursor-pointer;
+	}
+
+	/* ── Reference table ── */
+	.tp__table-wrap {
+		@apply overflow-x-auto rounded-xl my-4;
+		border: 1px solid color-mix(in srgb, var(--md-outline-variant) 55%, transparent);
+	}
+	.tp__table {
+		@apply w-full m-0 text-[0.8125rem] border-collapse;
+	}
+	.tp__table :global(th) {
+		@apply px-3 py-2 text-left font-mono text-[0.625rem] uppercase tracking-widest font-semibold;
+		color: var(--md-on-surface-variant);
+		background: var(--md-surface-container-low);
+		border-bottom: 1px solid color-mix(in srgb, var(--md-outline-variant) 55%, transparent);
+	}
+	.tp__table :global(td) {
+		@apply px-3 py-2 align-top;
+		border-bottom: 1px solid color-mix(in srgb, var(--md-outline-variant) 30%, transparent);
+	}
+	.tp__table :global(tr:last-child td) {
+		border-bottom: none;
+	}
+	.tp__table :global(code) {
+		@apply font-mono text-[0.75rem] whitespace-pre;
+		color: var(--md-primary);
+	}
+
+	/* ── Worked example ── */
+	.tp__examples {
+		@apply grid grid-cols-1 md:grid-cols-2 gap-3 my-4;
+	}
+	.tp__example {
+		@apply flex flex-col gap-1.5 min-w-0;
+	}
+	.tp__example-label {
+		@apply font-mono text-[0.625rem] uppercase tracking-widest font-semibold;
+		color: var(--md-on-surface-variant);
+	}
+	.tp__example :global(pre) {
+		@apply m-0 text-[0.75rem] leading-relaxed;
 	}
 
 	/* ── Responsive ── */
