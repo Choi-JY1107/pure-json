@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { GITHUB_URL } from '$lib/config/site';
 	import * as m from '$lib/paraglide/messages.js';
 
 	const tools = $derived([
@@ -66,6 +67,15 @@
 			<span class="sidebar__privacy-title">{m.sidebar_privacy()}</span>
 		</div>
 		<p class="sidebar__privacy-detail">{m.sidebar_privacy_detail()}</p>
+		<a
+			class="sidebar__privacy-link"
+			href={GITHUB_URL}
+			rel="noopener noreferrer"
+			target="_blank"
+		>
+			<span class="material-symbols-outlined sidebar__privacy-link-icon">code</span>
+			{m.byline_source()}
+		</a>
 	</div>
 </div>
 
@@ -164,5 +174,16 @@
 	.sidebar__privacy-detail {
 		@apply text-[0.6875rem] leading-relaxed m-0;
 		color: var(--md-on-surface-variant);
+	}
+	.sidebar__privacy-link {
+		@apply inline-flex items-center gap-1 mt-0.5
+		       font-mono text-[0.625rem] font-semibold no-underline transition-colors;
+		color: var(--md-tertiary);
+	}
+	.sidebar__privacy-link:hover {
+		color: var(--md-primary);
+	}
+	.sidebar__privacy-link-icon {
+		font-size: 0.8125rem;
 	}
 </style>

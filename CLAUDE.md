@@ -17,7 +17,9 @@ PureJSON — 100% 클라이언트 사이드 JSON 도구 모음 웹앱
 - Monaco Editor (코드 편집기)
 - Inlang Paraglide JS (i18n: en, ko, ja)
 - @vite-pwa/sveltekit (오프라인 PWA)
-- Static adapter (빌드 결과 → `build/`)
+- Adapter: `@sveltejs/adapter-cloudflare`를 먼저 시도하고 없으면 `adapter-static`으로 폴백 (`svelte.config.js`)
+  - 실제 산출물은 **`.svelte-kit/cloudflare/`** (adapter-cloudflare가 설치되어 있어 이쪽이 선택됨)
+  - 루트의 `build/`는 adapter-static 시절의 낡은 디렉토리이므로 빌드 결과 확인에 쓰지 말 것
 
 ## 빌드 & 명령어
 
@@ -29,6 +31,11 @@ npm run lint       # ESLint (flat config)
 npm run lint:fix   # ESLint 자동 수정
 ```
 
+`postinstall`에 `scripts/patch-wrangler-punycode.mjs`가 걸려 있다.
+wrangler 번들이 `punycode`를 bare로 require해 Node의 deprecated 내장 모듈을 로드하는 것을
+`"punycode/"`로 다시 써서 막는다(경고 억제가 아니라 실제로 로드를 막는 것).
+멱등하고 실패해도 install을 중단하지 않는다. 상세와 제거 조건은 ADR-008 참고.
+
 ## 프로젝트 구조
 
 - `src/routes/` — 페이지 라우트 (lang prefix 없음, Paraglide가 브라우저 언어 감지)
@@ -37,10 +44,11 @@ npm run lint:fix   # ESLint 자동 수정
   - `guides/` — 교육 가이드 인덱스 및 6개 가이드 (what-is-json, json-vs-yaml-xml, json-syntax-errors, json-rest-api, json-schema, large-json-files)
 - `src/lib/components/` — Svelte 컴포넌트 (editor, layout, ui, tool, home, guide)
   - `home/` — 홈 전용: `Hero.svelte`(자기 설명 JSON 시그니처), `ToolsGrid.svelte`(10개 도구 내부 링크)
-  - `tool/ToolPage.svelte` — 10개 도구 공통 컴포넌트. `hero`/`belowContent` 스니펫으로 홈에서 히어로/그리드 주입. `body`(문단 배열)로 도구별 교육 콘텐츠 확충
+  - `tool/ToolPage.svelte` — 10개 도구 공통 컴포넌트. `hero`/`belowContent` 스니펫으로 홈에서 히어로/그리드 주입. 콘텐츠 prop: `intro`, `body`(문단 배열), `deep`(심층 해설), `reference`(3열 동작 표), `examples`(입출력 코드쌍), `pitfalls`(함정), `howto`, `features`, `usecases`, `faqs`
+  - `ui/AuthorByline.svelte` — 실명 저자 + 최종 수정일 + 소스 링크. 도구/가이드/About에 사용 (E-E-A-T, ADR-008)
 - `src/lib/utils/` — JSON 처리 로직 (formatter, to-ts, to-yaml, to-csv, csv-to-json, to-xml, json-sorter, json-diff, tree-parser)
 - `src/lib/stores/` — Svelte 상태 관리 (editor.svelte.ts, theme.svelte.ts)
-- `src/lib/config/site.ts` — 사이트 설정 (로케일, 페이지 목록, URL)
+- `src/lib/config/site.ts` — 사이트 설정 (로케일, 페이지 목록, URL, `GITHUB_URL`, `AUTHOR`, `CONTENT_DATES`)
 - `src/lib/paraglide/` — 자동 생성 i18n 런타임 (직접 수정 금지)
 - `src/lib/monaco/` — Monaco 에디터 초기화
 - `i18n/messages/` — 번역 메시지 파일 (en.json, ko.json, ja.json)
@@ -67,6 +75,16 @@ npm run lint:fix   # ESLint 자동 수정
 - CSS는 각 Svelte 컴포넌트의 `<style>` 블록에 작성하며, 순수 Tailwind 유틸리티에 한해 `@apply` 사용
 - **DaisyUI 컴포넌트 클래스** (`btn`, `select`, `alert`, `tabs`, `stats`, `drawer` 등)는 `@apply`에서 사용 불가 → HTML에 인라인으로 BEM 클래스와 함께 배치
 - `<style>` 블록 상단에 `@reference "../../../app.css";` (또는 적절한 상대 경로) 필수
+
+### 콘텐츠 작성 규칙 (ADR-008)
+
+- **도구 페이지는 서로 다른 종류의 콘텐츠를 담을 것** — 같은 틀에 다른 단어를 채우면
+  AdSense가 "가치 없는 콘텐츠"로 판정한다. 실제로 그렇게 거절된 이력이 있다.
+- **차별화의 재료는 구현의 실제 동작** — `src/lib/utils/`의 코드를 읽고 실행해서
+  그 도구에만 있는 동작, 정규화, 한계, 함정을 뽑아낸다.
+- **레퍼런스 표와 예시에 적는 값은 반드시 실행해서 확인할 것** — 검증 없이 쓴 문서는
+  허위 주장이 되고 그 자체로 감점 요인이다. 실제로 4건이 그런 상태였다.
+- 문서가 주장하는 동작과 코드가 다르면 **코드를 고치는 쪽을 우선 검토**한다.
 
 ### 에디터 상태 관리
 
