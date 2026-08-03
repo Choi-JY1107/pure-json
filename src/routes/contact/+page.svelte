@@ -47,9 +47,6 @@
 <style>
 	@reference "../../app.css";
 
-	.legal-page {
-		@apply max-w-3xl mx-auto;
-	}
 	.legal-page__article {
 		@apply max-w-none;
 	}

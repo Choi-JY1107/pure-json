@@ -3,10 +3,6 @@
 </script>
 
 <footer class="footer">
-	<div class="footer__left">
-		<span class="material-symbols-outlined footer__lock-icon" style="font-variation-settings: 'FILL' 1;">lock</span>
-		<span>{m.footer_tagline()}</span>
-	</div>
 	<div class="footer__right">
 		<a href="/about" class="footer__link">{m.footer_about()}</a>
 		<a href="/contact" class="footer__link">{m.contact_title()}</a>
@@ -20,18 +16,11 @@
 	@reference "../../../app.css";
 
 	.footer {
-		@apply px-4 md:px-6 py-3 flex flex-wrap items-center justify-between gap-2
+		@apply px-4 md:px-6 py-3 flex flex-wrap items-center justify-end gap-2
 		       bg-surface-container-lowest border-t
 		       text-[0.75rem] font-medium;
 		border-color: color-mix(in srgb, var(--md-outline-variant) 50%, transparent);
 		color: var(--md-on-surface-variant);
-	}
-	.footer__left {
-		@apply flex items-center gap-2;
-	}
-	.footer__lock-icon {
-		font-size: 0.875rem;
-		color: var(--md-tertiary);
 	}
 	.footer__right {
 		@apply flex items-center gap-4;

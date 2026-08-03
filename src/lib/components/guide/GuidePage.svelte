@@ -126,9 +126,6 @@
 <style>
 	@reference "../../../app.css";
 
-	.guide-page {
-		@apply max-w-3xl mx-auto;
-	}
 	.guide-page__back {
 		@apply inline-flex items-center gap-1.5 mb-6 text-sm font-medium no-underline transition-colors;
 		color: var(--md-on-surface-variant);

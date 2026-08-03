@@ -598,7 +598,7 @@
 
 	/* ── Article ── */
 	.tp__article {
-		@apply max-w-3xl mt-6 pt-6;
+		@apply mt-6 pt-6;
 		border-top: 1px solid color-mix(in srgb, var(--md-outline-variant) 45%, transparent);
 	}
 	.tp__article :global(details) {

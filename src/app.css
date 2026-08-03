@@ -162,6 +162,7 @@ body {
 
 /* ── Prose (typography plugin) theming ── */
 .prose {
+	max-width: none;
 	--tw-prose-body: var(--md-on-surface);
 	--tw-prose-headings: var(--md-on-surface);
 	--tw-prose-links: var(--md-primary);

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { GITHUB_URL } from '$lib/config/site';
 	import * as m from '$lib/paraglide/messages.js';
 
 	const tools = $derived([
@@ -59,24 +58,6 @@
 			{/each}
 		{/each}
 	</nav>
-
-	<!-- Privacy trust card -->
-	<div class="sidebar__privacy">
-		<div class="sidebar__privacy-head">
-			<span class="material-symbols-outlined sidebar__privacy-icon" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
-			<span class="sidebar__privacy-title">{m.sidebar_privacy()}</span>
-		</div>
-		<p class="sidebar__privacy-detail">{m.sidebar_privacy_detail()}</p>
-		<a
-			class="sidebar__privacy-link"
-			href={GITHUB_URL}
-			rel="noopener noreferrer"
-			target="_blank"
-		>
-			<span class="material-symbols-outlined sidebar__privacy-link-icon">code</span>
-			{m.byline_source()}
-		</a>
-	</div>
 </div>
 
 <style>
@@ -152,38 +133,5 @@
 	.sidebar__icon {
 		font-size: 1.125rem;
 		flex-shrink: 0;
-	}
-
-	/* Privacy trust card */
-	.sidebar__privacy {
-		@apply mt-5 mx-3 p-3 rounded-xl flex flex-col gap-1.5;
-		background: color-mix(in srgb, var(--md-tertiary) 10%, transparent);
-		border: 1px solid color-mix(in srgb, var(--md-tertiary) 25%, transparent);
-	}
-	.sidebar__privacy-head {
-		@apply flex items-center gap-1.5;
-	}
-	.sidebar__privacy-icon {
-		font-size: 1rem;
-		color: var(--md-tertiary);
-	}
-	.sidebar__privacy-title {
-		@apply text-xs font-semibold;
-		color: var(--md-tertiary);
-	}
-	.sidebar__privacy-detail {
-		@apply text-[0.6875rem] leading-relaxed m-0;
-		color: var(--md-on-surface-variant);
-	}
-	.sidebar__privacy-link {
-		@apply inline-flex items-center gap-1 mt-0.5
-		       font-mono text-[0.625rem] font-semibold no-underline transition-colors;
-		color: var(--md-tertiary);
-	}
-	.sidebar__privacy-link:hover {
-		color: var(--md-primary);
-	}
-	.sidebar__privacy-link-icon {
-		font-size: 0.8125rem;
 	}
 </style>

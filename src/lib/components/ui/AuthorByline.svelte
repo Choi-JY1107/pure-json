@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AUTHOR, GITHUB_URL, CONTENT_DATES } from '$lib/config/site';
+	import { AUTHOR, CONTENT_DATES } from '$lib/config/site';
 	import * as m from '$lib/paraglide/messages.js';
 
 	let { updated = CONTENT_DATES.modified }: { updated?: string } = $props();
@@ -17,12 +17,6 @@
 		<span class="material-symbols-outlined byline__icon">update</span>
 		<span class="byline__label">{m.byline_updated()}</span>
 		<time class="byline__value" datetime={updated}>{updated}</time>
-	</span>
-	<span class="byline__item">
-		<span class="material-symbols-outlined byline__icon">code</span>
-		<a class="byline__value byline__value--link" href={GITHUB_URL} rel="noopener noreferrer" target="_blank">
-			{m.byline_source()}
-		</a>
 	</span>
 </div>
 
@@ -55,12 +49,5 @@
 	.byline__value {
 		@apply font-mono text-[0.6875rem];
 		color: var(--md-on-surface-variant);
-	}
-	.byline__value--link {
-		@apply no-underline transition-colors;
-		color: var(--md-tertiary);
-	}
-	.byline__value--link:hover {
-		color: var(--md-primary);
 	}
 </style>
