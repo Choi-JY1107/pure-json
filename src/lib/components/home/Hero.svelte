@@ -31,12 +31,6 @@
 				<span class="material-symbols-outlined" style="font-size:1.125rem">arrow_forward</span>
 			</a>
 		</div>
-
-		<ul class="hero__chips">
-			<li class="hero__chip"><span class="material-symbols-outlined hero__chip-icon">cloud_off</span>{m.home_hero_chip_local()}</li>
-			<li class="hero__chip"><span class="material-symbols-outlined hero__chip-icon">wifi_off</span>{m.home_hero_chip_offline()}</li>
-			<li class="hero__chip"><span class="material-symbols-outlined hero__chip-icon">favorite</span>{m.home_hero_chip_free()}</li>
-		</ul>
 	</div>
 
 	<!-- Signature: self-describing JSON -->
@@ -99,18 +93,6 @@
 	}
 	.hero__cta--ghost:hover {
 		background: var(--md-surface-container-highest);
-	}
-
-	.hero__chips {
-		@apply mt-7 flex flex-wrap gap-x-5 gap-y-2 list-none p-0 m-0;
-	}
-	.hero__chip {
-		@apply inline-flex items-center gap-1.5 text-[0.8125rem] font-medium;
-		color: var(--md-on-surface-variant);
-	}
-	.hero__chip-icon {
-		font-size: 1rem;
-		color: var(--md-tertiary);
 	}
 
 	/* ── Code card (signature) ── */

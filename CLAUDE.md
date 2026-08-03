@@ -45,7 +45,7 @@ wrangler 번들이 `punycode`를 bare로 require해 Node의 deprecated 내장 �
 - `src/lib/components/` — Svelte 컴포넌트 (editor, layout, ui, tool, home, guide)
   - `home/` — 홈 전용: `Hero.svelte`(자기 설명 JSON 시그니처), `ToolsGrid.svelte`(10개 도구 내부 링크)
   - `tool/ToolPage.svelte` — 10개 도구 공통 컴포넌트. `hero`/`belowContent` 스니펫으로 홈에서 히어로/그리드 주입. 콘텐츠 prop: `intro`, `body`(문단 배열), `deep`(심층 해설), `reference`(3열 동작 표), `examples`(입출력 코드쌍), `pitfalls`(함정), `howto`, `features`, `usecases`, `faqs`
-  - `ui/AuthorByline.svelte` — 실명 저자 + 최종 수정일 + 소스 링크. 도구/가이드/About에 사용 (E-E-A-T, ADR-008)
+  - `ui/AuthorByline.svelte` — 실명 저자 + 최종 수정일. 도구/가이드/About에 사용 (E-E-A-T, ADR-008)
 - `src/lib/utils/` — JSON 처리 로직 (formatter, to-ts, to-yaml, to-csv, csv-to-json, to-xml, json-sorter, json-diff, tree-parser)
 - `src/lib/stores/` — Svelte 상태 관리 (editor.svelte.ts, theme.svelte.ts)
 - `src/lib/config/site.ts` — 사이트 설정 (로케일, 페이지 목록, URL, `GITHUB_URL`, `AUTHOR`, `CONTENT_DATES`)
